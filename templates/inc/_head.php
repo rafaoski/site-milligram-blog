@@ -37,6 +37,13 @@ if($og_seo == true):?>
             list-style: none;
         }
 
+    /* eliminate horizontal scrollbars */
+    @media (max-width: 768px) {
+        .grid {
+            margin: 0px;
+        }
+    }
+    
     </style>
 
 </head>
