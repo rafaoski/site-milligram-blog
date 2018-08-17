@@ -89,13 +89,6 @@ img {
     /*width: 30%;*/
   }
 
-// Header
-// header {
-//     overflow: scroll;
-//     width: 100%;
-//     height: 100vh;
-// }
-
 // Nav Menu
 .nav-menu {
     display: flex;
@@ -160,6 +153,7 @@ img {
 //     pointer-events: none;
 //     cursor: default;
 //  }
+
 a[href*="tel:"] {
     pointer-events: none;
    }
