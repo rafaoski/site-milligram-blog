@@ -15,7 +15,7 @@ $count = count($category->references());
 // If category has reference to pages
 if($count != 0) {
 
-    echo "<a class='button button-outline m-2' 
+    echo "<a class='button m-2' 
     href='$category->url'>
     $category->title 
     ( $count )
