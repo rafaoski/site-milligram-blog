@@ -26,23 +26,23 @@ if($og_seo == true):?>
     <link rel="stylesheet" href="<?=$app_css;?>"/>
 
    <!-- CUSTOM STYLE -->
-    <style id='head-style'>
+   <style id='head-style'>
 
     /* Simple Honeypot Contact Form */
         .hide-robot {
             display: none;
         }
+        
        /* List style for Tags */
         .page-children.tags {
             list-style: none;
         }
 
-    /* eliminate horizontal scrollbars */
-    @media (max-width: 768px) {
+        /* eliminate horizontal scrollbars */
         .grid {
-            margin: 0px;
-        }
-    }
+                margin-right: auto;
+                margin-left: auto;
+            }
     
     </style>
 
