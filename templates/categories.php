@@ -1,0 +1,45 @@
+<?php namespace ProcessWire; ?>
+
+<div id='content-body' pw-prepend>
+
+<?php 
+// SHOW PAGE CHILDREN
+$categories = page()->children("limit=22");
+
+foreach ($categories as $category) {
+    
+// https://processwire.com/blog/posts/processwire-3.0.107-core-updates/    
+// get all visible pages referencing this page
+$count = count($category->references());
+
+// If category has reference to pages
+if($count != 0) {
+
+    echo "<a class='button button-outline m-2' 
+    href='$category->url'>
+    $category->title 
+    ( $count )
+</a>";
+
+} 
+
+}
+ // Basic Pagination + custom CSS class 'grid'
+    echo basicPagination($categories, 'grid');?>
+
+</div><!-- /#content-body -->
+
+
+<div id="page-children">
+
+<?=catTag($pages->get('/tags/'), 
+          [
+            'txt' => __('Tags'),
+            'limit' => 16,
+            'ul_cl' => 'grid',
+            'li_cl' => 'col',
+            'class' => 'button button-outline',
+          ] 
+        );?>
+
+</div><!-- /#page-children -->

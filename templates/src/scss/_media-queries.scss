@@ -1,0 +1,62 @@
+/* Smaller than tablet screen */
+@media (max-width: 80.0rem) {
+    h1 {
+    font-size: 1.7em;
+    }
+    h2 {
+        font-size: 1.4em;
+    }
+
+// Contact Options phone
+    // .mobile-active {
+    //     pointer-events: stroke;
+    //     cursor: pointer;
+    //  }
+    a[href*="tel:"] {
+    pointer-events: auto;
+    cursor: pointer;
+    }
+
+// Proc Edit Page Button
+.edit-btn {
+    position: fixed;
+    left: 60px;
+    margin: 2rem;
+    font-size: 1.5rem;
+    z-index: 999;
+}
+
+// Padding
+.p-1 {
+    padding: 0.8rem;
+}
+.p-2 {
+    padding: 1.3rem;
+}
+.p-3 {
+    padding: 1.7rem;
+}
+
+// Margin
+.m-1 {
+    margin: 0.8rem;
+}
+.m-2 {
+    margin: 1.3rem;
+}
+.m-3 {
+    margin: 1.7rem;
+}
+}
+
+/* Smaller than desktop screen */
+@media (max-width: 40.0rem) {
+   h1 {
+    font-size: 1.4em;
+   }
+   h2 {
+    font-size: 1.2em;
+   }
+
+ 
+}

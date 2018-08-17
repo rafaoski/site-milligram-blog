@@ -1,0 +1,85 @@
+.hero-content {
+  display: flex;
+  align-items: center;
+}
+
+// canvas
+// {
+//     display: block;
+//     vertical-align: bottom;
+// }
+
+#hero_particles {
+  /* height: 50vh; */
+  width: 100%;
+  background: $d_blue;
+  margin-bottom: 30px;
+}
+
+.hero_container {
+  position: absolute;
+  width: 100%;
+  z-index: 5;
+  text-align: center;
+}
+
+.hero_inner {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 0 2rem;
+  text-transform: uppercase;
+  color: $l_gray;
+}
+
+.hero_first {
+  padding: 1rem;
+  color: $white;
+  color: $red;
+  background: rgba($black, 0.5);
+  font-family: 'Montserrat';
+}
+
+.hero_of {
+  padding: 1rem;
+  color: $white;
+  color: $red;
+  background: rgba($black, 0.5);
+  font-family: 'Montserrat';
+}
+
+.hero_small {
+font-family: 'Montserrat';
+padding: .5rem;
+}
+
+.hero_info {
+  width: 100%;
+  text-align: center;
+  color: $white;
+  font-size: 1.7rem;
+  background-color: rgba($black, 0.3);
+}
+
+/* Smaller than desktop screen */
+ @media (max-width: 80.0rem) {
+  #hero_particles {
+    height: 100vh !important;
+    width: 100%;
+  }
+ 
+}
+
+/* Smaller than tablet screen */
+@media (max-width: 60.0rem) {
+
+}
+
+/* Smaller than mobile screen */
+@media (max-width: 40.0rem) {
+.hero_container {
+  h1 {
+   line-height: 2.3;
+ }
+}
+
+ }

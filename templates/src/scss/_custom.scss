@@ -1,0 +1,195 @@
+body {
+    font-family: 'Roboto'; // 'Roboto','Montserrat','Righteous'
+}
+
+h1,h2,h3,h4 {
+    font-family: 'Montserrat';
+}
+
+a {
+    font-family: 'Montserrat';
+    font-size: 16px;
+    transition: all .3s ease;
+    &:hover {
+        img {
+            filter: grayscale(100%);
+        }
+    }
+}
+
+blockquote {
+    font-family: 'Righteous';
+}
+
+// Image filters
+img {
+    max-width: 100%;
+    height: auto;
+    padding: 10px 0;
+    filter: grayscale(0%);
+    transition: all .3s ease;
+    // &:hover {
+    //     filter: grayscale(100%);
+    // }
+}
+
+// Padding
+.p-1 {
+    padding: 1rem;
+}
+.p-2 {
+    padding: 2rem;
+}
+.p-3 {
+    padding: 3rem;
+}
+
+// Margin
+.m-1 {
+    margin: 1rem;
+}
+.m-2 {
+    margin: 2rem;
+}
+.m-3 {
+    margin: 3rem;
+}
+
+// Turn off the filter for the logo
+.logo img {
+    transition: all .3s ease;
+    filter: grayscale(0%);
+    &:hover {
+        filter: grayscale(100%);
+    }
+}
+
+// Custom width Containers
+.container-fluid {
+    margin: 0 auto;
+    max-width: 160.0rem;
+    padding: 0 2.0rem;
+    position: relative;
+    width: 100%;
+}
+
+.container-medium {
+    margin: 0 auto;
+    max-width: 140.0rem;
+    padding: 0 2.0rem;
+    position: relative;
+    width: 100%;
+}
+
+// Center Element like image
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    /*width: 30%;*/
+  }
+
+// Nav Menu
+.nav-menu {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 15px;
+    li {
+        list-style: none;
+        padding: 10px;
+    }
+}
+
+// Language Menu
+.lang-menu {
+    display: flex;
+    flex-wrap: wrap;
+    li {
+        list-style: none;
+        padding: 5px;
+    }
+}
+
+// Breadcrumbs
+.bcrumbs {
+    a {
+        padding: 5px;
+    }
+    margin: 1rem 0;
+}
+
+// Basic Pagination
+.MarkupPagerNav {
+    li {
+        list-style: none;
+        padding: 1rem;
+        a {
+            font-size: 20px;
+            
+            // padding: 5px;
+        }
+    }
+}
+
+// Active Item
+.active {
+    a {
+        color: $red;
+        border-top: 1px solid $red;
+        padding: 5px;
+        font-weight: bold;
+    }
+}
+
+// Contact Form
+.c-form {
+    textarea {
+        height: auto;
+    }
+}
+
+// Footer mobile phone
+// .mobile-active {
+//     pointer-events: none;
+//     cursor: default;
+//  }
+a[href*="tel:"] {
+    pointer-events: none;
+   }
+
+// Proc Edit Page Button
+.edit-btn {
+    position: fixed;
+    top: 120px;
+    left: 10px;
+    margin: 2rem;
+    font-size: 1.5rem;
+    z-index: 999;
+}
+
+// Debug Regions
+.pw-debug {
+    padding: 15px;
+}
+
+/**
+ * Alignment styles that are used by the InputfieldTinyMCE for 
+ * positioning images in bodycopy. If you are using this field type, 
+ * you may want to include these or similar styles in your site.
+ *
+ */
+.align_left {
+        float: left;
+        margin: 0 1em 0.25em 0;
+}
+
+.align_right {
+        float: right;
+        margin: 0 0 0.25em 1em;
+}
+
+.align_center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+}
