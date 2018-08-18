@@ -455,15 +455,19 @@ function icon(array $opt) {
         $stroke = isset($opt['stroke']) ? $opt['stroke'] : 1;
         $heading = isset($opt['heading']) ? $opt['heading'] : "span";
         $class = isset($opt['class']) ? $opt['class'] : 'font-class';
-    
+        $a_class = isset($opt['a_class']) ? $opt['a_class'] : 'a-class';
+
     // custom Url
         if(isset($opt['url'])) {
-            $out .= "<a href='$url'>";
+            $out .= "<a class='$a_class' href='$url'>";
         }
 
     // heading like h1 h2 h3 ( default <span clas='font-class') ...
        $out .= "<$heading class='$class'>";
-      
+
+    // Show Custom Text Before
+    if (isset($opt['before']) && $opt['before'] == true) $out .= $txt;
+       
             $out .= "<i data-feather='$icon' 
             width=$width 
             height=$height 
@@ -472,7 +476,7 @@ function icon(array $opt) {
             </i>";
 
     // Show Custom Text
-        $out .= $txt;
+    if (!isset($opt['before'])) $out .= $txt;
 
     // End custom heading
         $out .= "</$heading>";
@@ -484,6 +488,52 @@ function icon(array $opt) {
     
         return $out;
     }
+
+ /**
+ * Prev Next Button
+ * Basic Example echo prNx($page, 'grid')
+ * @param Page|null $item
+ * @param string $class
+ */       
+function prNx($item = null, $class = 'prev-next') {
+
+// Prev Next Button    
+    $p_next = $item->next();
+    $p_prev = $item->prev();
+
+$out = '';    
+
+$out .= "<div class='$class'>";
+
+// link to the prev blog post, if there is one
+    if($p_prev->id) {
+
+// Get function icon()
+    $out .= icon([
+        'icon'=> 'arrow-left',
+        'txt' => $p_prev->title,
+        'url' => $p_prev->url,
+        'a_class' => 'm-1 button button-outline',
+        ]);
+    }
+
+// link to the next blog post, if there is one
+    if($p_next->id) {
+
+// Get function icon()
+    $out .= icon([
+        'icon'=> 'arrow-right',
+        'txt' => $p_next->title,
+        'url' => $p_next->url,
+        'before' => true,
+        'a_class' => 'm-1 button button-outline',
+        ]);
+    }
+
+$out .= '</div>';
+
+    return $out;
+}
 
 /**
 * Comments + Pagination

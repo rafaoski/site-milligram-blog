@@ -8,37 +8,40 @@ $posts = page()->children('limit=12');?>
 
 <article class='blog-item col-4_md-6_sm-12'>
 
-<a href="<?=$post->url?>">
+  <a href="<?=$post->url?>">
 
-      <h4><?=$post->title?></h4>
-</a>
+        <h4><?=$post->title?></h4>
+        
+  </a>
 
-<small>
-<?php // Get Some User from user Profile
-  echo icon([
-      'icon'=> 'user', // https://feathericons.com/
-      'txt' => $post->createdUser->title . ' | ',
-    ]); 
-    
-// Get created date ( from field date )
-  echo icon([
-      'icon'=> 'calendar',  
-      'txt' => $post->date . ' | ',
-  ]); 
+  <small>
 
-// IF COMMENTS
-  if(count($post->comments)) {
+  <?php // Get Some User from user Profile
+      echo icon([
+          'icon'=> 'user', // https://feathericons.com/
+          'txt' => $post->createdUser->title . ' | ',
+        ]); 
+        
+    // Get created date ( from field date )
+      echo icon([
+          'icon'=> 'calendar',  
+          'txt' => $post->date . ' | ',
+      ]); 
 
-    $id = $post->comments->last() ? $post->comments->last()->id : '#';
+    // IF POST COMMENTS && $dis_comm == false ( variable from _init.php )
+      if(count($post->comments) && $dis_comm == false) {
 
-    echo icon([
-      'icon'=> 'message-circle', // https://feathericons.com/
-      'txt' => count($post->comments),
-      'url' => "$post->url#Comment$id",
-    ]);
-}
-?>
-</small>
+        $id = $post->comments->last() ? $post->comments->last()->id : '#';
+
+        echo icon([
+          'icon'=> 'message-circle', // https://feathericons.com/
+          'txt' => count($post->comments),
+          'url' => "$post->url#Comment$id",
+        ]);
+    }
+  ?>
+
+  </small>
 
 <a href="<?=$post->url?>">
 

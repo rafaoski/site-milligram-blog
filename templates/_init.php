@@ -22,6 +22,9 @@ include_once('./_func.php');
 // as a convenience, set location of our 3rd party resources (Jquery)
 urls()->set('jquery', 'wire/modules/Jquery/JqueryCore/JqueryCore.js');
 
+// Disable Comments
+$dis_comm = false;
+
 // RSS FEED BLOG PAGE ( if installed module rss enable this => http://your-page/blog/rss)
     // if($page->template->name == 'blog' && $input->urlSegment1 == 'rss') {
     //     $rss = $modules->get("MarkupRSS");
