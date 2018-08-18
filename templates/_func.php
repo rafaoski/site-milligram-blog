@@ -167,7 +167,7 @@ if(isset($opt['txt_no'])) {
 
     $out .= "<ul class='page-children $item->name $ul_cl'>";
 
-foreach ($item->children("limit=$limit, $random") as $child) {
+foreach ($item->children("limit=$limit, $random, start=0") as $child) {
 
         $count = count($child->references());
 

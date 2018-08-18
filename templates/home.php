@@ -49,14 +49,15 @@ echo wireRenderFile("render/hero", // Render Hero Content
 
 <div id="page-children" pw-append>
 
-<?=catTag($pages->get('/categories/'), 
+<?php // Categories
+echo catTag($pages->get('/categories/'), 
           [
             // 'txt' => __('Categories'),
             'limit' => 16,
           ] 
-        );?>
-
-<?=catTag($pages->get('/tags/'), 
+        );
+// Tags
+echo catTag($pages->get('/tags/'), 
           [
             // 'txt' => __('Tags'),
             'limit' => 16,
@@ -67,4 +68,4 @@ echo wireRenderFile("render/hero", // Render Hero Content
           ] 
         );?>
 
-</div>
+</div><!-- /#page-children -->

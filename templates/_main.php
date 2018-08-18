@@ -70,18 +70,30 @@ wireIncludeFile("inc/_head", // Include header
 
             </div>
 
-            <?php wireIncludeFile("inc/_c-form", // Include contact form
-               [ // Enable contact Form
-                'enable_cf' =>  false,
-                'mail' => 'yourmail@gmail.com', // Email to send message
-                // More Info
-                'c_phone' => '6755464', // Info Phone
-                'c_mail' => 'processwire@gmail.com', // Info E-Mail
-                // Save Message
-                'save_message' => false, // Save mesage to pages
-                'c_parent' => 'contact', // Contact Page
-                'c_item' => 'contact-item', // Template to save message inside body field ( You must create template " contact-item" )
-              ]);?>
+            <?php // Include archives Form
+                wireIncludeFile("inc/_archives",
+                [ 
+                    'enable' => true, // Enable archives Form
+                    'title' => __('Select The Archives'),
+                    'blog_p' => $pages->get("/blog/"), // Blog page url
+                    'arch_p' => pages('/archives/')->url, // Archive page url
+                    'start_date' => 2017, // or whenever you want it to start
+                    'limit' => 50 // Limit items to Year
+                ]);
+            // Include contact form
+                wireIncludeFile("inc/_c-form", 
+                [ 
+                    'enable_cf' => false, // Enable contact Form
+                    'mail' => 'yourmail@gmail.com', // Email to send message
+                    // More Info
+                    'c_phone' => '6755464', // Info Phone
+                    'c_mail' => 'processwire@gmail.com', // Info E-Mail
+                    // Save Message
+                    'save_message' => false, // Save mesage to pages
+                    'c_parent' => 'contact', // Contact Page
+                    'c_item' => 'contact-item', // Template to save message inside body field ( You must create template " contact-item" )
+                ]);
+            ?>
 
         </aside><!-- /#sidebar -->
 
