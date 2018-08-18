@@ -13,18 +13,19 @@ $posts = page()->children('limit=12');?>
       <h4><?=$post->title?></h4>
 </a>
 
-<small><?php // Get Some Icon
+<small>
+<?php // Get Some User from user Profile
   echo icon([
       'icon'=> 'user', // https://feathericons.com/
-      'txt' => $post->createdUser->title,
+      'txt' => $post->createdUser->title . ' | ',
     ]); 
-
-  echo ' | ';  
-
-    echo icon([
+    
+// Get created date ( from field date )
+  echo icon([
       'icon'=> 'calendar',  
       'txt' => $post->date . ' | ',
-]); 
+  ]); 
+
 // IF COMMENTS
   if(count($post->comments)) {
 
