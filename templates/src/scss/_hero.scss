@@ -12,7 +12,7 @@
 #hero_particles {
   /* height: 50vh; */
   width: 100%;
-  background: $d_blue;
+  background: $midnight-black;
   margin-bottom: 30px;
 }
 
@@ -28,7 +28,7 @@
   margin-top: 20px;
   padding: 0 2rem;
   text-transform: uppercase;
-  color: $l_gray;
+  color: lighten($gray, 25%);
 }
 
 .hero_first {
