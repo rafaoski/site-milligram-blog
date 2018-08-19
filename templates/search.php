@@ -31,9 +31,8 @@ if($q) {
 }
 
 // unset the variable that we no longer need, since it can contain user input
-unset($q);
+unset($q);?>
 
-?>
 <div id='content-body'>
 	<?php
 	// did we find any matches?

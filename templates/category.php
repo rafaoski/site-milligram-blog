@@ -40,27 +40,6 @@ $posts = pages()->get('/blog/')->children("categories=$page, limit=16");?>
 <?php endforeach;
 
 // Basic Pagination + custom CSS class 'grid'
-   echo basicPagination($posts, 'grid');?>
+   echo basicPagination($posts, 'grid container-fluid');?>
 
 </div><!-- /#content-body -->
-
-<div id="page-children">
-
-<?=catTag($pages->get('/categories/'), 
-          [
-            'txt' => __('Categories'),
-            'limit' => 16,
-          ] 
-        );?>
-
-<?=catTag($pages->get('/tags/'), 
-          [
-            'txt' => __('Tags'),
-            'limit' => 16,
-            'class' => 'button button-outline',
-            'ul_cl' => 'grid',
-            'li_cl' => 'col',
-          ] 
-        );?>
-
-</div><!-- /#page-children -->

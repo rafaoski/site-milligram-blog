@@ -25,21 +25,6 @@ if($count != 0) {
 
 }
  // Basic Pagination + custom CSS class 'grid'
-    echo basicPagination($categories, 'grid');?>
+    echo basicPagination($categories, 'grid container-fluid');?>
 
 </div><!-- /#content-body -->
-
-
-<div id="page-children">
-
-<?=catTag($pages->get('/tags/'), 
-          [
-            'txt' => __('Tags'),
-            'limit' => 16,
-            'ul_cl' => 'grid',
-            'li_cl' => 'col',
-            'class' => 'button button-outline',
-          ] 
-        );?>
-
-</div><!-- /#page-children -->

@@ -46,26 +46,3 @@ echo wireRenderFile("render/hero", // Render Hero Content
 <?php echo page('body');?>
 
 </div><!-- /#content-body -->
-
-<div id="page-children" pw-append>
-
-<?php // Categories
-echo catTag($pages->get('/categories/'), 
-          [
-            // 'txt' => __('Categories'),
-            'limit' => 16,
-          ] 
-        );
-// Tags
-echo catTag($pages->get('/tags/'), 
-          [
-            // 'txt' => __('Tags'),
-            'limit' => 16,
-            'ul_cl' => 'grid', // Element <ul class='grid'
-            'li_cl' => 'col', // Element <li class='col'
-            'class' => 'button button-outline', // Element <a class='button button-outline',
-            'random' => true // Randomize Items
-          ] 
-        );?>
-
-</div><!-- /#page-children -->

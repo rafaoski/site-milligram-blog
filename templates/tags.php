@@ -23,17 +23,6 @@ if($count != 0) {
 
 }
  // Basic Pagination + custom CSS class 'grid'
-    echo basicPagination($tags, 'grid');?>
+    echo basicPagination($tags, 'grid container-fluid');?>
 
 </div><!-- /#content-body -->
-
-<div id="page-children">
-
-<?=catTag($pages->get('/categories/'), 
-          [
-            'txt' => __('Categories'),
-            'limit' => 16,
-          ] 
-        );?>
-
-</div><!-- /#page-children -->

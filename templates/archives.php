@@ -84,26 +84,3 @@ foreach ($page_f as $key) {
 echo basicPagination($page_f, 'container grid');?>
 
 </div><!-- /#content-body -->
-
-
-<div id="page-children">
-
-<?=catTag($pages->get('/categories/'), 
-          [
-            // 'txt' => __('Categories'),
-            'limit' => 16,
-          ] 
-        );?>
-
-<?=catTag($pages->get('/tags/'), 
-          [
-            // 'txt' => __('Tags'),
-            'limit' => 16,
-            'ul_cl' => 'grid', // Element <ul class='grid'
-            'li_cl' => 'col', // Element <li class='col'
-            'class' => 'button button-outline', // Element <a class='button button-outline',
-            'random' => true // Randomize Items
-          ] 
-        );?>
-
-</div><!-- /#page-children -->

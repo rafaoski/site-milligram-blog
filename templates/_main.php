@@ -66,7 +66,29 @@ wireIncludeFile("inc/_head", // Include header
 
             <div id="page-children">
 
-               <?=pageChildren($page);?>
+            <?php // Show Home page Children
+                echo pageChildren(pages(1));
+
+            // Get Categories
+                echo catTag($pages->get('/categories/'), 
+                    [
+                        // 'txt' => __('Categories'),
+                        'limit' => 9,
+                        'random' => true // Randomize Items
+                    ] 
+                );
+
+            // Get Tags     
+                echo catTag($pages->get('/tags/'), 
+                    [
+                        // 'txt' => __('Tags'),
+                        'limit' => 8,
+                        'ul_cl' => 'grid', // Element <ul class='grid'
+                        'li_cl' => 'col', // Element <li class='col'
+                        'class' => 'button button-outline', // Element <a class='button button-outline',
+                        'random' => true // Randomize Items
+                    ] 
+                    );?>
 
             </div>
 
@@ -80,6 +102,7 @@ wireIncludeFile("inc/_head", // Include header
                     'start_date' => 2017, // or whenever you want it to start
                     'limit' => 50 // Limit items to Year
                 ]);
+
             // Include contact form
                 wireIncludeFile("inc/_c-form", 
                 [ 
