@@ -638,7 +638,7 @@ function trashDemoData($trash = false) {
             // '1044', // Categories Page
             '1045','1050','1053', // Categories Children
             // '1046', // Tags Page
-            '1047','1048','1051','1054','1055' // Tags Children
+            '1047','1048','1051','1054','1055','1058' // Tags Children
         ];
             foreach ($arr_p as $key) {
                 $trash_p = pages()->get($key);
