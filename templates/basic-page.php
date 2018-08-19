@@ -35,7 +35,7 @@ if(page()->name == 'news'):?>
 
     <?php // Basic Pagination + custom CSS class 'grid'
           // https://processwire.com/api/modules/markup-pager-nav/
-          echo basicPagination($news, 'grid');?>
+          echo basicPagination($news, 'container grid');?>
 
   </div>
 
