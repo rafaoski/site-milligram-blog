@@ -119,7 +119,7 @@ function pageChildren($page = null, $text = null) {
 
     $out .= "<ul class='page-children'>";
 
-        foreach ($page->children('limit=15') as $child) {
+        foreach ($page->children('limit=15,start=0') as $child) {
 
             $out .= "<li><a href='$child->url'>$child->title</a></li>";
 
