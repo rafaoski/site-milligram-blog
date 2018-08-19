@@ -3,5 +3,5 @@
 // render a thumbnail of the first image
 if(count($value)) {
   $image = $value->first()->width(320);
-  echo "<img data-src='$image->url' alt='$image->description'>";
+  echo "<img data-src='$image->url' class='center lazy' alt='$image->description'>";
 }
