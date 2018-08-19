@@ -1,10 +1,12 @@
 <?php namespace ProcessWire;
-// https://manual.phpdoc.org/HTMLSmartyConverter/HandS/phpDocumentor/tutorial_tags.param.pkg.html
 
 /**
- * @param Page|null $root
+ * 
  * https://processwire.com/docs/tutorials-old/quick-start/navigation/
  * Usage => <?=simpleNav($pages->get("/"))?>
+ * 
+ * @param Page|null $root
+ * 
  */
 function simpleNav($root = null) {
     // $home = pages()->get("/");
@@ -19,8 +21,10 @@ function simpleNav($root = null) {
 }
 
 /**
+ * 
  * @param Page|null $root
  * @param array $opt
+ * 
  */
 function burgerNav($root = null, array $opt) {
 $children = $root->children();
@@ -127,7 +131,92 @@ function pageChildren($page = null, $text = null) {
 }
 
 /**
- *
+ * 
+ * // Basic Example ( also example is inside /render/grid.php )
+ *   echo icon([
+ *  'icon'=> 'user',  
+ *  'height' => 40,
+ *  'width' => 40,
+ *  'stroke' => 4,
+ *  'color' => '#201f27',
+ *  'text' => __('Hello'),
+ *  'heading' => 'h1',
+ *  // 'before' => true,
+ *  'url'=>  'https://feathericons.com/',  
+ *  'class' => 'custom-class',
+ *  ]);
+ * 
+ * @param array $opt
+ * 
+ */
+function icon(array $opt) {
+
+    // Reset variables    
+    
+        $out = '';
+    
+        // Get options
+            $icon = isset($opt['icon']) ? $opt['icon'] : 'circle';
+            $txt = isset($opt['txt']) ? $opt['txt'] : '';
+            $url = isset($opt['url']) ? $opt['url'] : '#';
+            $width = isset($opt['width']) ? $opt['width'] : 25;
+            $height = isset($opt['height']) ? $opt['height'] : 25;
+            $color = isset($opt['color']) ? $opt['color'] : '#303438';
+            $stroke = isset($opt['stroke']) ? $opt['stroke'] : 1;
+            $heading = isset($opt['heading']) ? $opt['heading'] : "span";
+            $class = isset($opt['class']) ? $opt['class'] : 'font-class';
+            $a_class = isset($opt['a_class']) ? $opt['a_class'] : 'a-class';
+    
+        // custom Url
+            if(isset($opt['url'])) {
+                $out .= "<a class='$a_class' href='$url'>";
+            }
+    
+        // heading like h1 h2 h3 ( default <span clas='font-class') ...
+           $out .= "<$heading class='$class'>";
+    
+        // Show Custom Text Before
+        if (isset($opt['before']) && $opt['before'] == true) $out .= $txt;
+           
+                $out .= "<i data-feather='$icon' 
+                width=$width 
+                height=$height 
+                stroke-width=$stroke
+                color=$color>
+                </i>";
+    
+        // Show Custom Text
+        if (!isset($opt['before'])) $out .= $txt;
+    
+        // End custom heading
+            $out .= "</$heading>";
+    
+        // /End custom url
+            if(isset($opt['url'])) {
+    
+                 $out .= "</a>";
+    
+            }
+        
+            return $out;
+        }
+
+/**
+ * 
+ * Example usage
+ * ~~
+ * echo catTag(pages('/categories/'), 
+ *   [
+ *     'txt' => __('Categories'),
+ *      //  'txt_clear' => true, // Show Only Text without <a href''><h3></h3></a>
+ *     'ul_cl' => 'element-ul-class',
+ *     'li_cl' => 'element-li-class',
+ *     'class' => 'element-a-class',
+ *     'limit' => 6, // Limit items
+ *     'random' => false, // Sort Random
+ *     'dis_count' => false
+ *   ]);
+ * 
  * @param Page|PageArray|null $page
  * @param array $opt 
  *
@@ -155,9 +244,9 @@ if(!count($item->children)) return '';
     $class = isset($opt['class']) ? $opt['class'] : 'cat-tag-class';
 
 // Show Content
-if(isset($opt['txt_no'])) {
+if(isset($opt['txt_clear'])) {
 
-    $out.= $opt['txt_no'];
+    $out.= $opt['txt'];
 
 } else {
 
@@ -169,14 +258,18 @@ if(isset($opt['txt_no'])) {
 
 foreach ($item->children("limit=$limit, $random, start=0") as $child) {
 
-        $count = count($child->references());
+    $count =  count( $child->references() );
+
+    $c_txt = '( ' . count( $child->references() ) . ' )';
+
+    if( isset($opt['dis_count']) && $opt['dis_count'] == true ) $c_txt = '';
 
         // If category has reference to pages
             if($count != 0) {
 
                $out .= "<li class='$li_cl'>
                             <a class='$class' 
-                                href='$child->url'>$child->title ( $count ) 
+                                href='$child->url'>$child->title $c_txt  
                             </a>
                         </li>";
             }
@@ -193,6 +286,7 @@ foreach ($item->children("limit=$limit, $random, start=0") as $child) {
  *
  */
 function googleFonts(array $fonts) {
+
 // Implode to format => 'Roboto','Montserrat','Limelight','Righteous'
 $font_family = "'" . implode("','", $fonts) . "'";
 
@@ -217,12 +311,11 @@ WebFontConfig = {
 }
 
 /**
+ * 
  * START PAGINATION https://processwire.com/api/modules/markup-pager-nav/
- * You must check Admin \ Setup \ Templates \ Urls => Allow Page Numbers
- * https://processwire.com/docs/admin/setup/templates/#allow-page-numbers
- * https://processwire.com/api/modules/markup-pager-nav/
+ * 
  * @param Page $items
- * @param string|null $class add custom class
+ * @param string|null $class
  *
  */
 function basicPagination($items, $class = null) {
@@ -336,8 +429,11 @@ window.cookieconsent.initialise({
 }
 
 /**
- * @param string $code Google Analytics Tracking Code
+ * 
  * https://developers.google.com/analytics/devguides/collection/analyticsjs/
+ * 
+ * @param string $code Google Analytics Tracking Code
+ * 
  */
 function gAnalitycs($code)
 {
@@ -354,43 +450,10 @@ ga('send', 'pageview');
 
 
 /**
-* @param  bool $trash
-* TRASH DEMO DATA => USAGE: trashDemoData($trash = true);
-*/
-function trashDemoData($trash = false) {
-    // IF TRUE
-    if($trash == true) {
-        // GET ID ALL PAGES TO TRASH
-        $arr_p = [
-            // '1029', // About Page
-            '1030','1031','1032','1033', // About Children
-            // '1023', // News
-            '1024','1025','1026', // News Children
-            // '1016', // Basic Page
-            '1018','1021', // Basic Page Children
-            // '1040', // Blog Page
-            '1043','1049','1052', '1057', // Blog Children
-            // '1044', // Categories Page
-            '1045','1050','1053', // Categories Children
-            // '1046', // Tags Page
-            '1047','1048','1051','1054','1055' // Tags Children
-        ];
-            foreach ($arr_p as $key) {
-                $trash_p = pages()->get($key);
-            // IF PAGE EXSIST
-                if($trash_p->name == true) {
-            // PAGE TO TRASH
-                    pages()->trash($trash_p);
-                // OR DELETE
-                    // pages()->delete($trash_p);
-                }
-            }
-        }
-    }
-
-/**
+ * 
  * @param Page|null $item
  * @param array $opt
+ * 
  */    
 function imgDemo($item, $opt = null) {
 
@@ -425,76 +488,16 @@ return $out;
 
 }
 
+
 /**
- * @param array $opt
  * 
- * // Basic Example ( also example is inside /render/grid.php )
- * echo icon([
- *  'icon'=> 'user',  
- *  'text' => __('Hello'),
- *  'url'=>  'https://feathericons.com/',  
- *  'height' => 40,
- *  'width' => 40,
- *  'color' => '#201f27',
- *  'stroke' => 4,
- *  'heading' => 'h1',
- *  'class' => 'custom-class',
- *  ]);
- * 
- */
-function icon(array $opt) {
-// Reset variables    
-    $out = '';
-    // Get options
-        $icon = isset($opt['icon']) ? $opt['icon'] : 'circle';
-        $txt = isset($opt['txt']) ? $opt['txt'] : '';
-        $url = isset($opt['url']) ? $opt['url'] : '#';
-        $width = isset($opt['width']) ? $opt['width'] : 25;
-        $height = isset($opt['height']) ? $opt['height'] : 25;
-        $color = isset($opt['color']) ? $opt['color'] : '#303438';
-        $stroke = isset($opt['stroke']) ? $opt['stroke'] : 1;
-        $heading = isset($opt['heading']) ? $opt['heading'] : "span";
-        $class = isset($opt['class']) ? $opt['class'] : 'font-class';
-        $a_class = isset($opt['a_class']) ? $opt['a_class'] : 'a-class';
-
-    // custom Url
-        if(isset($opt['url'])) {
-            $out .= "<a class='$a_class' href='$url'>";
-        }
-
-    // heading like h1 h2 h3 ( default <span clas='font-class') ...
-       $out .= "<$heading class='$class'>";
-
-    // Show Custom Text Before
-    if (isset($opt['before']) && $opt['before'] == true) $out .= $txt;
-       
-            $out .= "<i data-feather='$icon' 
-            width=$width 
-            height=$height 
-            stroke-width=$stroke
-            color=$color>
-            </i>";
-
-    // Show Custom Text
-    if (!isset($opt['before'])) $out .= $txt;
-
-    // End custom heading
-        $out .= "</$heading>";
-
-    // /End custom url
-        if(isset($opt['url'])) {
-             $out .= "</a>";
-        }
-    
-        return $out;
-    }
-
- /**
  * Prev Next Button
  * Basic Example echo prNx($page, 'grid')
+ *
  * @param Page|null $item
  * @param string $class
- */       
+ * 
+ */
 function prNx($item = null, $class = 'prev-next') {
 
 // Prev Next Button    
@@ -535,11 +538,13 @@ $out .= '</div>';
     return $out;
 }
 
-/**
-* Comments + Pagination
-* @param Page $page
-* @param int $limit
-*/
+ /**
+ * 
+ * Comments + Pagination
+ * @param Page $page
+ * @param int $limit
+ *
+ */
 function blogComments($page, $limit = 12) {
 
 if (!$page->comments) return ''; 
@@ -608,3 +613,42 @@ $comm = '';
 return $comm;
 
 }
+
+
+/**
+ * 
+ * TRASH DEMO DATA => USAGE: trashDemoData($trash = true);
+ * 
+ * @param  bool $trash
+ * 
+*/
+function trashDemoData($trash = false) {
+    // IF TRUE
+    if($trash == true) {
+        // GET ID ALL PAGES TO TRASH
+        $arr_p = [
+            // '1029', // About Page
+            '1030','1031','1032','1033', // About Children
+            // '1023', // News
+            '1024','1025','1026', // News Children
+            // '1016', // Basic Page
+            '1018','1021', // Basic Page Children
+            // '1040', // Blog Page
+            '1043','1049','1052', '1057', // Blog Children
+            // '1044', // Categories Page
+            '1045','1050','1053', // Categories Children
+            // '1046', // Tags Page
+            '1047','1048','1051','1054','1055' // Tags Children
+        ];
+            foreach ($arr_p as $key) {
+                $trash_p = pages()->get($key);
+            // IF PAGE EXSIST
+                if($trash_p->name == true) {
+            // PAGE TO TRASH
+                    pages()->trash($trash_p);
+                // OR DELETE
+                    // pages()->delete($trash_p);
+                }
+            }
+        }
+    }
