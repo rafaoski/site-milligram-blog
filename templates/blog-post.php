@@ -84,10 +84,14 @@ if($links->count()) {
 
 </div><!-- /#content-body -->
 
+<?php if($dis_comm == false):?>
+
 <pw-region id='bottom-region'>
 
-<link rel='stylesheet' href='<?php echo urls()->FieldtypeComments;?>comments.css'>
-<script defer src='<?php echo urls()->jquery?>'></script>
-<script defer src='<?php echo urls()->FieldtypeComments;?>comments.min.js'></script>
+<link rel='stylesheet' href='<?= urls()->FieldtypeComments;?>comments.css'>
+<script defer src='<?= urls()->jquery?>'></script>
+<script defer src='<?= urls()->FieldtypeComments;?>comments.min.js'></script>
 
 </pw-region>
+
+<?php endif;?>
