@@ -41,12 +41,6 @@ if(page()->name == 'news'):?>
 
 </div><!-- /#content-body -->
 
-<div id="page-children">
-
-<?=pageChildren($pages->get('/about/'));?>
-
-</div>
-
 <?php // If basic page ( name != 'news')
     else: ?>
 
