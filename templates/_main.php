@@ -67,7 +67,12 @@ wireIncludeFile("inc/_head", // Include header
             <div id="page-children">
 
             <?php // Show Home page Children
-                echo pageChildren(pages(1));
+                echo pageChildren(pages(1),
+                     [
+                         'limit'=> 12,
+                        //  'random' => true
+                    ]
+                );
 
             // Get Categories
                 echo catTag($pages->get('/categories/'), 

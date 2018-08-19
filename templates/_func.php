@@ -23,10 +23,10 @@ function simpleNav($root = null) {
 /**
  * 
  * @param Page|null $root
- * @param array $opt
+ * @param array|null $opt
  * 
  */
-function burgerNav($root = null, array $opt) {
+function burgerNav($root = null, $opt = null) {
 $children = $root->children();
 // $children->prepend($root);
 $out = '';
@@ -104,22 +104,33 @@ function breadCrumb($page = null) {
 /**
  *
  * @param Page|PageArray|null $page
- * @param string|null $text 
+ * @param array|null $opt 
  *
  */
-function pageChildren($page = null, $text = null) {
+function pageChildren($page = null, $opt = null) {
 
-    if(!count($page->children)) return '';
-    
-    if($text == null) $text = __('Show more Pages');
+if(!count($page->children)) return '';
 
-    $out = '';
+// Reset variables
+$out = '';
+$random = '';
 
-    $out .= "<h4>$text</h4>";
+// Default Text
+    $txt = isset($opt['txt']) ? $opt['txt'] : __('Show more Pages');
+
+// Limit Items
+    $limit = isset($opt['limit']) ? $opt['limit'] : 8;
+
+// Random Items
+if(isset($opt['random']) && $opt['random'] == true) {
+    $random = "sort=random,";
+  }
+
+    $out .= "<h4>$txt</h4>";
 
     $out .= "<ul class='page-children'>";
 
-        foreach ($page->children('limit=15,start=0') as $child) {
+        foreach ($page->children("limit=$limit,$random start=0") as $child) {
 
             $out .= "<li><a href='$child->url'>$child->title</a></li>";
 
@@ -218,10 +229,10 @@ function icon(array $opt) {
  *   ]);
  * 
  * @param Page|PageArray|null $page
- * @param array $opt 
+ * @param array|null $opt 
  *
  */
-function catTag($item = null, array $opt) {
+function catTag($item = null, $opt = null) {
 
 if(!count($item->children)) return '';
 // Reset Variables
@@ -229,7 +240,7 @@ if(!count($item->children)) return '';
     $random = '';
 // Heading Text
     $txt = isset($opt['txt']) ? $opt['txt'] : $item->title;
-// Heading Text
+// Random Items
    if(isset($opt['random']) && $opt['random'] == true) {
       $random = "sort=random";
     }
