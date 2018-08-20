@@ -234,7 +234,12 @@ function icon(array $opt) {
  */
 function catTag($item = null, $opt = null) {
 
+// Do not show if the items do not exist
 if(!count($item->children)) return '';
+
+// Do not show if the page is the same as item
+if(wire('page')->id == $item->id) return '';
+
 // Reset Variables
     $out = '';
     $random = '';
