@@ -17,10 +17,6 @@ echo icon([
     'url' => $arch_p
   ]);
 
-// Limit Year 
-$item = -1;
-$l_y = isset($limit_y) ? $limit_y : 2;
-
 // End Date Today
   $end_date = date("Y"); // End this year
   $now = time(); // Get Time
@@ -28,10 +24,6 @@ $l_y = isset($limit_y) ? $limit_y : 2;
 echo '<ul>';
 
 for($year = $end_date; $year >= $start_date; $year--) {
-
-// Limit Year
-$item ++;
-    if($l_y == $item) return '';
 
    for($month = 12; $month > 0; $month--) {
 
