@@ -449,19 +449,19 @@ window.cookieconsent.initialise({
  * https://developers.google.com/analytics/devguides/collection/analyticsjs/
  * 
  * @param string $code Google Analytics Tracking Code
- * 
+ *
  */
 function gAnalitycs($code)
 {
-return"\n
-<!-- Google Analytics -->
+return "\n
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src='https://www.googletagmanager.com/gtag/js?id=UA-{$code}'></script>
 <script>
-window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-ga('create', '$code', 'auto');
-ga('send', 'pageview');
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-<!-- End Google Analytics -->\n";
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-{$code}');
+</script>";
 }
 
 
