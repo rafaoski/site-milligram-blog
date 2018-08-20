@@ -105,7 +105,7 @@ wireIncludeFile("inc/_head", // Include header
                     'blog_p' => $pages->get("/blog/"), // Blog page url
                     'arch_p' => pages('/archives/')->url, // Archive page url
                     'start_date' => 2017, // or whenever you want it to start
-                    'limit' => 50 // Limit items to Year
+                    'limit_y' => 3 // Limit archives by year ( show only last 3 year )
                 ]);
 
             // Include contact form
