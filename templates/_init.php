@@ -28,7 +28,7 @@ $dis_comm = false;
 // RSS FEED BLOG PAGE ( if installed module rss enable this => http://your-page/blog/rss)
     // if($page->template->name == 'blog' && $input->urlSegment1 == 'rss') {
     //     $rss = $modules->get("MarkupRSS");
-    //     $rss->title = $t_str['last-posts'];
+    //     $rss->title = __('Recent Posts');
     //     $rss->render($page->children("limit=12"));
     // die();
     // }
