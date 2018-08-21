@@ -2,65 +2,30 @@
 
 <div id='content-body'>
 
-<p class='entry-header'>
+<div class='entry-header'>
 
-<?php // Get Some Icons https://feathericons.com/
+<?php // Include file
+wireIncludeFile('inc/_entry-header',
+[
+'item' => page(),  
+'dis_comm' => $dis_comm //  variable from _init.php
+]); ?>
 
-  echo icon('user', ['txt' => $page->createdUser->title . ' | ' ]); 
-
-  echo icon('calendar',['txt' => $page->date . ' | ']);
-      
-  // IF PAGE COMMENTS && $dis_comm == false ( variable from _init.php )
-  if(count($page->comments) && $dis_comm == false) {
-
-    $id = $page->comments->last() ? $page->comments->last()->id : '#';
-
-    echo icon('message-circle',
-    [
-      'txt' => count($page->comments),
-      'url' => "$page->url#Comment$id",
-    ]);
-} ?>
-
-</p>
+</div><!-- /.entry-header -->
 
 <?php // Demo img
-    echo imgDemo($page,['demo' => true]);?>
+echo imgDemo($page,['demo' => true]);?>
 
-<p class="categories">
+<div class="entry-footer m-1">
 
-<?php // Get Some CATEGORIES Icon
+<?php // Include file
+wireIncludeFile('inc/_entry-footer',
+  ['item' => page()]
+);?>
 
-echo icon('grid',
-  [
-    'txt' => ' | ',
-    'url' => pages('/categories/')->url,
-    'color' => '#9b4dca'
-  ]);
+</div><!-- /.entry-footer -->
 
-// Show CATEGORIES https://processwire.com/api/ref/page-array/each/
-  echo $page->categories->each(
-    "<a href='{url}'>{title}</a> | "
-  ) . ' ... ' ;
-
-// Get Some TAGS Icon
-  echo icon('tag',
-  [
-    'txt' => ' | ',
-    'url' => pages('/tags/')->url,
-    'color' => '#9b4dca'
-  ]);
-
-// Show TAGS https://processwire.com/api/ref/page-array/each/
-  echo $page->tags->each(
-    "<a href='{url}'>{title}</a> | "
-  ) . ' ... ';
-  ?>
-
-</p>
-
-<?php 
-// Page body field
+<?php // Page body field
 echo page()->body;
 
 // Prev Next Button
@@ -88,6 +53,17 @@ if($links->count()) {
 }?>
 
 </div><!-- /#content-body -->
+
+<div id="page-children" class='p-3' pw-prepend>
+  <?php 
+    wireIncludeFile("inc/_user-info",
+      [ 
+          'author' => $user, // Enable archives Form
+          ''
+      ]); ?>
+
+
+</div>
 
 <?php if($dis_comm == false):?>
 

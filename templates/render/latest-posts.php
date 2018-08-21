@@ -26,14 +26,15 @@ $children = $item->children("limit=4,sort=random");?>
             <a href="<?=$child->url?>">
 
                 <?php // Img Demo
-                    echo imgDemo($child,['demo' => true, 'random' => true]);?>
-
-            
+                    echo imgDemo($child,['demo' => true, 'random' => true]);
+                // If no demo   
+                    // echo $child->render('images', 'img-small');
+                ?>
 
                 <h4><?=$child->title?></h4>
       
             <?php // https://processwire.com/blog/posts/processwire-3.0.7-expands-field-rendering-page-path-history-and-more/
-                    echo $child->render('body','txt-small');?>
+                  //  echo $child->render('body','txt-small');?>
 
             </a>
             

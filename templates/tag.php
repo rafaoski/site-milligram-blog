@@ -6,7 +6,7 @@ $posts = pages()->get('/blog/')->children("tags=$page, limit=16");?>
 
 <?php foreach ($posts as $post): ?>
 
-<article class='col-4_md-6_sm-12'>
+<article class='col-6_sm-12'>
 
 <a href="<?=$post->url?>">
 
@@ -16,23 +16,19 @@ $posts = pages()->get('/blog/')->children("tags=$page, limit=16");?>
 
 </a>
 
-<small>
-<?php // Get Some Icon https://feathericons.com/,
-echo icon('tag',
+<br>
+
+<?=$post->render('body','txt-small')?></p>
+
+<div class="entry-footer m-1">
+
+  <?php wireIncludeFile('inc/_entry-footer',
   [
-  'txt' => ' | ',
-  'url' => pages('/tags/')->url,
-  'color' => '#9b4dca'
-]);
+      'item' => $post,
 
-echo $post->tags->each(
-  "<a href='{url}'>{title}</a> | "
-) . ' ... ';?>
-</small>
-  
-<br><?=$post->render('body','txt-small')?></p>
+  ]);?>
 
-   <a href="<?=$post->url?>"><?=__('Read More');?></a>
+</div>
 
 </article>
 

@@ -9,7 +9,7 @@ if(page()->name == 'news'):?>
 
 <?php foreach ($news as $child): ?>
 
-  <div class='news-item col-4_md-6_sm-12'>
+  <div class='news-item col-6_sm-12'>
 
     <a href="<?=$child->url?>">
 
@@ -57,6 +57,17 @@ if($page->parent()->name == 'news'):?>
 <?php endif;?>
 
   <?=page()->body?>
+
+<?php if(page()->hasChildren()) {
+
+  echo wireRenderFile("render/child",
+  [ // Enab
+  // Render Grid from this page
+    'items' => page()->children(),
+    'title' => __('Show More Pages'),
+  ]);
+
+} ?>
 
 </div><!-- /#content-body -->
 

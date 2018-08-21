@@ -19,9 +19,9 @@
             [
                 'url'=> $value,
                 't_blank' => true,
-                'width' => 35,
+                'width' => 40,
                 'height' => 35,
-                'stroke' => 1,
+                'stroke' => 2,
                 'color' => '#9b4dca'
             ]); 
         }?>

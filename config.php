@@ -40,7 +40,6 @@ $config->useMarkupRegions = true;
 $config->useFunctionsAPI = true; 
 $config->defaultAdminTheme = 'AdminThemeUikit';
 
-
 /**
  * Example Custom Config
  * https://processwire.com/api/variables/config/
