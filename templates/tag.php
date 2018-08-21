@@ -18,15 +18,15 @@ $posts = pages()->get('/blog/')->children("tags=$page, limit=16");?>
 
 <small>
 <?php // Get Some Icon https://feathericons.com/,
-echo icon('grid',
+echo icon('tag',
   [
   'txt' => ' | ',
-  'url' => pages('/categories/')->url,
+  'url' => pages('/tags/')->url,
   'color' => '#9b4dca'
 ]);
 
-echo $post->categories->each(
-  "<a href='{url}'>{title}</a>"
+echo $post->tags->each(
+  "<a href='{url}'>{title}</a> | "
 ) . ' ... ';?>
 </small>
   

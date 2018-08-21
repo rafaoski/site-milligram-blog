@@ -25,7 +25,7 @@ $posts = pages()->get('/blog/')->children("categories=$page, limit=16");?>
         ]);
 
         echo $post->categories->each(
-        "<a href='{url}'>{title}</a>"
+        "<a href='{url}'>{title}</a> | "
         ) . ' ... ';?>
     </small>
     
