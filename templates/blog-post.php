@@ -55,13 +55,12 @@ if($links->count()) {
 </div><!-- /#content-body -->
 
 <div id="page-children" class='p-3' pw-prepend>
+
   <?php 
     wireIncludeFile("inc/_user-info",
       [ 
-          'author' => $user, // Enable archives Form
-          ''
+          'author' => page()->createdUser, // Enable archives Form
       ]); ?>
-
 
 </div>
 
@@ -75,4 +74,4 @@ if($links->count()) {
 
 </pw-region>
 
-<?php endif;?>
+<?php endif;
