@@ -13,15 +13,17 @@
 
     <p id="social" class='socila-profiles col-7_md-6_sm-12'>
 
-        <?php foreach ($soc_p as $key => $value) {
-            // Feather Icons
-            echo "<a href='$value'>
-            <i data-feather='$key'
-            width=35 height=35
-            stroke-width=1
-            color=#9b4dca>
-            </i>
-            </a>";
+        <?php foreach ($soc_p as $icon => $value) {
+            
+            echo icon($icon, // Feather Icons
+            [
+                'url'=> $value,
+                't_blank' => true,
+                'width' => 35,
+                'height' => 35,
+                'stroke' => 1,
+                'color' => '#9b4dca'
+            ]); 
         }?>
 
     </p><!-- /#social -->
@@ -75,9 +77,9 @@ window.addEventListener("load", function(){
     echo googleFonts($g_fonts);
 
 // GOGLE ANALYTICS CODE
-if(isset($ga_code) && $ga_code != '' ) {
-    echo gAnalitycs("$ga_code");
-}
+    if(isset($ga_code) && $ga_code != '' ) {
+        echo gAnalitycs("$ga_code");
+    }
 
 // Privacy Banner
 if($p_b == true) {

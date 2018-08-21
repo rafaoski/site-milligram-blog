@@ -37,13 +37,15 @@ $intro = isset($intro) ? explode(" ", $intro) : explode(" ", __('Add Hero Text')
     <br>
    
       <small><?= $b_first_txt . " <a href='$b_url'>" . $b_url_txt . " </a>" . $b_last_txt . ' ' ;?>
-
-            <a href='<?=$icon_url?>'>
-            
-              <i data-feather="<?=$icon?>" width=30 height=30 stroke-width=1 color=red></i>
-
-            </a>
-
+      
+          <?=icon($icon,
+          [
+            'url' => $icon_url,
+            'width' => 30,
+            'height' => 30,
+            'color' => 'red'
+          ])?>
+ 
       </small>
       
   </p>
@@ -71,7 +73,7 @@ $intro = isset($intro) ? explode(" ", $intro) : explode(" ", __('Add Hero Text')
   @media (max-width: 40.0rem) {
     
     header {
-      background: #201f27;
+      /* background: #201f27; */
        /* position: static; */
       padding-bottom: 10px;
     }

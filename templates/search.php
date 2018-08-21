@@ -46,7 +46,7 @@ unset($q);?>
 		}
 	} else {
 		// we didn't find any
-		echo "<h3>Sorry, no results were found.</h3>";
+		echo "<h3>" . __('Sorry, no results were found.') . "</h3>";
 	}
 	?>
 </div>

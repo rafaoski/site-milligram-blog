@@ -2,26 +2,27 @@
 
 <div id='content-body'>
 
-<p class='entry-header'><?php // Get Some Icon
-  echo icon([
-      'icon'=> 'user', // https://feathericons.com/
-      'txt' => $page->createdUser->title . ' | ' ]); 
+<p class='entry-header'>
 
-    echo icon([
-      'icon'=> 'calendar',  
-      'txt' => $page->date . ' | ']);
+<?php // Get Some Icons https://feathericons.com/
+
+  echo icon('user', ['txt' => $page->createdUser->title . ' | ' ]); 
+
+  echo icon('calendar',['txt' => $page->date . ' | ']);
       
   // IF PAGE COMMENTS && $dis_comm == false ( variable from _init.php )
   if(count($page->comments) && $dis_comm == false) {
 
     $id = $page->comments->last() ? $page->comments->last()->id : '#';
 
-    echo icon([
-      'icon'=> 'message-circle', // https://feathericons.com/
+    echo icon('message-circle',
+    [
       'txt' => count($page->comments),
       'url' => "$page->url#Comment$id",
     ]);
-} ?></p>
+} ?>
+
+</p>
 
 <?php // Demo img
     echo imgDemo($page,['demo' => true]);?>
@@ -29,34 +30,38 @@
 <p class="categories">
 
 <?php // Get Some CATEGORIES Icon
-echo icon([
-    'icon'=> 'grid', // https://feathericons.com/
+
+echo icon('grid',
+  [
     'txt' => ' | ',
     'url' => pages('/categories/')->url,
     'color' => '#9b4dca'
   ]);
+
 // Show CATEGORIES https://processwire.com/api/ref/page-array/each/
   echo $page->categories->each(
     "<a href='{url}'>{title}</a> | "
   ) . ' ... ' ;
 
 // Get Some TAGS Icon
-  echo icon([
-    'icon'=> 'tag', // https://feathericons.com/
+  echo icon('tag',
+  [
     'txt' => ' | ',
     'url' => pages('/tags/')->url,
     'color' => '#9b4dca'
   ]);
+
 // Show TAGS https://processwire.com/api/ref/page-array/each/
   echo $page->tags->each(
     "<a href='{url}'>{title}</a> | "
-  ) . ' ... ';?>
+  ) . ' ... ';
+  ?>
 
 </p>
 
 <?php 
 // Page body field
-    echo page()->body;
+echo page()->body;
 
 // Prev Next Button
 echo prNx($page, 'grid-center');   

@@ -15,8 +15,8 @@ if ($input->urlSegment(1)) {
 <form action="./">
 
 <?php 
-echo icon([
-    'icon'=> 'archive', // https://feathericons.com/
+echo icon('archive', // https://feathericons.com/
+  [
     'txt' => ' ' . __('Select the archives'),
     'color' => '#9b4dca',
     'heading' => 'h3'

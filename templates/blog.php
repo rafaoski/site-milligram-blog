@@ -17,14 +17,14 @@ $posts = page()->children('limit=12');?>
   <small>
 
   <?php // Get Some User from user Profile
-      echo icon([
-          'icon'=> 'user', // https://feathericons.com/
+      echo icon('user', // https://feathericons.com/
+        [
           'txt' => $post->createdUser->title . ' | ',
         ]); 
         
     // Get created date ( from field date )
-      echo icon([
-          'icon'=> 'calendar',  
+      echo icon('calendar',
+      [
           'txt' => $post->date . ' | ',
       ]); 
 
@@ -33,8 +33,8 @@ $posts = page()->children('limit=12');?>
 
         $id = $post->comments->last() ? $post->comments->last()->id : '#';
 
-        echo icon([
-          'icon'=> 'message-circle', // https://feathericons.com/
+        echo icon('message-circle',
+        [
           'txt' => count($post->comments),
           'url' => "$post->url#Comment$id",
         ]);

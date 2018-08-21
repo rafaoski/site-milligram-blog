@@ -98,17 +98,17 @@ $tokenValue = $this->session->CSRF->getTokenValue(); ?>
 		<!-- honeypot fields end -->
 
     <div class="name">
-      <label class="label-name"><i data-feather='user'></i></label>
+      <label class="label-name"><?=icon('user')?></label>
       <input name='name' placeholder="<?=$l_name?>" autocomplete="off" type="text" required>
     </div>
 
     <div class="enmail">
-      <label class="label-email"><i data-feather='mail'></i></label>
+      <label class="label-email"><?=icon('mail')?></label>
       <input name='email' placeholder="<?=$l_email?>" type="email" required>
     </div>
 
     <div class="message">
-      <label class="label-message"><i data-feather='message-circle'></i></label>
+      <label class="label-message"><?=icon('message-circle');?></label>
       <textarea class='' name='message' placeholder="<?=$l_message?>" rows="7"  required></textarea>
     </div>
 
@@ -117,25 +117,28 @@ $tokenValue = $this->session->CSRF->getTokenValue(); ?>
 
 </form>
 
-<a href='tel:<?=$sanitizer->text($c_phone);?>'>
-<i data-feather='phone'
-    width=30 height=30
-    stroke-width=1
-    color=#9b4dca>
-</i> <?=$sanitizer->text($c_phone);?>
-</a>
+<?php 
+echo icon('phone',
+[
+'txt' => $sanitizer->text($c_phone) . '<br>',  
+'url' =>  "tel:{$sanitizer->text($c_phone)}",
+'width' => 30,
+'height' => 30,
+'color' => '#9b4dca',
+'stroke' => 1
+]);
 
-<br>
+echo icon('mail',
+[
+'txt' => $sanitizer->email($c_mail),  
+'url' =>  "mailto:{$sanitizer->email($c_mail)}",
+'width' => 30,
+'height' => 30,
+'color' => '#9b4dca',
+'stroke' => 1
+]);
 
-<a href='mailto:<?=$sanitizer->email($c_mail);?>'>
-<i data-feather='mail'
-    width=30 height=30
-    stroke-width=1
-    color=#9b4dca>
-</i> <?=$sanitizer->email($c_mail);?>
-</a>
-
-<?php } 
+ } 
   endif;
     // Remove Session Message
     $session->remove('Message');

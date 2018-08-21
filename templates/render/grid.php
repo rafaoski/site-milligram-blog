@@ -4,13 +4,13 @@ $children = $item->children("limit=4");?>
 
   <h1><?=$item->headline?></h1>
 
-  <div class="grid home-about">
+  <div class="grid main-body">
 
       <div class="col-6_sm-12">
 
         <?php // Simple Icon
-            echo icon([
-              'icon'=> 'crosshair', // https://feathericons.com/
+            echo icon('crosshair',
+            [
               'width' => 150,
               'height' => 150,
               'color' => '#608190',
@@ -52,8 +52,8 @@ $children = $item->children("limit=4");?>
                   <div class="col-6_sm-12">
 
                     <?php // Get icons inside loop
-                        echo icon([
-                            'icon'=> $icons[$key], // https://feathericons.com/
+                        echo icon($icons[$key],
+                        [
                             'width' => $size[$key],
                             'height' => $size[$key],
                             'color' => $colors[$key],

@@ -144,8 +144,7 @@ if(isset($opt['random']) && $opt['random'] == true) {
 /**
  * 
  * // Basic Example ( also example is inside /render/grid.php )
- *   echo icon([
- *  'icon'=> 'user',  
+ *  echo icon('user',[
  *  'height' => 40,
  *  'width' => 40,
  *  'stroke' => 4,
@@ -153,23 +152,27 @@ if(isset($opt['random']) && $opt['random'] == true) {
  *  'text' => __('Hello'),
  *  'heading' => 'h1',
  *  // 'before' => true,
- *  'url'=>  'https://feathericons.com/',  
+ *  'url'=>  'https://feathericons.com/',
+ *  't_url' => true, // <a href='#' target='_blank'  
  *  'class' => 'custom-class',
  *  ]);
  * 
- * @param array $opt
+ * @param string|null $icon
+ * @param array|null $opt
  * 
  */
-function icon(array $opt) {
+function icon($icon = null, $opt = null) {
+
+if($icon == null) return '';
 
     // Reset variables    
     
         $out = '';
     
         // Get options
-            $icon = isset($opt['icon']) ? $opt['icon'] : 'circle';
             $txt = isset($opt['txt']) ? $opt['txt'] : '';
             $url = isset($opt['url']) ? $opt['url'] : '#';
+            $t_blank = isset($opt['t_blank']) && $opt['t_blank'] == true ? "target='_blank'" : '';
             $width = isset($opt['width']) ? $opt['width'] : 25;
             $height = isset($opt['height']) ? $opt['height'] : 25;
             $color = isset($opt['color']) ? $opt['color'] : '#303438';
@@ -180,7 +183,7 @@ function icon(array $opt) {
     
         // custom Url
             if(isset($opt['url'])) {
-                $out .= "<a class='$a_class' href='$url'>";
+                $out .= "<a class='$a_class' href='$url' $t_blank>";
             }
     
         // heading like h1 h2 h3 ( default <span clas='font-class') ...
@@ -528,8 +531,7 @@ $out .= "<div class='$class'>";
     if($p_prev->id) {
 
 // Get function icon()
-    $out .= icon([
-        'icon'=> 'arrow-left',
+    $out .= icon('arrow-left',[
         'txt' => $p_prev->title,
         'url' => $p_prev->url,
         'a_class' => 'm-1 button button-outline',
@@ -540,8 +542,7 @@ $out .= "<div class='$class'>";
     if($p_next->id) {
 
 // Get function icon()
-    $out .= icon([
-        'icon'=> 'arrow-right',
+    $out .= icon('arrow-right',[
         'txt' => $p_next->title,
         'url' => $p_next->url,
         'before' => true,

@@ -5,8 +5,8 @@ $children = $item->children("limit=4,sort=random");?>
   <div class="last-post">
 
      <?php // Simple Icon
-            echo icon([
-              'icon'=> 'eye', // https://feathericons.com/
+            echo icon('eye', // https://feathericons.com/
+            [
               'width' => 70,
               'height' => 70,
               'color' => '#608190',

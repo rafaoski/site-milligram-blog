@@ -9,8 +9,8 @@
 if($enable == false or page()->url == $arch_p) return '';
 
 // Some Heading
-echo icon([
-    'icon'=> 'archive', // https://feathericons.com/
+echo icon('archive', // https://feathericons.com/
+  [ 
     'txt' => ' ' . $title,
     'color' => '#9b4dca',
     'heading' => 'h3',

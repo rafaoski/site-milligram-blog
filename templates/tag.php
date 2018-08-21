@@ -17,9 +17,9 @@ $posts = pages()->get('/blog/')->children("tags=$page, limit=16");?>
 </a>
 
 <small>
-<?php // Get Some Icon
-echo icon([
-  'icon'=> 'grid', // https://feathericons.com/,
+<?php // Get Some Icon https://feathericons.com/,
+echo icon('grid',
+  [
   'txt' => ' | ',
   'url' => pages('/categories/')->url,
   'color' => '#9b4dca'
