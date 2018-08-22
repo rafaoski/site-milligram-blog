@@ -19,8 +19,10 @@ if($og_seo == true):?>
     <meta id='og-type' property="og:type" content="website" />
     <meta id='og-url' property="og:url" content="<?=page()->httpUrl?>" />
     <meta property='og:site_name' content='<?=__('Your Site Name');?>'/>
-    <meta id='og-image' property='og:image' content='<?=count(page()->images) ? $page->images->first->httpUrl() : ''?>'/>
-<?php endif; // End Open Graph Seo
+<?php if( page()->images && count(page()->images) ) { // If page has images
+    echo "\t<meta id='og-image' property='og:image' content='{$page->images->first->httpUrl()}'/>\n";
+}    
+endif; // End Open Graph Seo
         wireIncludeFile("inc/_link-tag",['home' => $home]); // Include Lang tag ?>
     <!-- BASIC STYLESHEET -->
     <link rel="stylesheet" href="<?=$app_css;?>"/>
@@ -45,6 +47,11 @@ if($og_seo == true):?>
             }
     
     </style>
+
+<?php // Add Google Webmaster Verification Code Code https://kb.yoast.com/kb/how-to-connect-your-website-to-google-webmaster-tools/
+   if($verification_code) {
+    echo "<meta name='google-site-verification' content='$verification_code' />\n";
+}?>
 
 </head>
 

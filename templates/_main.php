@@ -13,7 +13,9 @@ wireIncludeFile("inc/_head", // Include header
     // Get main CSS file
     'app_css' => urls()->templates . "dist/app.css",
     // Enable Open Graph SEO
-    'og_seo' => false
+    'og_seo' => false,
+    // Add Google Webmaster Verification Code https://kb.yoast.com/kb/how-to-connect-your-website-to-google-webmaster-tools/
+    'verification_code' => '' // Paste Your Code
 ]);?>
 
 <!-- MAIN CONTENT -->
@@ -76,8 +78,8 @@ wireIncludeFile("inc/_head", // Include header
                 [ 
                     'enable' => true, // Enable archives Form
                     'title' => __('Select The Archives'),
-                    'blog_p' => $pages->get("/blog/"), // Blog page url
-                    'arch_p' => pages('/archives/')->url, // Archive page url
+                    'blog_p' => $pages->get("/blog/"), // Blog page
+                    'arch_p' => pages('/archives/'), // Archive page
                     'start_date' => 2017, // or whenever you want it to start
                 ]);
 
@@ -106,11 +108,11 @@ wireIncludeFile("inc/_head", // Include header
         [  // Social Profiles ( Icons => https://feathericons.com/ )
             'soc_p' => 
             [
-            'twitter' => 'https://twitter.com/processwire',
-            'facebook' => 'https://pl-pl.facebook.com/processwire/',
-            'activity' => 'https://weekly.pw/',
-            'youtube' => 'https://www.youtube.com/user/ryancramerdesign/videos',
-            'github' => 'https://github.com/processwire/processwire'
+             'twitter' => 'https://twitter.com/processwire',
+             'facebook' => 'https://pl-pl.facebook.com/processwire/',
+             'activity' => 'https://weekly.pw/',
+             'youtube' => 'https://www.youtube.com/user/ryancramerdesign/videos',
+             'github' => 'https://github.com/processwire/processwire'
             ],
           // Add Google Fonts
             'g_fonts' => ['Roboto','Montserrat','Righteous'],

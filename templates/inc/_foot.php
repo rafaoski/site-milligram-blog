@@ -13,7 +13,8 @@
 
     <p id="social" class='socila-profiles col-7_md-6_sm-12'>
 
-        <?php foreach ($soc_p as $icon => $value) {
+    <?php if(isset($soc_p))
+        foreach ($soc_p as $icon => $value) {
             
             echo icon($icon, // Feather Icons
             [
@@ -24,7 +25,7 @@
                 'stroke' => 2,
                 'color' => '#9b4dca'
             ]); 
-        }?>
+    }?>
 
     </p><!-- /#social -->
 

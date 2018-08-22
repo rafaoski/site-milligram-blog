@@ -6,7 +6,7 @@
 // $startYear = date("Y"); // this year
 // $start_date = 2015; // or whenever you want it to start
 // $limit = 20; // Limit items to Year
-if($enable == false or page()->url == $arch_p) return '';
+if($enable == false or page()->url == $arch_p->url) return '';
 
 // Some Heading
 echo icon('archive', // https://feathericons.com/
@@ -14,7 +14,7 @@ echo icon('archive', // https://feathericons.com/
     'txt' => ' ' . $title,
     'color' => '#9b4dca',
     'heading' => 'h3',
-    'url' => $arch_p
+    'url' => $arch_p->url
   ]);
 
 // End Date Today
@@ -33,7 +33,7 @@ for($year = $end_date; $year >= $start_date; $year--) {
        else $endTime = strtotime("$year-" . ($month+1) . "-01");
        $entries = $blog_p->children("date>=$startTime, date<$endTime"); // or substitute your own date field
        $date = date("Y-m",$startTime);
-       $url = $arch_p . date("Y",$startTime) . "/" . date("m",$startTime);
+       $url = $arch_p->url . date("Y",$startTime) . "/" . date("m",$startTime);
        $count = count($entries);
        
        if($count > 0) {
