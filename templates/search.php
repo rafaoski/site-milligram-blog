@@ -38,7 +38,7 @@ unset($q);?>
 	// did we find any matches?
 	if(count($matches)) {
 		// yes we did, render them
-		echo "Found $matches->count page(s).";
+		echo __('Found') . ' ' . $matches->count . ' ' . __('page(s)');
 		foreach ($matches as $key) {
 			$out = '<ul>';
 			echo "<li><a href='$key->url'>$key->title</a></li>";
