@@ -2,7 +2,7 @@
 if($enable_grid == false) return '';
 $children = $item->children("limit=4");?>
 
-  <h1><?=$item->headline?></h1>
+  <h2><?=$item->headline?></h2>
 
   <div class="grid main-body">
 
