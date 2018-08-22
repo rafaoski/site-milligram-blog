@@ -126,7 +126,7 @@ if(isset($opt['random']) && $opt['random'] == true) {
     $random = "sort=random,";
   }
 
-    $out .= "<h4>$txt</h4>";
+    $out .= "<h3>$txt</h3>";
 
     $out .= "<ul class='page-children'>";
 
