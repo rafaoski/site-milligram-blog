@@ -3,7 +3,7 @@
 // $news = pages()->find("template=basic-page, limit=16"); // Example find with template name
 $news = page()->children('limit=12');
 // If page name is news
-if(page()->name == 'news'):?>
+if(page()->name == page()->opt['news_p']->name):?>
 
 <div id='content-body' class="news grid">
 

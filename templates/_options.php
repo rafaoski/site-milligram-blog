@@ -19,10 +19,13 @@ page()->opt = [
  * 
  */
 'home' => pages()->get('/'), // Get Home Page
-'blog_p' => pages()->get("/blog/"), // Blog Page
+'blog_p' => pages("/blog/"), // Blog Page
 'cat_p' =>  pages('/categories/'), // Categories Page
 'tag_p' =>  pages('/tags/'), // Tags page
 'arch_p' => pages('/archives/'), // Archive Page
+'about_p' => pages('/about/'), // Archive Page
+'news_p' => pages('/news/'), // Archive Page
+
 // 'p_url' => pages('/privacy-policy/'), // Privacy Policy
 
 /**
@@ -89,4 +92,5 @@ page()->opt = [
    // 'p_url' => pages('/privacy-policy/')->url, // Same as pages()->get('/privacy-policy/')->url
 // Google Analytics Code
 'ga_code' => '', // To Enable put Google Analytics Code
+
 ];   

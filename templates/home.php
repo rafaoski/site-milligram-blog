@@ -25,7 +25,7 @@ echo wireRenderFile("render/hero", // Render Hero Content
         [ // Enable Content Grid
           'enable_grid' =>  true, // Enable Grid Content
         // Render Grid from this page
-          'item' => pages('about')
+          'item' => page()->opt['about_p']
         ]);?>
 
 </section><!-- /#home-grid -->
@@ -36,7 +36,7 @@ echo wireRenderFile("render/hero", // Render Hero Content
       [ // Enable Content Grid
         'enable_grid' =>  true, // Enable Grid Content
       // Render Grid from this page
-        'item' => pages('blog'),
+        'item' => page()->opt['blog_p'],
       // Blog Heading  
         'heading' => page()->ts['recent']
       ]);?>
