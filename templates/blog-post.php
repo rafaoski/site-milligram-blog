@@ -58,7 +58,7 @@ if($links->count()) {
 
 </div>
 
-<?php if(count(page()->comments) && page()->opt['disable_comments'] == false):?>
+<?php if(page()->comments && page()->opt['disable_comments'] == false):?>
 
 <pw-region id='bottom-region'>
 
