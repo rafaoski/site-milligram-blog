@@ -7,14 +7,16 @@
     <p id='copyright' class='copy col-5_md-6_sm-12'>
 
         <small class='small'>&copy; <?=date('Y')?> &bull;</small>
-        <a href='https://processwire.com'><?=__('Powered by ProcessWire CMS');?></a>
+
+        <a href='https://processwire.com'><?=page()->ts['powered_by'];?></a>
 
     </p><!-- /#copyright -->
 
     <p id="social" class='socila-profiles col-7_md-6_sm-12'>
 
-    <?php if(isset($soc_p))
-        foreach ($soc_p as $icon => $value) {
+    <?php if( isset(page()->opt['soc_p']) )
+
+        foreach (page()->opt['soc_p'] as $icon => $value) {
             
             echo icon($icon, // Feather Icons
             [
@@ -35,7 +37,7 @@
 
     <a class='button edit-btn' href='<?=page()->editUrl?>'>
 
-           <?=__('Edit Page');?>
+           <?=page()->ts['edit_page'];?>
 
     </a>
 
@@ -75,22 +77,26 @@ window.addEventListener("load", function(){
 </script>
 
 <?php // Get Some Google Fonts https://github.com/typekit/webfontloader
-    echo googleFonts($g_fonts);
+    echo googleFonts(page()->opt['g_fonts']);
 
 // GOGLE ANALYTICS CODE
-    if(isset($ga_code) && $ga_code != '' ) {
-        echo gAnalitycs("$ga_code");
+    if(isset(page()->opt['ga_code']) && page()->opt['ga_code'] != '' ) {
+
+        echo gAnalitycs(page()->opt['ga_code']);
+
     }
 
 // Privacy Banner
-if($p_b == true) {
+if(page()->opt['p_b'] == true) {
+
 echo cookieBanner(
     [
-       'message' => __('Privacy & Cookies Policy. This website uses cookies to ensure you get the best experience on our website.'),
-       'dismiss' => __('Got it!'),
-       'link' => __('Learn More'),
-       'href' => $p_url // Url to Cookie Page
+       'message' => page()->ts['p_message'],
+       'dismiss' => page()->ts['go_it'],
+       'link' => page()->ts['learn_more'],
+       'href' => page()->opt['p_url']
     ]);
+
 } ?>
 
 </body>

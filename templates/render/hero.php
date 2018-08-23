@@ -1,7 +1,7 @@
 <?php namespace ProcessWire;
 if($enable == false) return '';
 
-$intro = isset($intro) ? explode(" ", $intro) : explode(" ", __('Add Hero Text'));?>
+$intro = isset($intro) ? explode(" ", $intro) : explode(" ", page()->ts['add_hero']);?>
 
 <section class="hero-content" pw-after="header">
 
@@ -36,7 +36,7 @@ $intro = isset($intro) ? explode(" ", $intro) : explode(" ", __('Add Hero Text')
 
     <br>
    
-      <small><?= $b_first_txt . " <a href='$b_url'>" . $b_url_txt . " </a>" . $b_last_txt . ' ' ;?>
+      <small><?= $first_txt . " <a href='$b_url'>" . $next_txt . " </a>" . $last_txt . ' ' ;?>
       
           <?=icon($icon,
           [

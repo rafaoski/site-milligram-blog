@@ -25,6 +25,7 @@
                 'ul_cl' => 'grid', // Element <ul class='grid'
                 'li_cl' => 'col', // Element <li class='col'
                 'class' => 'button button-outline', // Element <a class='button button-outline',
-                'random' => true // Randomize Items
+                'random' => true, // Randomize Items
+                'dis_count' => true // hide Count Down
             ] 
 );

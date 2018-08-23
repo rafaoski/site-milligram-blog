@@ -1,6 +1,6 @@
 <?php namespace ProcessWire;
 // Get Pages if Has Categories 
-$posts = pages()->get('/blog/')->children("tags=$page, limit=16");?>
+$posts = page()->opt['blog_p']->children("tags=$page, limit=16");?>
 
 <div id='content-body' class="category grid" pw-prepend>
 
@@ -35,6 +35,6 @@ $posts = pages()->get('/blog/')->children("tags=$page, limit=16");?>
 <?php endforeach;
 
 // Basic Pagination + custom CSS class 'grid'
-   echo basicPagination($posts, 'grid container-fluid');?>
+echo basicPagination($posts, 'container grid');?>
 
 </div><!-- /#content-body --> 

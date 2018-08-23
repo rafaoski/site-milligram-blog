@@ -1,20 +1,19 @@
 <?php namespace ProcessWire;
 // CODE FROM => https://processwire.com/talk/topic/263-creating-archives-for-newsblogs-sections/
-// Get the name of the blog. Where in the site menu Blog ...  Settings => Name => /blog/
-// $blog_p = $pages->get("/blog/");
-// $arch_p = pages('/archives/')->url; // Archive page url
-// $startYear = date("Y"); // this year
-// $start_date = 2015; // or whenever you want it to start
-// $limit = 20; // Limit items to Year
-if($enable == false or page()->url == $arch_p->url) return '';
+// Get archives url
+$arch_url = page()->opt['arch_p']->url;
+
+$blog_p = page()->opt['blog_p'];
+
+if( page()->opt['enable_archive'] == false or page()->url == $arch_url ) return '';
 
 // Some Heading
 echo icon('archive', // https://feathericons.com/
   [ 
-    'txt' => ' ' . $title,
+    'txt' => ' ' . page()->ts['s_archives'],
     'color' => '#9b4dca',
     'heading' => 'h3',
-    'url' => $arch_p->url
+    'url' => $arch_url
   ]);
 
 // End Date Today
@@ -23,7 +22,7 @@ echo icon('archive', // https://feathericons.com/
 
 echo '<ul>';
 
-for($year = $end_date; $year >= $start_date; $year--) {
+for($year = $end_date; $year >= page()->opt['sidebar_start_date']; $year--) {
 
    for($month = 12; $month > 0; $month--) {
 
@@ -33,7 +32,7 @@ for($year = $end_date; $year >= $start_date; $year--) {
        else $endTime = strtotime("$year-" . ($month+1) . "-01");
        $entries = $blog_p->children("date>=$startTime, date<$endTime"); // or substitute your own date field
        $date = date("Y-m",$startTime);
-       $url = $arch_p->url . date("Y",$startTime) . "/" . date("m",$startTime);
+       $url = $arch_url . date("Y",$startTime) . "/" . date("m",$startTime);
        $count = count($entries);
        
        if($count > 0) {

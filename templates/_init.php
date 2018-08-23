@@ -19,16 +19,14 @@
 
 include_once('./_func.php');
 
-// as a convenience, set location of our 3rd party resources (Jquery)
-urls()->set('jquery', 'wire/modules/Jquery/JqueryCore/JqueryCore.js');
+include_once('./_translate.php');
 
-// Disable Comments
-$dis_comm = false;
+include_once('./_options.php');
 
 // RSS FEED BLOG PAGE ( if installed module rss enable this => http://your-page/blog/rss)
     // if($page->template->name == 'blog' && $input->urlSegment1 == 'rss') {
     //     $rss = $modules->get("MarkupRSS");
-    //     $rss->title = __('Recent Posts');
+    //     $rss->title = page()->ts['recent'];
     //     $rss->render($page->children("limit=12"));
     // die();
     // }

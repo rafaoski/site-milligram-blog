@@ -1,7 +1,5 @@
 <?php namespace ProcessWire;
 
-if(!isset($item) or $item == '') return '';
-
 echo icon('user', ['txt' => $item->createdUser->title . ' | ' ]); 
 
 echo icon('calendar',
@@ -9,8 +7,8 @@ echo icon('calendar',
   'txt' => $item->date . ' | '
 ]);
     
-// IF PAGE COMMENTS && $dis_comm == false ( variable from _init.php )
-if(count($item->comments) && $dis_comm == false) {
+// if page comments
+if(count($item->comments) && page()->opt['disable_comments'] == false) {
 
   $id = $item->comments->last() ? $item->comments->last()->id : '#';
 
@@ -19,4 +17,5 @@ if(count($item->comments) && $dis_comm == false) {
     'txt' => count($item->comments),
     'url' => "$item->url#Comment$id",
   ]);
+
 }

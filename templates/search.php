@@ -38,7 +38,7 @@ unset($q);?>
 	// did we find any matches?
 	if(count($matches)) {
 		// yes we did, render them
-		echo __('Found') . ' ' . $matches->count . ' ' . __('page(s)');
+		echo page()->ts['found'] . ' ' . $matches->count . ' ' . page()->ts['pages'];
 		foreach ($matches as $key) {
 			$out = '<ul>';
 			echo "<li><a href='$key->url'>$key->title</a></li>";
@@ -46,7 +46,7 @@ unset($q);?>
 		}
 	} else {
 		// we didn't find any
-		echo "<h3>" . __('Sorry, no results were found.') . "</h3>";
+		echo "<h3>" . page()->ts['no_results'] . "</h3>";
 	}
 	?>
 </div>

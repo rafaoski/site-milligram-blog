@@ -340,8 +340,8 @@ WebFontConfig = {
 function basicPagination($items, $class = null) {
 
     return $items->renderPager(array(
-        'nextItemLabel' => __('Next &raquo;'),
-        'previousItemLabel' => __('&laquo; Previous'),
+        'nextItemLabel' => page()->ts['next'],
+        'previousItemLabel' => page()->ts['prev'],
         'listMarkup' => "<ul class='MarkupPagerNav $class'>{out}</ul>",
         'itemMarkup' => "<li class='{class}'>{out}</li>",
         'linkMarkup' => "<a href='{url}'><span>{out}</span></a>",
@@ -565,22 +565,22 @@ $out .= '</div>';
 function blogComments($page, $limit = 12) {
 
 if (!$page->comments) return ''; 
-// Translatable Strings
-$cite = __('Name');
-$email = __('Email');
-$text = __('Comment');
-$submit = __('Submit');
-$comments_l = __('Comments');
-$added = __('Added ');
-$in_day = __(' in day ');
-$reply = __('Reply');
-$join = __('Join The Discussion');
-$approved = __('Your comment must be approved by admin');
-$thanks = __('Thanks Your comment has been saved');
-$errors = __('There were errors and the comment was not approved');
-$prev = __('&laquo; Previous Comments');
-$next = __('Next Comments &raquo;');
 
+// Translatable Strings
+$cite = page()->ts['cite'];
+$email = page()->ts['email'];
+$text = page()->ts['text'];
+$submit = page()->ts['submit'];
+$comments_l = page()->ts['comments_l'];
+$added = page()->ts['added'];
+$in_day = page()->ts['in_day'];
+$reply = page()->ts['reply'];
+$join = page()->ts['join'];
+$approved = page()->ts['approved'];
+$thanks = page()->ts['thanks'];
+$errors = page()->ts['errors'];
+$prev = page()->ts['prev'];
+$next = page()->ts['next'];
 
 $comm = '';
 

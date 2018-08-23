@@ -1,16 +1,18 @@
 <?php namespace ProcessWire;
-if($enable_cf == false) return '';
-// Some translatable strings
-$c_u = __('Contact Us');
-$l_name = __('Name');
-$l_email = __('E-Mail');
-$l_message = __('Some Message');
-$l_success = __('Success !!! Your message has been sent');
-$s_wrong = __('Something Wrong !!! Try it again');
-$submit = __('Submit');
-$reset = __('Reset');
-$show_form = __('Show Form');
-$m_subj = __('Mail Subject');
+
+if(page()->opt['enable_cf'] == false) return '';
+
+// Translate    
+  $c_u = page()->ts['c_u'];
+  $l_name = page()->ts['l_name'];
+  $l_email = page()->ts['l_email'];
+  $l_message = page()->ts['l_message'];
+  $l_success = page()->ts['l_success'];
+  $s_wrong = page()->ts['s_wrong'];
+  $submit = page()->ts['submit'];
+  $reset = page()->ts['reset'];
+  $show_form = page()->ts['show_form'];
+  $m_subj = page()->ts['m_subj'];
 
 if($input->post->submit) :
  
@@ -38,14 +40,28 @@ if($m_name && $m_from  && $m_message) {
 
     $m = wireMail();
     // separate method call usage
-    $m->to($mail); // specify CSV string or array for multiple addresses
+    $m->to(page()->opt['your_mail']); // specify CSV string or array for multiple addresses
     $m->from($m_from);
     $m->subject($m_subj);
-    $m->bodyHTML("$html");
+    $m->bodyHTML($html);
     $m->send();
 
+// $bool = $mail->mailHTML($to, string $subject, $messageHTML, array $headers = []);
+
+  // $mail->mailHTML($your_mail, $m_subj, 
+  // [
+  //   'bodyHTML' => $html,
+  //   'from' => $m_from
+  // ]);
+  
 // If Enable Save Messages 
-if($save_message == true) {
+if(page()->opt['save_message'] == true) {
+
+// Parent Page ( Contact Page )  
+  $c_parent = page()->opt['c_parent'];
+// Contact Items
+  $c_item = page()->opt['c_item'];
+
 // save to log that can be viewed via the pw backend
   $p = new Page();
   $p->template = "$c_item";
@@ -55,6 +71,7 @@ if($save_message == true) {
   $p->body = $html;
   $p->addStatus(Page::statusHidden);
   $p->save();
+
 }
 
 $session->Message ="<blockquote>
@@ -67,7 +84,7 @@ $session->Message ="<blockquote>
 
 } else {
 
-    echo '<h1>' . $ts['f_fill'] . '</h1>';
+    echo '<h1>' . page()->ts['f_fill'] . '</h1>';
 }
 // IF CSRF TOKEN NOT FOUND
 } else {
@@ -118,10 +135,15 @@ $tokenValue = $this->session->CSRF->getTokenValue(); ?>
 </form>
 
 <?php 
+// Get Phone Number
+$phone_nr = $sanitizer->text(page()->opt['c_phone']);
+// Get Mail
+$c_mail = $sanitizer->email(page()->opt['c_mail']);
+
 echo icon('phone',
 [
-'txt' => $sanitizer->text($c_phone) . '<br>',  
-'url' =>  "tel:{$sanitizer->text($c_phone)}",
+'txt' => $phone_nr . '<br>',  
+'url' =>  "tel:$phone_nr",
 'width' => 30,
 'height' => 30,
 'color' => '#9b4dca',
@@ -130,8 +152,8 @@ echo icon('phone',
 
 echo icon('mail',
 [
-'txt' => $sanitizer->email($c_mail),  
-'url' =>  "mailto:{$sanitizer->email($c_mail)}",
+'txt' => $c_mail,  
+'url' =>  "mailto:$c_mail",
 'width' => 30,
 'height' => 30,
 'color' => '#9b4dca',

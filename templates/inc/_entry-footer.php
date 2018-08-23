@@ -6,7 +6,7 @@ if(!isset($item) or $item == '') return '';
 echo icon('grid',
   [
     'txt' => ' | ',
-    'url' => pages('/categories/')->url,
+    'url' => page()->opt['cat_p']->url, // Get Category Page
     'color' => '#9b4dca'
   ]);
 
@@ -19,7 +19,7 @@ echo icon('grid',
   echo icon('tag',
   [
     'txt' => ' | ',
-    'url' => pages('/tags/')->url,
+    'url' => page()->opt['tag_p']->url, // Get Tag Page
     'color' => '#9b4dca'
   ]);
 

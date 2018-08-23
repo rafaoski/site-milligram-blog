@@ -64,7 +64,7 @@ if($page->parent()->name == 'news'):?>
   [ // Enab
   // Render Grid from this page
     'items' => page()->children(),
-    'title' => __('Show More Pages'),
+    'title' => page()->ts['more_pages'],
   ]);
 
 } ?>

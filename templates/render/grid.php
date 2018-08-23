@@ -16,7 +16,7 @@ $children = $item->children("limit=4");?>
               'color' => '#608190',
               'stroke' => 3,
               'heading' => 'h3',
-              'txt' => __(' PROCESSWIRE WOW!!!'),
+              'txt' => page()->ts['wow'],
               'url' => $item->url
             ]);?>
 
@@ -31,7 +31,7 @@ $children = $item->children("limit=4");?>
 
           <div class="bottom-link">
 
-              <a href="<?=$item->url?>"><?=__('read more');?></a>
+              <a href="<?=$item->url?>"><?=page()->ts['read_m'];?></a>
 
           </div>
 
@@ -69,7 +69,7 @@ $children = $item->children("limit=4");?>
             
                       <div class="bottom-link">
 
-                          <a href="<?=$child->url?>"><?=__('read more');?></a>
+                          <a href="<?=$child->url?>"><?=page()->ts['read_m'];?></a>
 
                       </div>
 

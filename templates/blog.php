@@ -19,8 +19,7 @@ $posts = page()->children('limit=12');?>
   <?php // Include file
     wireIncludeFile('inc/_entry-header',
     [
-    'item' => $post,  
-    'dis_comm' => $dis_comm //  variable from _init.php
+    'item' => $post
     ]); ?>
 
 </div>

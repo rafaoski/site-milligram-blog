@@ -5,11 +5,7 @@
 <div class='entry-header'>
 
 <?php // Include file
-wireIncludeFile('inc/_entry-header',
-[
-'item' => page(),  
-'dis_comm' => $dis_comm //  variable from _init.php
-]); ?>
+wireIncludeFile('inc/_entry-header',['item' => page()]);?>
 
 </div><!-- /.entry-header -->
 
@@ -19,9 +15,7 @@ echo imgDemo($page,['demo' => true]);?>
 <div class="entry-footer m-1">
 
 <?php // Include file
-wireIncludeFile('inc/_entry-footer',
-  ['item' => page()]
-);?>
+wireIncludeFile('inc/_entry-footer',['item' => page()]);?>
 
 </div><!-- /.entry-footer -->
 
@@ -37,15 +31,15 @@ $links = $page->links();
 // If another page has links to this page
 if($links->count()) {
 
-  echo "<h3>" . __('You might also like:') . "</h3>";
+  echo "<h3>" . page()->ts['also_like'] . "</h3>";
   echo $links->each("<li><a href={url}>{title}</a></li>");
 
 } ?>
 
 <br>
 
-<?php // $dis_comm == false ( variable from _init.php )
-  if($dis_comm == false) {
+<?php // if page has comments
+  if( page()->opt['disable_comments'] == false ) {
     
     // Basic Comments + pagination
     echo blogComments($page, 16);
@@ -64,12 +58,12 @@ if($links->count()) {
 
 </div>
 
-<?php if($dis_comm == false):?>
+<?php if(count(page()->comments) && page()->opt['disable_comments'] == false):?>
 
 <pw-region id='bottom-region'>
 
 <link rel='stylesheet' href='<?= urls()->FieldtypeComments;?>comments.css'>
-<script defer src='<?= urls()->jquery?>'></script>
+<script defer src='<?= page()->opt['jquery'];?>'></script>
 <script defer src='<?= urls()->FieldtypeComments;?>comments.min.js'></script>
 
 </pw-region>

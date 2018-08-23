@@ -7,11 +7,11 @@ echo wireRenderFile("render/hero", // Render Hero Content
         // Intro
           'intro' =>  page()->title,
           'content' =>  page()->headline,
-        // Bottom text
-          'b_first_txt' => __('A friendly and powerful open source CMS'),
+        // Bottom text and url
+          'first_txt' => page()->ts['first_txt'], 
+          'next_txt' => page()->ts['next_txt'], 
+          'last_txt' => page()->ts['last_txt'], 
           'b_url' => 'https://processwire.com/',
-          'b_url_txt' => __('Processwire'),
-          'b_last_txt' => __('  With an exceptionally strong API -- '),
         // Some Icons
           'icon' => 'github', // https://feathericons.com/
           'icon_url' => 'https://github.com/processwire'
@@ -25,7 +25,7 @@ echo wireRenderFile("render/hero", // Render Hero Content
         [ // Enable Content Grid
           'enable_grid' =>  true, // Enable Grid Content
         // Render Grid from this page
-          'item' => pages('about'),
+          'item' => pages('about')
         ]);?>
 
 </section><!-- /#home-grid -->
@@ -38,7 +38,7 @@ echo wireRenderFile("render/hero", // Render Hero Content
       // Render Grid from this page
         'item' => pages('blog'),
       // Blog Heading  
-        'heading' => __('Show Latest Posts')
+        'heading' => page()->ts['recent']
       ]);?>
 
 </section><!-- /#home-grid -->

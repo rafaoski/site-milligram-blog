@@ -23,6 +23,6 @@ if($count != 0) {
 
 }
  // Basic Pagination + custom CSS class 'grid'
-    echo basicPagination($tags, 'grid container-fluid');?>
+ echo basicPagination($tags, 'container grid');?>
 
 </div><!-- /#content-body -->

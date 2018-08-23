@@ -17,7 +17,7 @@ if ($input->urlSegment(1)) {
 <?php 
 echo icon('archive', // https://feathericons.com/
   [
-    'txt' => ' ' . __('Select the archives'),
+    'txt' => page()->ts['s_archives'],
     'color' => '#9b4dca',
     'heading' => 'h3'
   ]);
@@ -25,13 +25,14 @@ echo icon('archive', // https://feathericons.com/
 
 <select name='form'  onchange='location = this.options[this.selectedIndex].value;'>
 
-<?php //Get the name of the blog. Where in the site menu Blog ...  Settings => Name => /blog/
-$blog = $pages->get("/blog/");
+<?php
+$blog_p = page()->opt['blog_p'];
+$startDate = page()->opt['basic_start_date']; // or whenever you want it to end
+
 // $startYear = date("Y"); // this year
-$startDate = 2015; // or whenever you want it to end
 $endDate = date("Y"); // this year
 $now = time();
-echo "<option value='#'>" . __('Select Archives') . "</option>";
+echo "<option value='#'>" . page()->ts['s_archives'] . "</option>";
 //CODE FROM => https://processwire.com/talk/topic/263-creating-archives-for-newsblogs-sections/
 for($year = $endDate; $year >= $startDate; $year--) {
    for($month = 12; $month > 0; $month--) {
@@ -39,7 +40,7 @@ for($year = $endDate; $year >= $startDate; $year--) {
        if($startTime > $now) continue; // don't bother with future dates
        if($month == 12) $endTime = strtotime(($year+1) . "-01-01");
            else $endTime = strtotime("$year-" . ($month+1) . "-01");
-       $entries = $blog->children("date>=$startTime, date<$endTime"); // or substitute your own date field
+       $entries = $blog_p->children("date>=$startTime, date<$endTime"); // or substitute your own date field
        $date = date("Y-m",$startTime);
        $url = $page->url . date("Y",$startTime) . "/" . date("m",$startTime) . '/';
        $count = count($entries);
@@ -67,7 +68,7 @@ if($y !=''){
 
   if(count($page_f) == 0) throw new Wire404Exception();
 
-  echo "<h3>" . __('Date') . " -- $y/$m </h3>";
+  echo "<h3>" . page()->ts['date'] . " -- $y/$m </h3>";
 }
 
 foreach ($page_f as $key) {
@@ -76,7 +77,7 @@ foreach ($page_f as $key) {
 
   echo "<p><blockquote><h4><a href='$key->url'>$key->title</a> -- $key->date</h4>";
 
-  echo "$body <a href='$key->url'>" . __('Read More &raquo;') . "</a></blockquote></p>";
+  echo "$body <a href='$key->url'>" . page()->ts['read_m'] . "</a></blockquote></p>";
 
 }
 
