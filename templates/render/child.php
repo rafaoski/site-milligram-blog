@@ -14,7 +14,7 @@
 
     if(page()->opt['demo_img']) {
 
-      echo imgDemo($item,['demo' => true]);
+      echo imgDemo($item);
 
     } else {
 

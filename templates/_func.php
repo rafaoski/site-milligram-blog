@@ -487,9 +487,8 @@ $out .="<img class='center lazy'
         alt='{$item->description}'
         width='$width' height='$height'>";
         
-} else if(isset($opt) && $opt['demo'] == true ){
+} else {
         
-
 // Home Page Random images from https://picsum.photos/
 if(isset($opt['random']) && $opt['random'] == true) {
     $width = '3' . rand(1,4) . '0';

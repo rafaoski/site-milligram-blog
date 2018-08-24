@@ -30,7 +30,7 @@ $posts = page()->children('limit=12');?>
 
 if(page()->opt['demo_img']) {
 
-  echo imgDemo($post,['demo' => true]);
+  echo imgDemo($post);
 
 } else {
 

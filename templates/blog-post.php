@@ -13,7 +13,7 @@ wireIncludeFile('inc/_entry-header',['item' => page()]);?>
 
 if(page()->opt['demo_img']) {
 
-  echo imgDemo(page(),['demo' => true]);
+  echo imgDemo(page());
 
 } else {
 

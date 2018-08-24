@@ -19,7 +19,7 @@ if(page()->name == page()->opt['news_p']->name):?>
 
         if(page()->opt['demo_img']) {
 
-          echo imgDemo($child,['demo' => true]);
+          echo imgDemo($child);
 
         } else {
 
@@ -56,7 +56,7 @@ if(page()->name == page()->opt['news_p']->name):?>
 
 if(page()->opt['demo_img']) {
 
-echo imgDemo(page(),['demo' => true]);
+echo imgDemo(page());
 
 } else {
 

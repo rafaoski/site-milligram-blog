@@ -16,7 +16,7 @@ $posts = page()->opt['blog_p']->children("tags=$page, limit=16");?>
 
 if(page()->opt['demo_img']) {
 
-    echo imgDemo($post,['demo' => true]);
+    echo imgDemo($post);
 
 } else {
 
