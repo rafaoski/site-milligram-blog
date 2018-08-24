@@ -6,7 +6,6 @@ page()->opt = [
 // as a convenience, set location of our 3rd party resources (Jquery)
 'jquery' => urls()->set('jquery', 'wire/modules/Jquery/JqueryCore/JqueryCore.js'),
 
-
 /**
  * 
  * Enable Demo Image
@@ -61,7 +60,6 @@ page()->opt = [
 'sidebar_start_date' => 2017, // Archives inside sidebar ( ./inc/_archives.php ) Sidebar
 'basic_start_date' => 2017, // Archives inside ( archives.php ) Basic Page
 
-
 /**
  * 
  * Contact Form
@@ -76,7 +74,6 @@ page()->opt = [
 'save_message' => false, // Save mesage to pages
 'c_parent' => 'contact', // Contact Page
 'c_item' => 'contact-item', // Template to save message inside body field ( You must create template " contact-item" )
-
 
 /**
  * 
