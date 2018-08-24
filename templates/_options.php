@@ -31,8 +31,8 @@ page()->opt = [
 'cat_p' =>  pages('/categories/'), // Categories Page
 'tag_p' =>  pages('/tags/'), // Tags page
 'arch_p' => pages('/archives/'), // Archive Page
-'about_p' => pages('/about/'), // Archive Page
-'news_p' => pages('/news/'), // Archive Page
+'about_p' => pages('/about/'), // About Page
+'news_p' => pages('/news/'), // News Page
 
 // 'p_url' => pages('/privacy-policy/'), // Privacy Policy
 
