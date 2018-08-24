@@ -60,7 +60,7 @@ echo imgDemo(page(),['demo' => true]);
 
 } else {
 
-echo page()->render('images', 'img-small');
+echo page()->render('images', 'img-medium');
 
 }?>
       
