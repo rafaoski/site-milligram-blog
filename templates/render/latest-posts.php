@@ -19,23 +19,26 @@ $children = $item->children("limit=4,sort=random");?>
   <div class="grid">
 
     <?php // Start Loop
-        foreach ($children as $child):?>
+        foreach ($children as $item):?>
 
             <div class="col-6_sm-12">
 
-            <a href="<?=$child->url?>">
+            <a href="<?=$item->url?>">
 
-                <?php // Img Demo
-                    echo imgDemo($child,['demo' => true, 'random' => true]);
-                // If no demo   
-                    // echo $child->render('images', 'img-small');
-                ?>
+            <?php // View a replacement image from https://picsum.photos/ 
 
-                <h4><?=$child->title?></h4>
-      
-            <?php // https://processwire.com/blog/posts/processwire-3.0.7-expands-field-rendering-page-path-history-and-more/
-                  //  echo $child->render('body','txt-small');?>
+                if(page()->opt['demo_img']) {
 
+                echo imgDemo($item,['demo' => true]);
+
+                } else {
+
+                echo $item->render('images', 'img-small');
+
+            }?>
+
+            <h4><?=$item->title?></h4>
+     
             </a>
             
             </div><!-- /.child -->

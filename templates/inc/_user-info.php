@@ -4,7 +4,7 @@ if(page()->template != 'blog-post') return '';
 
 echo "<h3>$author->title</h3>";
 
-echo $author->render('images', 'img-small');
+echo $author->render('images', 'img-thumb');
 
 echo "<blockquote>$author->headline</blockquote>";
 

@@ -9,9 +9,18 @@
 <a class="col-4_sm-12" href='<?=$item->url?>'>
 
     <h4><?=$item->title?></h4>
-   
-    <?php // Demo img
-      echo imgDemo($page,['demo' => true]);?>
+
+    <?php // View a replacement image from https://picsum.photos/ 
+
+    if(page()->opt['demo_img']) {
+
+      echo imgDemo($item,['demo' => true]);
+
+    } else {
+
+      echo $item->render('images', 'img-small');
+
+    }?>
 
 </a>
 

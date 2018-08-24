@@ -9,8 +9,17 @@ wireIncludeFile('inc/_entry-header',['item' => page()]);?>
 
 </div><!-- /.entry-header -->
 
-<?php // Demo img
-echo imgDemo($page,['demo' => true]);?>
+<?php // View a replacement image from https://picsum.photos/ 
+
+if(page()->opt['demo_img']) {
+
+  echo imgDemo(page(),['demo' => true]);
+
+} else {
+
+  echo page()->render('images', 'img-medium');
+
+}?>
 
 <div class="entry-footer m-1">
 

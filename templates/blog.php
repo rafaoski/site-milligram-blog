@@ -26,9 +26,17 @@ $posts = page()->children('limit=12');?>
 
 <a href="<?=$post->url?>">
 
-<?php // Img Demo
-      echo imgDemo($post,['demo' => true, 'random' => true]);
-      // echo $post->render('images', 'img-small'); // Uncomment If no demo images ( from fields/img-medium.php )?>
+<?php // View a replacement image from https://picsum.photos/ 
+
+if(page()->opt['demo_img']) {
+
+  echo imgDemo($post,['demo' => true]);
+
+} else {
+
+  echo $post->render('images', 'img-small');
+
+}?>
 
 </a>
 

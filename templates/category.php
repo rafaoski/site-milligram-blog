@@ -12,7 +12,17 @@ $posts = page()->opt['blog_p']->children("categories=$page, limit=16");?>
 
         <h3><?=$post->title?></h3>
 
-        <?=imgDemo($post,['demo' => true,'random' => true]);?>
+    <?php // View a replacement image from https://picsum.photos/ 
+
+    if(page()->opt['demo_img']) {
+
+        echo imgDemo($post,['demo' => true]);
+
+    } else {
+
+        echo $post->render('images', 'img-small');
+
+    }?>
 
     </a>
 

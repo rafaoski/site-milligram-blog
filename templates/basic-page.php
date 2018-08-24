@@ -15,11 +15,17 @@ if(page()->name == page()->opt['news_p']->name):?>
 
       <h4><?=$child->title?></h4>
 
-    <?php // Demo img
-         echo imgDemo($child,['demo' => true,'random' => true]);
-    // Or https://processwire.com/blog/posts/processwire-3.0.7-expands-field-rendering-page-path-history-and-more/
-    // echo page()->render('images', 'img-thumb'); // Go to folder /fields 
-    ?>
+      <?php // View a replacement image from https://picsum.photos/ 
+
+        if(page()->opt['demo_img']) {
+
+          echo imgDemo($child,['demo' => true]);
+
+        } else {
+
+          echo $child->render('images', 'img-small');
+
+      }?>
 
       <p><b> -- <small><?= date("F j, Y, g:i a", $child->created);?></small></b>
 
@@ -46,11 +52,20 @@ if(page()->name == page()->opt['news_p']->name):?>
 
 <div id='content-body'>
 
-<?php // Demo img
-      echo imgDemo($page,['demo' => true]);?>
+<?php // View a replacement image from https://picsum.photos/ 
+
+if(page()->opt['demo_img']) {
+
+echo imgDemo(page(),['demo' => true]);
+
+} else {
+
+echo page()->render('images', 'img-small');
+
+}?>
       
 <?php // Show created date   
-if($page->parent()->name == 'news'):?>
+if(page()->parent()->name == 'news'):?>
 
   <p><b> -- <small><?= date("F j, Y, g:i a", $page->created);?></small></b></p>
 
