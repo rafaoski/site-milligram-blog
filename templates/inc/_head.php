@@ -35,8 +35,8 @@ endif; // End Open Graph Seo
             display: none;
         }
         
-       /* List style for Tags */
-        .page-children.tags {
+        /* List style for Tags */
+        .page-children.<?=page()->opt['tag_p']->name;?> {
             list-style: none;
         }
 
