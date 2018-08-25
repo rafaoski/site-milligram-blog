@@ -1,12 +1,12 @@
-<?php namespace ProcessWire;
+<?php namespace ProcessWire; 
 // _main.php template file, called after a page’s template file
 // trashDemoData('false'); // Put unnecessary pages into the trash ( change to true ) !!!
-$home = page()->opt['home']; // homepage
-//  wireIncludeFile => https://processwire.com/blog/posts/processwire-2.5.2/
-wireIncludeFile("inc/_head", // Include header
-[ // Get Homepage
-    'home' => $home,
-]);?>
+
+// Get Homepage
+$home = page()->opt['home']; 
+
+// ( Include header ) https://processwire.com/blog/posts/processwire-2.5.2/
+wireIncludeFile("inc/_head", ['home' => $home]);?>
 
 <!-- MAIN CONTENT -->
 <main id='main' class='container-medium'>
@@ -75,4 +75,5 @@ wireIncludeFile("inc/_head", // Include header
 
 </main>
 
-<?php wireIncludeFile("inc/_foot"); // Include Footer
+<?php // ( Include footer ) https://processwire.com/blog/posts/processwire-2.5.2/
+    wireIncludeFile("inc/_foot"); // Include Footer
