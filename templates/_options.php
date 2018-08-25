@@ -45,7 +45,7 @@ page()->opt = [
 
 /**
  * 
- * Options => ( _head.php )
+ * Options => ( ./_head.php )
  * 
  */
 // Get Favicon
