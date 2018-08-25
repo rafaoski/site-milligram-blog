@@ -47,8 +47,8 @@ if($links->count()) {
 
 <br>
 
-<?php // if page has comments
-  if( page()->opt['disable_comments'] == false ) {
+<?php // If enable comments ( _options.php )
+  if( page()->opt['enable_comments'] == true ) {
     
     // Basic Comments + pagination
     echo blogComments($page, 16);
@@ -71,7 +71,7 @@ if($links->count()) {
 
 <?php endif; ?>
 
-<?php if(page()->comments && page()->opt['disable_comments'] == false):?>
+<?php if(page()->comments && page()->opt['enable_comments'] == true):?>
 
 <pw-region id='bottom-region'>
 

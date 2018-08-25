@@ -18,7 +18,7 @@ page()->opt = [
  * Enable / Disable => Comments
  * 
  */ 
-'disable_comments' => false,
+'enable_comments' => true,
 
 /**
  * 

@@ -8,7 +8,7 @@ echo icon('calendar',
 ]);
     
 // if page comments
-if(count($item->comments) && page()->opt['disable_comments'] == false) {
+if(count($item->comments) && page()->opt['enable_comments'] == true) {
 
   $id = $item->comments->last() ? $item->comments->last()->id : '#';
 
