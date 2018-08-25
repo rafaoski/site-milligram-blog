@@ -8,7 +8,7 @@ page()->opt = [
 
 /**
  * 
- * Enable Demo Image
+ * Enable / Disable => Demo Image
  * 
  */ 
 'demo_img' => true,
