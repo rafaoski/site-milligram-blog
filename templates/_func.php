@@ -116,7 +116,7 @@ $out = '';
 $random = '';
 
 // Default Text
-    $txt = isset($opt['txt']) ? $opt['txt'] : __('Show more Pages');
+    $txt = isset($opt['txt']) ? $opt['txt'] : page()->ts['more_pages'];
 
 // Limit Items
     $limit = isset($opt['limit']) ? $opt['limit'] : 8;
