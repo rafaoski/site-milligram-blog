@@ -15,14 +15,22 @@ page()->opt = [
 
 /**
  * 
- * Disable Comments
+ * Enable / Disable => Comments
  * 
  */ 
 'disable_comments' => false,
 
 /**
  * 
- * Get Pages 
+ * Enable / Disable => User Info ( ./inc/_user-info.php ) in a single blog entry 
+ * 
+ */ 
+'user_info' => true,
+
+/**
+ * 
+ * Get Pages ( If you change the names of the pages, you should probably also rewrite those path names )
+ * Like ( /news/ ) And the German version ( /nachrichten/ )
  * 
  */
 'home' => pages()->get('/'), // Get Home Page
@@ -37,7 +45,7 @@ page()->opt = [
 
 /**
  * 
- * Options _header.php
+ * Options => ( _head.php )
  * 
  */
 // Get Favicon
@@ -62,7 +70,7 @@ page()->opt = [
 
 /**
  * 
- * Contact Form
+ * Options => Contact Form ( ./inc/_c-form.php )
  * 
  */ 
 'enable_cf' => false, // Enable contact Form
@@ -77,7 +85,7 @@ page()->opt = [
 
 /**
  * 
- * Footer
+ * Options Footer => ( ./inc/_foot.php )
  * 
  */ 
 'soc_p' =>  // Social Profiles ( Icons => https://feathericons.com/ )
