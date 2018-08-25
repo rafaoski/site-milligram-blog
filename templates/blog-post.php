@@ -57,6 +57,8 @@ if($links->count()) {
 
 </div><!-- /#content-body -->
 
+<?php if(page()->opt['user_info'] == true ): ?>
+
 <div id="page-children" class='p-3' pw-prepend>
 
   <?php 
@@ -65,7 +67,9 @@ if($links->count()) {
           'author' => page()->createdUser, // Get Created User
       ]); ?>
 
-</div>
+</div><!-- /#page-children -->
+
+<?php endif; ?>
 
 <?php if(page()->comments && page()->opt['disable_comments'] == false):?>
 

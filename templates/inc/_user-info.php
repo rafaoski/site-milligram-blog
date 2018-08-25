@@ -1,10 +1,6 @@
 <?php namespace ProcessWire;
 
-if(page()->opt['user_info'] == false ) return '';
-
 if(!isset($author) or $author == '') return '';
-
-if(page()->template != 'blog-post') return '';
 
 echo "<h3>$author->title</h3>";
 
