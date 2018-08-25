@@ -62,7 +62,7 @@ if($links->count()) {
   <?php 
     wireIncludeFile("inc/_user-info",
       [ 
-          'author' => page()->createdUser, // Enable archives Form
+          'author' => page()->createdUser, // Get Created User
       ]); ?>
 
 </div>
