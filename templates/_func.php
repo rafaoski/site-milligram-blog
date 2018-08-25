@@ -578,8 +578,8 @@ $join = page()->ts['join'];
 $approved = page()->ts['approved'];
 $thanks = page()->ts['thanks'];
 $errors = page()->ts['errors'];
-$prev = page()->ts['prev'];
-$next = page()->ts['next'];
+$prev = page()->ts['prev_comments'];
+$next = page()->ts['next_comments'];
 
 $comm = '';
 

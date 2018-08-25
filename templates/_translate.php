@@ -73,7 +73,7 @@ page()->ts = [
 'approved' => __('Your comment must be approved by admin'),
 'thanks' => __('Thanks Your comment has been saved'),
 'errors' => __('There were errors and the comment was not approved'),
-'prev' => __('&laquo; Previous Comments'),
-'next' => __('Next Comments &raquo;'),
+'prev_comments' => __('&laquo; Previous Comments'),
+'next_comments' => __('Next Comments &raquo;'),
 
 ];
