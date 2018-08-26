@@ -28,7 +28,7 @@ if(page()->opt['demo_img']) {
 
 <br>
 
-<?=$post->render('body','txt-small')?></p>
+<p><?=$post->render('body','txt-small')?></p>
 
 <div class="entry-footer m-1">
 

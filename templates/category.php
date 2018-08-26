@@ -26,7 +26,7 @@ $posts = page()->opt['blog_p']->children("categories=$page, limit=16");?>
 
     </a>
 
-    <?=$post->render('body','txt-small')?>
+    <p><?=$post->render('body','txt-small')?></p>
 
     <div class="entry-footer m-1">
 
