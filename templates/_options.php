@@ -77,7 +77,7 @@ page()->opt = [
 'app_css' => urls()->templates . "dist/app.css",
 
 // Enable Open Graph SEO
-'og_seo' => true,
+'og_seo' => false,
 
 // Site Name
 's_name' => page()->ts['site_name'],
