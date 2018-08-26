@@ -1,9 +1,9 @@
 <?php namespace ProcessWire;
-// Render Hero Image
-echo wireRenderFile("render/hero", // Render Hero Content
-      [ // Enable Hero Content
+// Render Hero
+echo wireRenderFile("render/hero",
+      [ 
           'enable' =>  true,
-          'height' => 70, // Height Hero Content
+          'height' => 70, // Height Hero Content ( 70vh full screen - not for mobile screens )
         // Intro
           'intro' =>  page()->title,
           'content' =>  page()->headline,
@@ -14,35 +14,35 @@ echo wireRenderFile("render/hero", // Render Hero Content
           'b_url' => 'https://processwire.com/',
         // Some Icons
           'icon' => 'github', // https://feathericons.com/
-          'icon_url' => 'https://github.com/processwire'
+          'icon_url' => 'https://github.com/processwire',
+        // id / class  
+          'id' => 'hero',
+          'class' => 'hero-content'
       ]);?>
 
 <div id='content-body'>
 
-<section id='home-grid' class="container-fluid">
+<?php 
+  // Render Grid
+    echo wireRenderFile("render/grid",
+      [ 
+        'enable' =>  true,
+        'item' => page()->opt['about_p'], // Render from About page
+        'id' => 'home-grid',
+        'class' => 'container-fluid'
+      ]);
 
-  <?php echo wireRenderFile("render/grid",
-        [ // Enable Content Grid
-          'enable_grid' =>  true, // Enable Grid Content
-        // Render Grid from this page
-          'item' => page()->opt['about_p']
-        ]);?>
+ // Render Latest Posts 
+    echo wireRenderFile("render/latest-posts",
+      [ 
+        'enable' =>  true,
+        'item' => page()->opt['blog_p'], // Render from Blog page
+        'heading' => page()->ts['recent'], // Blog Heading
+        'id' => 'latest-posts',
+        'class' => 'container-fluid'
+      ]);
 
-</section><!-- /#home-grid -->
-
-<section id='latest-posts' class="container-fluid">
-
-<?php echo wireRenderFile("render/latest-posts",
-      [ // Enable Content Grid
-        'enable_grid' =>  true, // Enable Grid Content
-      // Render Grid from this page
-        'item' => page()->opt['blog_p'],
-      // Blog Heading  
-        'heading' => page()->ts['recent']
-      ]);?>
-
-</section><!-- /#home-grid -->
-
-<?php echo page('body');?>
+// body field
+echo page('body');?>
 
 </div><!-- /#content-body -->

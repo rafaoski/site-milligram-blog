@@ -1,8 +1,10 @@
 <?php namespace ProcessWire;
-if($enable_grid == false) return '';
+
+if($enable == false) return '';
+
 $children = $item->children("limit=4,sort=random");?>
 
-  <div class="last-post">
+<section id='<?=$id?>' class="<?=$class?>">
 
      <?php // Simple Icon
             echo icon('eye', // https://feathericons.com/
@@ -47,4 +49,4 @@ $children = $item->children("limit=4,sort=random");?>
 
     </div><!-- /.grid -->
 
-  </div><!-- /.last-post -->
+</section>

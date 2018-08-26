@@ -1,6 +1,10 @@
 <?php namespace ProcessWire;
-if($enable_grid == false) return '';
+
+if($enable == false) return '';
+
 $children = $item->children("limit=4");?>
+
+<section id='<?=$id?>' class="<?=$class?>">
 
   <h2><?=$item->headline?></h2>
 
@@ -82,3 +86,5 @@ $children = $item->children("limit=4");?>
       </div><!-- /.col-6_sm-12 -->
 
   </div><!-- /.main-body -->
+
+</section>

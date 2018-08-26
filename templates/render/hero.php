@@ -1,9 +1,10 @@
 <?php namespace ProcessWire;
+
 if($enable == false) return '';
 
 $intro = isset($intro) ? explode(" ", $intro) : explode(" ", page()->ts['add_hero']);?>
 
-<section class="hero-content" pw-after="header">
+<section id="<?=$id?>" class="<?=$class?>" pw-after="header">
 
 <div class="hero_container">
 
@@ -60,32 +61,37 @@ $intro = isset($intro) ? explode(" ", $intro) : explode(" ", page()->ts['add_her
 </section>
 
 <style id='head-style' pw-append>
+
     header {
-        /* background: #201f27; */
-        background: none;
-        position: absolute;
-        width: 100%;
+    /* background: #201f27; */
+      background: none;
+      position: absolute;
+      width: 100%;
     }
+
     #hero_particles {
       height: <?=$height?>vh;
     }
-  /* Smaller than mobile screen */
-  @media (max-width: 40.0rem) {
-    
+
+    /* Smaller than mobile screen */
+    @media (max-width: 40.0rem) {
+      
     header {
-      /* background: #201f27; */
-       /* position: static; */
+    /* background: #201f27; */
+    /* position: static; */
       padding-bottom: 10px;
     }
     
   }
+
 </style>
 
 <pw-region id="bottom-region" pw-append>
 <script type="text/javascript">
+
 /* https://developer.mozilla.org/en-US/docs/Web/Events/load */
 window.addEventListener("load", function(){
-//  var particlesJS
+
 /* ---- particles.js config ---- */
  particlesJS("hero_particles", {
 
