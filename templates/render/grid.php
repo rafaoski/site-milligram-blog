@@ -68,8 +68,8 @@ $children = $item->children("limit=4");?>
 
                       <h4><?=$child->title?></h4>
 
-                    <?php // https://processwire.com/blog/posts/processwire-3.0.7-expands-field-rendering-page-path-history-and-more/
-                         echo $child->render('body','txt-small');?>
+                    <p><?php // https://processwire.com/blog/posts/processwire-3.0.7-expands-field-rendering-page-path-history-and-more/
+                         echo $child->render('body','txt-small');?></p>
             
                       <div class="bottom-link">
 
