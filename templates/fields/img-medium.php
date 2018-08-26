@@ -2,7 +2,13 @@
 // https://processwire.com/blog/posts/processwire-3.0.7-expands-field-rendering-page-path-history-and-more/
 // render a thumbnail of the first image
 if(count($value)) {
-  $image = $value->first()->width(640);
+
+// Get medium size ( 640px ) 
+  $medium = page()->opt['medium'];
+// Get first image 
+  $image = $value->first()->width($medium);
+  
+// Show image
   echo "<img data-src='$image->url' 
             class='center lazy' 
             alt='$image->description'

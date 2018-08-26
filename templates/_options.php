@@ -15,6 +15,19 @@ page()->opt = [
 
 /**
  * 
+ * Image Size
+ * 
+ */ 
+'thumbnail' => 180, // ./inc/user-info.php ( ./fields/img-thumb )
+
+'small'     => 480, // blog.php, latest-posts.php, basic-page.php, category.php, tag.php ( ./fields/img-small )
+
+'medium'    => 640, // blog.php, basic-page.php ( ./fields/img-medium )
+
+'large'     => 1200, // ./inc/_head.php
+
+/**
+ * 
  * Enable / Disable => Comments
  * 
  */ 
@@ -64,7 +77,10 @@ page()->opt = [
 'app_css' => urls()->templates . "dist/app.css",
 
 // Enable Open Graph SEO
-'og_seo' => false,
+'og_seo' => true,
+
+// Site Name
+'s_name' => page()->ts['site_name'],
 
 // Add Google Webmaster Verification Code https://kb.yoast.com/kb/how-to-connect-your-website-to-google-webmaster-tools/
 'verification_code' => '', // Paste Your Code
