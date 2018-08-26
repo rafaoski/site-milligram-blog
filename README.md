@@ -51,3 +51,4 @@ On completion, use the command <code><b>npm run production</b></code> to build s
 [Verlok Lazy Load](https://github.com/verlok/lazyload)  
 [Cookie Consent](https://cookieconsent.insites.com/)  
 [Particles.js](https://vincentgarreau.com/particles.js/)  
+[Burger Menu](https://github.com/mblode/burger)

@@ -20,7 +20,7 @@ mix.js('src/js/app.js', 'dist/custom.js')
 //     'src/css/style.css',
 // ], 'src/css/custom.css');
 mix.combine([
-    'node_modules/feather-icons/dist/feather.min.js', // https://vincentgarreau.com/particles.js/
+    'node_modules/feather-icons/dist/feather.min.js', // https://github.com/feathericons/feather
     'node_modules/vanilla-lazyload/dist/lazyload.min.js',
     'node_modules/particles.js/particles.js', // https://vincentgarreau.com/particles.js/
     'src/js/burger.min.js', // https://github.com/mblode/burger
