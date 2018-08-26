@@ -33,10 +33,9 @@ mix.combine([
              "./dist/*.css",
              "./dist/*.js",
              "./*.php",
+             "./inc/*.php",
              "./render/*.php",
-             "./fields/*.php",
-             "./fields/body/*.php",
-             "./fields/images/*.php",
+             "./fields/*.php"
          ]
 });
 
