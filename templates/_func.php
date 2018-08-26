@@ -231,7 +231,7 @@ if($icon == null) return '';
  *     'dis_count' => false
  *   ]);
  * 
- * @param Page|PageArray|null $page
+ * @param Page|null $item
  * @param array|null $opt 
  *
  */
