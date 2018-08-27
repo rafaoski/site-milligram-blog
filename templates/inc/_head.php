@@ -87,7 +87,7 @@ wireIncludeFile("inc/_link-tag",['home' => $home]);?>
             'logo_url' => page()->opt['logo_url'],
 		 // Show Site Name if logo_url is uncomment
             'alt' => page()->ts['logo_alt'],
-			'brand' => page()->ts['site_name'],
+			'brand' => page()->opt['s_name'],
          ]
      )?>
 
