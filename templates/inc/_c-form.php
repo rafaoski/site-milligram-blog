@@ -1,6 +1,6 @@
 <?php namespace ProcessWire;
 
-if(page()->opt['enable_cf'] == false) return '';
+if(!page()->opt['enable_cf']) return '';
 
 // Translate    
   $c_u = page()->ts['c_u'];

@@ -16,7 +16,7 @@
 if(input()->pageNum > 1) echo "\t<meta name='robots' content='noindex,follow'>\n";
 
 // If Enable Open Graph Seo
-if(page()->opt['og_seo'] == true):?>
+if(page()->opt['og_seo']):?>
 
     <meta id='og-title' property="og:title" content="<?=page('headline|title');?>"/>
     <meta id='og-desc' property='og:description' content='<?=page()->summary?>'>

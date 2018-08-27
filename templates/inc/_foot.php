@@ -12,13 +12,13 @@
 
     </p><!-- /#copyright -->
 
+<?php if(page()->opt['soc_p']):?>
+
     <p id="social" class='socila-profiles col-7_md-6_sm-12'>
 
-    <?php if( isset(page()->opt['soc_p']) )
-
-        foreach (page()->opt['soc_p'] as $icon => $value) {
-            
-            echo icon($icon, // Feather Icons
+        <?php foreach (page()->opt['soc_p'] as $icon => $value) {
+                
+        echo icon($icon, // Feather Icons
             [
                 'url'=> $value,
                 't_blank' => true,
@@ -27,9 +27,11 @@
                 'stroke' => 2,
                 'color' => '#9b4dca'
             ]); 
-    }?>
+        }?>
 
     </p><!-- /#social -->
+
+<?php endif; ?>
 
 </footer>
 
@@ -80,14 +82,14 @@ window.addEventListener("load", function(){
     echo googleFonts(page()->opt['g_fonts']);
 
 // GOGLE ANALYTICS CODE
-    if(isset(page()->opt['ga_code']) && page()->opt['ga_code'] != '' ) {
+if(page()->opt['ga_code']) {
 
-        echo gAnalitycs(page()->opt['ga_code']);
+    echo gAnalitycs(page()->opt['ga_code']);
 
-    }
+}
 
 // Privacy Banner
-if(page()->opt['p_b'] == true) {
+if(page()->opt['p_b']) {
 
 echo cookieBanner(
     [
