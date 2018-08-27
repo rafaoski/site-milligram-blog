@@ -1,23 +1,23 @@
 <?php namespace ProcessWire;
 
+// as a convenience, set location of our 3rd party resources (Jquery)
+urls()->set('jquery', 'wire/modules/Jquery/JqueryCore/JqueryCore.js');
+
 // Custom options
 page()->opt = [
 
-// as a convenience, set location of our 3rd party resources (Jquery)
-'jquery' => urls()->set('jquery', 'wire/modules/Jquery/JqueryCore/JqueryCore.js'),
-
 /**
- * 
+ *
  * Enable / Disable => Demo Image
- * 
- */ 
+ *
+ */
 'demo_img' => true,
 
 /**
- * 
+ *
  * Image Size
- * 
- */ 
+ *
+ */
 'thumbnail' => 180, // ./inc/user-info.php ( ./fields/img-thumb )
 
 'small'     => 480, // blog.php, latest-posts.php, basic-page.php, category.php, tag.php ( ./fields/img-small )
@@ -27,24 +27,24 @@ page()->opt = [
 'large'     => 1200, // ./inc/_head.php
 
 /**
- * 
+ *
  * Enable / Disable => Comments
- * 
- */ 
+ *
+ */
 'enable_comments' => true,
 
 /**
- * 
- * Enable / Disable => User Info ( ./inc/_user-info.php ) in a single blog entry 
- * 
- */ 
+ *
+ * Enable / Disable => User Info ( ./inc/_user-info.php ) in a single blog entry
+ *
+ */
 'user_info' => true,
 
 /**
- * 
+ *
  * Get Pages ( If you change the names of the pages, you should probably also rewrite those path names )
  * Like ( /news/ ) And the German version ( /nachrichten/ )
- * 
+ *
  */
 'home' => pages()->get('/'), // Get Home Page
 
@@ -63,9 +63,9 @@ page()->opt = [
 // 'p_url' => pages('/privacy-policy/'), // Privacy Policy
 
 /**
- * 
+ *
  * Options => ( ./_head.php )
- * 
+ *
  */
 // Get Favicon
 'favicon_url' => urls()->templates . "dist/img/favicon.png",
@@ -86,9 +86,9 @@ page()->opt = [
 'verification_code' => '', // Paste Your Code
 
 /**
- * 
+ *
  * Options => ( _archive.php ) ( ./inc/_archives.php )
- * 
+ *
  */
 'enable_archive' => true, // Enable Archives ( ./inc/_archives.php ) Sidebar
 
@@ -97,10 +97,10 @@ page()->opt = [
 'basic_start_date' => 2017, // Archives inside ( archives.php ) Basic Page
 
 /**
- * 
+ *
  * Options => Contact Form ( ./inc/_c-form.php )
- * 
- */ 
+ *
+ */
 'enable_cf' => false, // Enable contact Form
 'your_mail' => 'yourmail@gmail.com', // Email to send message
 
@@ -114,10 +114,10 @@ page()->opt = [
 'c_item' => 'contact-item', // Template to save message inside body field ( You must create template " contact-item" )
 
 /**
- * 
+ *
  * Options Footer => ( ./inc/_foot.php )
- * 
- */ 
+ *
+ */
 'soc_p' =>  // Social Profiles ( Icons => https://feathericons.com/ )
 [
  'twitter' => 'https://twitter.com/processwire',
@@ -137,4 +137,4 @@ page()->opt = [
 // Google Analytics Code
 'ga_code' => '', // To Enable put Google Analytics Code
 
-];   
+];

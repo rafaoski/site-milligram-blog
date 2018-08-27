@@ -76,7 +76,7 @@ if($links->count()) {
 <pw-region id='bottom-region'>
 
 <link rel='stylesheet' href='<?= urls()->FieldtypeComments;?>comments.css'>
-<script defer src='<?= page()->opt['jquery'];?>'></script>
+<script defer src='<?= urls()->jquery;?>'></script>
 <script defer src='<?= urls()->FieldtypeComments;?>comments.min.js'></script>
 
 </pw-region>
