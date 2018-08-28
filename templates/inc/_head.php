@@ -42,11 +42,7 @@ wireIncludeFile("inc/_link-tag",['home' => $home]);?>
     
     </style>
 
-<?php // Google Webmaster Verification Code
-
- $code = page()->opt['verification_code'];
-
- if($code) echo "<meta name='google-site-verification' content='$code' />\n";?>
+    <?=gwCode(page()->opt['verification_code']);?>
 
 </head>
 

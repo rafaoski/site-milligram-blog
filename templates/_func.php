@@ -184,6 +184,18 @@ function ogSeo($page) {
 
 /**
  * 
+ * Google Webmaster Tools Verification Code
+ * 
+ * @param string|null $code 
+ * 
+ */
+function gwCode($code = null) {
+
+    if($code) return "<meta name='google-site-verification' content='$code' />\n";
+}
+
+/**
+ * 
  * // Basic Example ( also example is inside /render/grid.php )
  *  echo icon('user',[
  *  'height' => 40,
