@@ -3,8 +3,40 @@
 // as a convenience, set location of our 3rd party resources (Jquery)
 urls()->set('jquery', 'wire/modules/Jquery/JqueryCore/JqueryCore.js');
 
+// https://processwire.com/api/ref/languages/get-locale/
+if(page()->getLanguages()) {
+
+    foreach ($languages as $lang) {
+
+        $page_url = page()->localHttpUrl($lang); 
+    
+        if(page()->httpUrl == $page_url) {
+    
+            $page_locale = languages()->getLocale('LC_ALL',$lang->name);
+            
+            $lang_code = substr($page_locale, 0, 2);
+        }
+    
+    }
+
+} else {
+
+    $page_locale = page()->ts['locale'];
+    
+    $lang_code = page()->ts['lang_code'];
+
+}
+
 // Custom options
 page()->opt = [
+
+/**
+ * 
+ * Language Options ( set locale ogSeo(), <html lang='l_pref' )
+ * 
+ */
+'locale' => $page_locale, // Inside _func.php => function ogSeo()
+'l_pref' => $lang_code, // Inside _head.php <html lang='l_pref'
 
 /**
  *

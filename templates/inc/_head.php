@@ -1,6 +1,6 @@
 <?php namespace ProcessWire;?>
 <!DOCTYPE html>
-<html lang='<?=page()->ts['lang_code'];?>'>
+<html lang='<?=page()->opt['l_pref'];?>'>
 <head id='html-head'>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">

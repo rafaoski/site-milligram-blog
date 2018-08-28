@@ -3,7 +3,8 @@
 // Translate Strings
 page()->ts = [
 
-// Language Code
+// Language => locale / code prefx
+'locale' => _x('en_US', 'HTML locale code'),
 'lang_code' => _x('en', 'HTML language code'),
 
 // Main Page ( main.php )
