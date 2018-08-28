@@ -150,7 +150,7 @@ if(isset($opt['random']) && $opt['random'] == true) {
  *  'stroke' => 4,
  *  'color' => '#201f27',
  *  'text' => __('Hello'),
- *  'html_el' => 'h1', // Html Element
+ *  'html_el' => 'h1', // html elements like h1 h2 h3 h4 h5 span p ... 
  *  // 'before' => true,
  *  'url'=>  'https://feathericons.com/',
  *  't_url' => true, // <a href='#' target='_blank'  
@@ -185,7 +185,7 @@ function icon($icon = null, $opt = null) {
                     $out .= "<a class='$a_class' href='$url' $t_blank>";
                 }
         
-            // html_el like h1 h2 h3 ( default <span clas='font-class') ...
+            // html elements like h1 h2 h3 h4 h5 span p ...
                $out .= isset($opt['html_el']) ? "<{$opt['html_el']} class='$class'>" : '';
         
             // Show Custom Text Before
@@ -201,7 +201,7 @@ function icon($icon = null, $opt = null) {
             // Show Custom Text
             if (!isset($opt['before'])) $out .= $txt;
         
-            // End custom html_el
+            // End custom html elements
                 $out .= isset($opt['html_el']) ? "</{$opt['html_el']}>" : '';
         
             // /End custom url
