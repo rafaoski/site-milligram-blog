@@ -110,6 +110,7 @@ page()->opt = [
 
 // Enable Open Graph SEO
 'og_seo' => false,
+'og_pref' => ' ' . 'prefix="og: http://ogp.me/ns#"',
 
 // Site Name
 's_name' => page()->ts['site_name'],

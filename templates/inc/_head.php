@@ -1,6 +1,7 @@
-<?php namespace ProcessWire;?>
+<?php namespace ProcessWire;
+$og_pref = page()->opt['og_seo'] ? page()->opt['og_pref'] : '';?>
 <!DOCTYPE html>
-<html lang='<?=page()->opt['l_pref'];?>'>
+<html lang='<?=page()->opt['l_pref'];?>'<?=$og_pref;?>>
 <head id='html-head'>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
