@@ -10,34 +10,11 @@
 	<meta name="description" content="<?=page()->summary;?>">
 
 <?php // https://weekly.pw/issue/222/
-	    if($config->pagerHeadTags) echo $config->pagerHeadTags . "\n";
-
+if(config()->pagerHeadTags) echo config()->pagerHeadTags . "\n";
 // https://processwire.com/blog/posts/processwire-2.6.18-updates-pagination-and-seo/
 if(input()->pageNum > 1) echo "\t<meta name='robots' content='noindex,follow'>\n";
-
-// If Enable Open Graph Seo
-if(page()->opt['og_seo']):?>
-
-    <meta id='og-title' property="og:title" content="<?=page('headline|title');?>"/>
-    <meta id='og-desc' property='og:description' content='<?=page()->summary?>'>
-    <meta id='og-type' property="og:type" content="website"/>
-    <meta id='og-url' property="og:url" content="<?=page()->httpUrl?>"/>
-    <meta property='og:site_name' content='<?=page()->opt['s_name']?>'/>
-
-<?php if( page()->images && count(page()->images) ) { // If page has images
-
-// Get large size ( 1280px ) 
-$large = page()->opt['large'];
-
-// Get image
-$img = $page->images->first()->width($large)->httpUrl();
-
-    echo "\t<meta id='og-image' property='og:image' content='$img'/>\n";
-
-}
-
-endif;
-
+// Simple Open Graph Seo
+echo ogSeo(page());
 // Include Lang tag 
 wireIncludeFile("inc/_link-tag",['home' => $home]);?>
 

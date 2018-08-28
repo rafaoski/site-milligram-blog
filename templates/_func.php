@@ -143,6 +143,43 @@ if(isset($opt['random']) && $opt['random'] == true) {
 
 /**
  * 
+ * Simple Open Graph SEO
+ * 
+ * @param Page $page
+ * 
+ */
+function ogSeo($page) {
+
+    // If Enable Open Graph Seo
+    if(!page()->opt['og_seo']) return '';
+    
+    $out = ''; 
+    // Type Content ( article, website )
+    $content = $page->parent() == page()->opt['blog_p'] ? 'article' : 'website';
+    
+        $out .= "\t<meta id='og-title' property='og:title' content='{$page('headline|title')}'/>\n";
+        $out .= "\t<meta id='og-desc' property='og:description' content='{$page->summary}'>\n";
+        $out .= "\t<meta id='og-type' property='og:type' content='$content'/>\n";
+        $out .= "\t<meta id='og-url' property='og:url' content='{$page->httpUrl}'/>\n";
+        $out .= "\t<meta property='og:site_name' content='{$page->opt['s_name']}'/>\n";
+        
+        if( $page->images && count($page->images) ) { // If page has images
+    
+            // Get large size ( 1280px ) 
+            $large = page()->opt['large'];
+            
+            // Get image
+            $img = $page->images->first()->width($large)->httpUrl();
+            
+            $out .= "\t<meta id='og-image' property='og:image' content='$img'/>\n";
+            
+        }
+    
+      return $out;
+    }
+
+/**
+ * 
  * // Basic Example ( also example is inside /render/grid.php )
  *  echo icon('user',[
  *  'height' => 40,
