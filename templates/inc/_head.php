@@ -8,7 +8,6 @@ $og_pref = page()->opt['og_seo'] ? page()->opt['og_pref'] : '';?>
     <link rel="icon" href="<?=page()->opt['favicon_url'];?>"/>
 	<title id='html-title'><?=page('headline|title');?></title>
 	<meta name="description" content="<?=page()->summary;?>">
-
 <?php // https://weekly.pw/issue/222/
 if(config()->pagerHeadTags) echo config()->pagerHeadTags . "\n";
 // https://processwire.com/blog/posts/processwire-2.6.18-updates-pagination-and-seo/
@@ -23,7 +22,6 @@ wireIncludeFile("inc/_link-tag",['home' => $home]);?>
 
    <!-- CUSTOM STYLE -->
    <style id='head-style'>
-
     /* Simple Honeypot Contact Form */
         .hide-robot {
             display: none;
@@ -39,11 +37,9 @@ wireIncludeFile("inc/_link-tag",['home' => $home]);?>
                 margin-right: auto;
                 margin-left: auto;
             }
-    
     </style>
 
-    <?=gwCode(page()->opt['verification_code']);?>
-
+<?=gwCode(page()->opt['verification_code']);?>
 </head>
 
 <body id='html-body' class='<?=page()->template?>'>
