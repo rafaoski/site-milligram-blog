@@ -152,35 +152,43 @@ function ogSeo($page) {
 
     // If Enable Open Graph Seo
     if(!page()->opt['og_seo']) return '';
+    // https://processwire.com/blog/posts/processwire-2.6.18-updates-pagination-and-seo/#using-a-pagination-view-all-page
+    // specify scheme and host statically rather than from $page->httpUrl
+    $canonicalURL = $page->httpUrl;
     
-    $out = ''; 
-// Type Content ( article, website )
-    $content = $page->parent() == page()->opt['blog_p'] ? 'article' : 'website';
-// Get locale
-    $locale = page()->opt['locale'];
-        $out .= "\t<link rel='canonical' href='$page->httpUrl'/>\n";
-        $out .= "\t<meta property='og:locale' content='$locale'/>\n";
-        $out .= "\t<meta id='og-title' property='og:title' content='{$page('headline|title')}'/>\n";
-        $out .= "\t<meta id='og-desc' property='og:description' content='{$page->summary}'>\n";
-        $out .= "\t<meta id='og-type' property='og:type' content='$content'/>\n";
-        $out .= "\t<meta id='og-url' property='og:url' content='{$page->httpUrl}'/>\n";
-        $out .= "\t<meta property='og:site_name' content='{$page->opt['s_name']}'/>\n";
-// If Page Images
-        if( $page->images && count($page->images) ) { // If page has images
-    
-    // Get large size ( 1280px ) 
-            $large = page()->opt['large'];
-    // Get image width
-            $img = $page->images->first()->width($large);
-    // Show Image    
-            $out .= "\t<meta id='og-image' property='og:image' content='{$img->httpUrl()}'/>\n";
-    // Image Size    
-            $out .= "\t<meta property='og:image:width' content='$img->width'/>\n";
-            $out .= "\t<meta property='og:image:height' content='$img->height'/>\n";
-        }
-    
-      return $out;
+    // if on a pagination, include that as part of your canonical URL
+    if(input()->pageNum > 1) {
+      $canonicalURL .= config()->pageNumUrlPrefix . input()->pageNum;
     }
+    
+        $out = ''; 
+    // Type Content ( article, website )
+        $content = $page->parent() == page()->opt['blog_p'] ? 'article' : 'website';
+    // Get locale
+        $locale = page()->opt['locale'];
+            $out .= "\t<link rel='canonical' href='$canonicalURL'/>\n";
+            $out .= "\t<meta property='og:locale' content='$locale'/>\n";
+            $out .= "\t<meta id='og-title' property='og:title' content='{$page('headline|title')}'/>\n";
+            $out .= "\t<meta id='og-desc' property='og:description' content='{$page->summary}'>\n";
+            $out .= "\t<meta id='og-type' property='og:type' content='$content'/>\n";
+            $out .= "\t<meta id='og-url' property='og:url' content='{$canonicalURL}'/>\n";
+            $out .= "\t<meta property='og:site_name' content='{$page->opt['s_name']}'/>\n";
+    // If Page Images
+            if( $page->images && count($page->images) ) { // If page has images
+        
+        // Get large size ( 1280px ) 
+                $large = page()->opt['large'];
+        // Get image width
+                $img = $page->images->first()->width($large);
+        // Show Image    
+                $out .= "\t<meta id='og-image' property='og:image' content='{$img->httpUrl()}'/>\n";
+        // Image Size    
+                $out .= "\t<meta property='og:image:width' content='$img->width'/>\n";
+                $out .= "\t<meta property='og:image:height' content='$img->height'/>\n";
+            }
+        
+          return $out;
+        }
 
 /**
  * 

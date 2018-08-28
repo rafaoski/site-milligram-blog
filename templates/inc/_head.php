@@ -8,10 +8,10 @@ $og_pref = page()->opt['og_seo'] ? page()->opt['og_pref'] : '';?>
     <link rel="icon" href="<?=page()->opt['favicon_url'];?>"/>
 	<title id='html-title'><?=page('headline|title');?></title>
 	<meta name="description" content="<?=page()->summary;?>">
-<?php // https://weekly.pw/issue/222/
-if(config()->pagerHeadTags) echo config()->pagerHeadTags . "\n";
-// https://processwire.com/blog/posts/processwire-2.6.18-updates-pagination-and-seo/
+<?php // https://processwire.com/blog/posts/processwire-2.6.18-updates-pagination-and-seo/
 if(input()->pageNum > 1) echo "\t<meta name='robots' content='noindex,follow'>\n";
+// https://weekly.pw/issue/222/
+if(config()->pagerHeadTags) echo "\t" . config()->pagerHeadTags . "\n";
 // Simple Open Graph Seo
 echo ogSeo(page());
 // Include Lang tag 
