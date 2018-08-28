@@ -12,7 +12,7 @@ echo icon('archive', // https://feathericons.com/
   [ 
     'txt' => ' ' . page()->ts['s_archives'],
     'color' => '#9b4dca',
-    'heading' => 'h3',
+    'html_el' => 'h3',
     'url' => $arch_url
   ]);
 

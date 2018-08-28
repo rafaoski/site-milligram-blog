@@ -13,7 +13,7 @@ $children = $item->children("limit=4,sort=random");?>
               'height' => 70,
               'color' => '#608190',
               'stroke' => 2,
-              'heading' => 'h3',
+              'html_el' => 'h3',
               'txt' => $heading,
               'url' => $item->url
             ]);?>

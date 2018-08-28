@@ -150,7 +150,7 @@ if(isset($opt['random']) && $opt['random'] == true) {
  *  'stroke' => 4,
  *  'color' => '#201f27',
  *  'text' => __('Hello'),
- *  'heading' => 'h1',
+ *  'html_el' => 'h1', // Html Element
  *  // 'before' => true,
  *  'url'=>  'https://feathericons.com/',
  *  't_url' => true, // <a href='#' target='_blank'  
@@ -163,57 +163,56 @@ if(isset($opt['random']) && $opt['random'] == true) {
  */
 function icon($icon = null, $opt = null) {
 
-if($icon == null) return '';
-
-    // Reset variables    
+    if($icon == null) return '';
     
-        $out = '';
-    
-        // Get options
-            $txt = isset($opt['txt']) ? $opt['txt'] : '';
-            $url = isset($opt['url']) ? $opt['url'] : '#';
-            $t_blank = isset($opt['t_blank']) && $opt['t_blank'] == true ? "target='_blank'" : '';
-            $width = isset($opt['width']) ? $opt['width'] : 25;
-            $height = isset($opt['height']) ? $opt['height'] : 25;
-            $color = isset($opt['color']) ? $opt['color'] : '#303438';
-            $stroke = isset($opt['stroke']) ? $opt['stroke'] : 1;
-            $heading = isset($opt['heading']) ? $opt['heading'] : "span";
-            $class = isset($opt['class']) ? $opt['class'] : 'font-class';
-            $a_class = isset($opt['a_class']) ? $opt['a_class'] : 'a-class';
-    
-        // custom Url
-            if(isset($opt['url'])) {
-                $out .= "<a class='$a_class' href='$url' $t_blank>";
-            }
-    
-        // heading like h1 h2 h3 ( default <span clas='font-class') ...
-           $out .= "<$heading class='$class'>";
-    
-        // Show Custom Text Before
-        if (isset($opt['before']) && $opt['before'] == true) $out .= $txt;
-           
-                $out .= "<i data-feather='$icon' 
-                width=$width 
-                height=$height 
-                stroke-width=$stroke
-                color=$color>
-                </i>";
-    
-        // Show Custom Text
-        if (!isset($opt['before'])) $out .= $txt;
-    
-        // End custom heading
-            $out .= "</$heading>";
-    
-        // /End custom url
-            if(isset($opt['url'])) {
-    
-                 $out .= "</a>";
-    
-            }
+        // Reset variables    
         
-            return $out;
-        }
+            $out = '';
+        
+            // Get options
+                $txt = isset($opt['txt']) ? $opt['txt'] : '';
+                $url = isset($opt['url']) ? $opt['url'] : '#';
+                $t_blank = isset($opt['t_blank']) && $opt['t_blank'] == true ? "target='_blank'" : '';
+                $width = isset($opt['width']) ? $opt['width'] : 25;
+                $height = isset($opt['height']) ? $opt['height'] : 25;
+                $color = isset($opt['color']) ? $opt['color'] : '#303438';
+                $stroke = isset($opt['stroke']) ? $opt['stroke'] : 1;
+                $class = isset($opt['class']) ? $opt['class'] : 'font-class';
+                $a_class = isset($opt['a_class']) ? $opt['a_class'] : 'a-class';
+        
+            // custom Url
+                if(isset($opt['url'])) {
+                    $out .= "<a class='$a_class' href='$url' $t_blank>";
+                }
+        
+            // html_el like h1 h2 h3 ( default <span clas='font-class') ...
+               $out .= isset($opt['html_el']) ? "<{$opt['html_el']} class='$class'>" : '';
+        
+            // Show Custom Text Before
+            if (isset($opt['before']) && $opt['before'] == true) $out .= $txt;
+               
+                    $out .= "<i data-feather='$icon' 
+                    width=$width 
+                    height=$height 
+                    stroke-width=$stroke
+                    color=$color>
+                    </i>";
+        
+            // Show Custom Text
+            if (!isset($opt['before'])) $out .= $txt;
+        
+            // End custom html_el
+                $out .= isset($opt['html_el']) ? "</{$opt['html_el']}>" : '';
+        
+            // /End custom url
+                if(isset($opt['url'])) {
+        
+                     $out .= "</a>";
+        
+                }
+            
+                return $out;
+            }
 
 /**
  * 

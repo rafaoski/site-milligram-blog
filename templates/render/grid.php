@@ -19,7 +19,7 @@ $children = $item->children("limit=4");?>
               'height' => 150,
               'color' => '#608190',
               'stroke' => 3,
-              'heading' => 'h3',
+              'html_el' => 'h3',
               'txt' => page()->ts['wow'],
               'url' => $item->url
             ]);?>
