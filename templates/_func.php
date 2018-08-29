@@ -159,6 +159,7 @@ $tw_image = '';
     
 // https://processwire.com/blog/posts/processwire-2.6.18-updates-pagination-and-seo/#using-a-pagination-view-all-page
 // specify scheme and host statically rather than from $page->httpUrl
+// $canonicalURL = 'https://www.domain.com' . $page->url
 $canonicalURL = $page->httpUrl;
         
 // if on a pagination, include that as part of your canonical URL
