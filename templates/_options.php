@@ -121,6 +121,7 @@ page()->opt = [
 'og_seo' => false,
 'og_pref' => ' ' . 'prefix="og: http://ogp.me/ns#"',
 's_name' => page()->ts['site_name'], // Site Name
+'cannonical_url' => '', // https://www.domain.com
 // Twitter Card 
 'enable_tw' => false,
 'large_image' => true,
