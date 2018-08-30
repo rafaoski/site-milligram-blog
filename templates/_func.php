@@ -143,38 +143,42 @@ if(isset($opt['random']) && $opt['random'] == true) {
 
 /**
  * 
- * Simple Open Graph SEO
+ * Smart SEO
  * 
  * @param Page $page
  * 
  */
-function ogSeo($page) {
+function smartSeo($page) {
 
-// Check if Open Graph Seo is enabled
-if(!page()->opt['og_seo']) return '';
-        
+// Check if Seo is enabled
+if(!page()->opt['smart_seo']) return '';
+
 // Reset variables
 $out = ''; 
-$tw_image = '';    
-        
+$tw_image = '';
+
+// https://processwire.com/blog/posts/processwire-2.6.18-updates-pagination-and-seo/
+if(input()->pageNum > 1) echo "\t<meta name='robots' content='noindex,follow'>\n";
+// https://weekly.pw/issue/222/
+if(config()->pagerHeadTags) echo "\t" . config()->pagerHeadTags . "\n";
+
 // https://processwire.com/blog/posts/processwire-2.6.18-updates-pagination-and-seo/#using-a-pagination-view-all-page
 // specify scheme and host statically rather than from $page->httpUrl
 // $canonicalURL = 'https://www.domain.com' . $page->url;
-    
 if(page()->opt['cannonical_url']) {
     $canonicalURL = page()->opt['cannonical_url'] . $page->url;
 } else {
     $canonicalURL = $page->httpUrl;
 }
-            
+
 // if on a pagination, include that as part of your canonical URL
 if(input()->pageNum > 1) {
     $canonicalURL .= config()->pageNumUrlPrefix . input()->pageNum;
 }
-        
+
 // Type Content ( article, website )
 $content = $page->parent() == page()->opt['blog_p'] ? 'article' : 'website';
-        
+
 // Get locale
 $locale = page()->opt['locale'];
     $out .= "\t<meta property='og:locale' content='{$locale}'/>\n";
@@ -199,7 +203,7 @@ if($page->parent == page()->opt['blog_p']) {
         "\t<meta property='article:tag' content='{title}'>\n"
     );
 }
-    
+
 // If Page Images
 if( $page->images && count($page->images) ) {
         
@@ -215,7 +219,7 @@ if( $page->images && count($page->images) ) {
     // TWITTER CARD IMAGE
         $tw_image = "\t<meta name='twitter:image' content='{$img->httpUrl()}'/>\n";
 }
-    
+
 // Simple Twitter Card 
 if(page()->opt['enable_tw']) {
 
@@ -266,56 +270,56 @@ if($code) return "<meta name='google-site-verification' content='$code' />\n";
  */
 function icon($icon = null, $opt = null) {
 
-    if($icon == null) return '';
+if($icon == null) return '';
     
-        // Reset variables    
+// Reset variables    
+
+    $out = '';
+
+    // Get options
+        $txt = isset($opt['txt']) ? $opt['txt'] : '';
+        $url = isset($opt['url']) ? $opt['url'] : '#';
+        $t_blank = isset($opt['t_blank']) && $opt['t_blank'] == true ? "target='_blank'" : '';
+        $width = isset($opt['width']) ? $opt['width'] : 25;
+        $height = isset($opt['height']) ? $opt['height'] : 25;
+        $color = isset($opt['color']) ? $opt['color'] : '#303438';
+        $stroke = isset($opt['stroke']) ? $opt['stroke'] : 1;
+        $class = isset($opt['class']) ? $opt['class'] : 'font-class';
+        $a_class = isset($opt['a_class']) ? $opt['a_class'] : 'a-class';
+
+    // custom Url
+        if(isset($opt['url'])) {
+            $out .= "<a class='$a_class' href='$url' $t_blank>";
+        }
+
+    // html elements like h1 h2 h3 h4 h5 span p ...
+        $out .= isset($opt['html_el']) ? "<{$opt['html_el']} class='$class'>" : '';
+
+    // Show Custom Text Before
+    if (isset($opt['before']) && $opt['before'] == true) $out .= $txt;
         
-            $out = '';
-        
-            // Get options
-                $txt = isset($opt['txt']) ? $opt['txt'] : '';
-                $url = isset($opt['url']) ? $opt['url'] : '#';
-                $t_blank = isset($opt['t_blank']) && $opt['t_blank'] == true ? "target='_blank'" : '';
-                $width = isset($opt['width']) ? $opt['width'] : 25;
-                $height = isset($opt['height']) ? $opt['height'] : 25;
-                $color = isset($opt['color']) ? $opt['color'] : '#303438';
-                $stroke = isset($opt['stroke']) ? $opt['stroke'] : 1;
-                $class = isset($opt['class']) ? $opt['class'] : 'font-class';
-                $a_class = isset($opt['a_class']) ? $opt['a_class'] : 'a-class';
-        
-            // custom Url
-                if(isset($opt['url'])) {
-                    $out .= "<a class='$a_class' href='$url' $t_blank>";
-                }
-        
-            // html elements like h1 h2 h3 h4 h5 span p ...
-               $out .= isset($opt['html_el']) ? "<{$opt['html_el']} class='$class'>" : '';
-        
-            // Show Custom Text Before
-            if (isset($opt['before']) && $opt['before'] == true) $out .= $txt;
-               
-                    $out .= "<i data-feather='$icon' 
-                    width=$width 
-                    height=$height 
-                    stroke-width=$stroke
-                    color=$color>
-                    </i>";
-        
-            // Show Custom Text
-            if (!isset($opt['before'])) $out .= $txt;
-        
-            // End custom html elements
-                $out .= isset($opt['html_el']) ? "</{$opt['html_el']}>" : '';
-        
-            // /End custom url
-                if(isset($opt['url'])) {
-        
-                     $out .= "</a>";
-        
-                }
-            
-                return $out;
-            }
+            $out .= "<i data-feather='$icon' 
+            width=$width 
+            height=$height 
+            stroke-width=$stroke
+            color=$color>
+            </i>";
+
+    // Show Custom Text
+    if (!isset($opt['before'])) $out .= $txt;
+
+    // End custom html elements
+        $out .= isset($opt['html_el']) ? "</{$opt['html_el']}>" : '';
+
+    // /End custom url
+        if(isset($opt['url'])) {
+
+                $out .= "</a>";
+
+        }
+    
+        return $out;
+}
 
 /**
  * 
@@ -569,7 +573,6 @@ return "\n
 </script>";
 }
 
-
 /**
  * 
  * @param Page|null $item
@@ -597,7 +600,6 @@ if(isset($opt['random']) && $opt['random'] == true) {
     $height = '2' . rand(5,9) . '0';
 }
 
-
 $out .="<img class='center lazy'
         data-src='https://picsum.photos/$width/$height'
         alt='$item->title'
@@ -607,7 +609,6 @@ $out .="<img class='center lazy'
 return $out;
 
 }
-
 
 /**
  * 
@@ -731,7 +732,6 @@ $comm = '';
 return $comm;
 
 }
-
 
 /**
  * 

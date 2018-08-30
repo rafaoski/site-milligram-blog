@@ -113,17 +113,16 @@ page()->opt = [
 
 /**
  *
- * Enable Open Graph SEO
- * Enable Simple Twitter Card 
+ * Smart SEO
+ * Twitter Card 
  * https://cards-dev.twitter.com/validator
  *
  */
-'og_seo' => false,
-'og_pref' => ' ' . 'prefix="og: http://ogp.me/ns#"',
+'smart_seo' => true, // Enable Seo
 's_name' => page()->ts['site_name'], // Site Name
 'cannonical_url' => '', // https://www.domain.com
 // Twitter Card 
-'enable_tw' => false,
+'enable_tw' => true, // Enable Twitter Card
 'large_image' => true,
 
 /**
