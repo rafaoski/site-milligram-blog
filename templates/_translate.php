@@ -22,8 +22,7 @@ page()->ts = [
 'recent' =>  __('Recent Posts'),
 
 // Search Page ( search.php )
-'found' => __('Found'),
-'pages' => __('page(s)'),
+'found_matches' => __("Found %d page(s)."),
 'no_results' => __('Sorry, no results were found.'),
 
 // Blog Post ( blog-post.php )

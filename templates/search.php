@@ -37,8 +37,10 @@ unset($q);?>
 	<?php
 	// did we find any matches?
 	if(count($matches)) {
+		
 		// yes we did, render them
-		echo page()->ts['found'] . ' ' . $matches->count . ' ' . page()->ts['pages'];
+		echo sprintf(page()->ts['found_matches'],count($matches));
+
 		foreach ($matches as $key) {
 			$out = '<ul>';
 			echo "<li><a href='$key->url'>$key->title</a></li>";
