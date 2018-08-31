@@ -24,7 +24,6 @@ if(page()->getLanguages()) {
     $page_locale = page()->ts['locale'];
 // Language Prefix <html lang='en'      
     $lang_code = page()->ts['lang_code'];
-
 }
 
 // Custom options
