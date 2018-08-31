@@ -11,18 +11,18 @@ if(page()->getLanguages()) {
         $page_url = page()->localHttpUrl($lang); 
     
         if(page()->httpUrl == $page_url) {
-    
-            $page_locale = languages()->getLocale('LC_ALL',$lang->name);
-            
+        // Seo Locale <meta property='og:locale' content='en_US'/>
+            $page_locale = substr(languages()->getLocale('LC_ALL',$lang->name),0,5);
+        // Language Prefix <html lang='en'>    
             $lang_code = substr($page_locale, 0, 2);
         }
     
     }
 
 } else {
-
+// Seo Locale <meta property='og:locale' content='en_US'/>
     $page_locale = page()->ts['locale'];
-    
+// Language Prefix <html lang='en'      
     $lang_code = page()->ts['lang_code'];
 
 }
@@ -32,10 +32,10 @@ page()->opt = [
 
 /**
  * 
- * Language Options ( set locale ogSeo(), <html lang='l_pref' )
+ * Language Options ( set <html lang='en'>, <meta property='og:locale' content='en_US'/> )
  * 
  */
-'locale' => $page_locale, // Inside _func.php => function ogSeo()
+'locale' => $page_locale, // Inside _func.php => function smartSeo()
 'l_pref' => $lang_code, // Inside _head.php <html lang='l_pref'
 
 /**
@@ -91,8 +91,6 @@ page()->opt = [
 'about_p' => pages('/about/'), // About Page
 
 'news_p' => pages('/news/'), // News Page
-
-// 'p_url' => pages('/privacy-policy/'), // Privacy Policy
 
 /**
  *
@@ -173,6 +171,7 @@ page()->opt = [
 // Privacy Banner // https://cookieconsent.insites.com/
 'p_b' => false, // Enable Privacy Banner
 'p_url' => pages()->get('/')->httpUrl . 'privacy-policy/', // Cookie Page ( You Must Create Privacy Policy page )
+// 'p_url' => pages('/privacy-policy/')->url, // Privacy Policy Url ( If you created )
 
 // Google Analytics Code
 'ga_code' => '', // To Enable put Google Analytics Code
