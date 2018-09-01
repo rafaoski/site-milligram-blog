@@ -124,14 +124,11 @@ page()->opt = [
 
 /**
  *
- * Options => ( _archive.php ) ( ./inc/_archives.php )
+ * Archive Options
  *
  */
-'enable_archive' => true, // Enable Archives ( ./inc/_archives.php ) Sidebar
-
-'archive_date' => 2017, // Archives inside ( archives.php ) Basic Page
-
-'sidebar_date' => 2017, // Archives inside Sidebar ( _main.php )
+'archive_date' => 2017, // Start Date => Archives inside ( archives.php ) Basic Page
+'sidebar_date' => 2017, // Start Date => Archives inside Sidebar ( _main.php )
 
 /**
  *
@@ -139,16 +136,14 @@ page()->opt = [
  *
  */
 'enable_cf' => false, // Enable contact Form
-'your_mail' => 'yourmail@gmail.com', // Email to send message
-
+'mail_to' => 'yourmail@gmail.com', // Email to send message
 // More Info
 'c_phone' => '6755464', // Info Phone
 'c_mail' => 'processwire@gmail.com', // Info E-Mail
-
 // Save Message
 'save_message' => false, // Save mesage to pages
-'c_parent' => 'contact', // Contact Page
-'c_item' => 'contact-item', // Template to save message inside body field ( You must create template " contact-item" )
+'c_page' => pages('/contact/'), // Get Contact Page ( You must create contact Page " Contact " )
+'c_item' => 'contact-item', // Template to save message ( You must create template " contact-item " with body field )
 
 /**
  *

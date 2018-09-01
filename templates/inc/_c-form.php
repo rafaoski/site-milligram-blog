@@ -1,25 +1,38 @@
 <?php namespace ProcessWire;
+// Enable or disable
+if(isset($enable) && $enable == false) return '';
+
+$mailTo = isset($mailTo) ? $mailTo : '';
+// Mail Subject
+$mailSubject = isset($mailSubject) ? $mailSubject : '';
+$saveMessage = isset($saveMessage) ? $saveMessage : '';
+$contactPage = isset($contactPage) ? $contactPage : '';
+$contactItem = isset($contactItem) ? $contactItem : '';
 // Translate
-  $c_u = page()->ts['c_u'];
-  $l_name = page()->ts['l_name'];
-  $l_email = page()->ts['l_email'];
-  $l_message = page()->ts['l_message'];
-  $l_success = page()->ts['l_success'];
-  $s_wrong = page()->ts['s_wrong'];
-  $submit = page()->ts['submit'];
-  $reset = page()->ts['reset'];
-  $show_form = page()->ts['show_form'];
-  $m_subj = page()->ts['m_subj'];
+$c_u = page()->ts['c_u'];
+$l_name = page()->ts['l_name'];
+$l_email = page()->ts['l_email'];
+$l_message = page()->ts['l_message'];
+$l_success = page()->ts['l_success'];
+$s_wrong = page()->ts['s_wrong'];
+$submit = page()->ts['submit'];
+$reset = page()->ts['reset'];
+$show_form = page()->ts['show_form'];
+
+// Get Phone Number
+$phoneNumber = $sanitizer->text(page()->opt['c_phone']);
+// Get Mail
+$contactMail = $sanitizer->email(page()->opt['c_mail']);
 
 if($input->post->submit) :
 
 if($input->firstname) {
 
-    $session->Message = '<h3>' . $s_wrong . "</h3>";
+    session()->Message = '<h3>' . $s_wrong . "</h3>";
     session()->redirect('./http404');
 
 }
-if($session->CSRF->hasValidToken()) {
+if(session()->CSRF->hasValidToken()) {
 
 $m_name = $sanitizer->text($input->post->name);
 $m_from = $sanitizer->email($input->post->email);
@@ -37,50 +50,43 @@ if($m_name && $m_from  && $m_message) {
 
     $m = wireMail();
     // separate method call usage
-    $m->to(page()->opt['your_mail']); // specify CSV string or array for multiple addresses
+    $m->to($mailTo); // specify CSV string or array for multiple addresses
     $m->from($m_from);
-    $m->subject($m_subj);
-    $m->bodyHTML($html);
+    $m->subject($mailSubject);
+    $m->body($html);
     $m->send();
 
 // $bool = $mail->mailHTML($to, string $subject, $messageHTML, array $headers = []);
 
-  // $mail->mailHTML($your_mail, $m_subj,
+  // $mail->mailHTML($mailTo, $mailSubject,
   // [
   //   'bodyHTML' => $html,
   //   'from' => $m_from
   // ]);
 
 // If Enable Save Messages
-if(page()->opt['save_message'] == true) {
-
-// Parent Page ( Contact Page )
-  $c_parent = page()->opt['c_parent'];
-// Contact Items
-  $c_item = page()->opt['c_item'];
+if( $saveMessage == true) {
 
 // save to log that can be viewed via the pw backend
   $p = new Page();
-  $p->template = "$c_item";
+  $p->template = $contactItem;
   // $p->parent = 1017;
-  $p->parent = pages("/$c_parent/");
+  $p->parent = $contactPage;
   $p->title = $m_from . ' - ' . date("Y.m.d | H:i");
   $p->body = $html;
   $p->addStatus(Page::statusHidden);
   $p->save();
 
 }
-
-$session->Message ="<blockquote>
+// Session Message
+session()->Message ="<blockquote>
 <h4 class='success'>$l_success</h4>
 <h5>$l_name: $m_name</h5>
 <h5>$l_email:  $m_from</h5>
 <p>$l_message: $m_message</p></blockquote>";
- //finally redirect user to contact-page
- session()->redirect('./');
-
+//finally redirect user
+session()->redirect('./');
 } else {
-
     echo '<h1>' . page()->ts['f_fill'] . '</h1>';
 }
 // IF CSRF TOKEN NOT FOUND
@@ -99,48 +105,57 @@ if ($session->Message) {
 } else {
 
 $tokenName = $this->session->CSRF->getTokenName();
-$tokenValue = $this->session->CSRF->getTokenValue(); ?>
+$tokenValue = $this->session->CSRF->getTokenValue();
+// Form Icons
+$ic_user = icon('user');
+$ic_mail = icon('mail');
+$ic_message = icon('message-circle');
 
-<h3><?=$c_u?></h3>
+// More Info
+echo icon('navigation',
+  [
+    'txt' => " $c_u",
+    'width' => 40,
+    'height' => 40,
+    'color' => '#9b4dca',
+    'stroke' => 1,
+    'html_el' => 'h3',
+    'url' => $contactPage->url,
+  ]);
 
-<form id='contact-form' class="c-form" action="./" method='post'>
+echo "<form id='contact-form' class='c-form' action='./' method='post'>
 
-<input type="hidden" id="_post_token" name="<?=$tokenName?>" value="<?=$tokenValue?>">
+<input type='hidden' id='_post_token' name='$tokenName' value='$tokenValue'>
 
 		<!-- Create fields for the honeypot -->
-    <input name="firstname" type="text" id="firstname" class="hide-robot">
+    <input name='firstname' type='text' id='firstname' class='hide-robot'>
 		<!-- honeypot fields end -->
 
-    <div class="name">
-      <label class="label-name"><?=icon('user')?></label>
-      <input name='name' placeholder="<?=$l_name?>" autocomplete="off" type="text" required>
+    <div class='name'>
+      <label class='label-name'>$ic_user</label>
+      <input name='name' placeholder='$l_name' autocomplete='off' type='text' required>
     </div>
 
-    <div class="enmail">
-      <label class="label-email"><?=icon('mail')?></label>
-      <input name='email' placeholder="<?=$l_email?>" type="email" required>
+    <div class='enmail'>
+      <label class='label-email'>$ic_mail</label>
+      <input name='email' placeholder='$l_email' type='email' required>
     </div>
 
-    <div class="message">
-      <label class="label-message"><?=icon('message-circle');?></label>
-      <textarea class='' name='message' placeholder="<?=$l_message?>" rows="7"  required></textarea>
+    <div class='message'>
+      <label class='label-message'>$ic_message</label>
+      <textarea class='' name='message' placeholder='$l_message' rows='7'  required></textarea>
     </div>
 
-    <input name='submit' value='<?=$submit?>' type="submit">
-    <button type="reset"><?=$reset?></button>
+    <input name='submit' value='$submit' type='submit'>
+    <button type='reset'>$reset</button>
 
-</form>
+</form>";
 
-<?php
-// Get Phone Number
-$phone_nr = $sanitizer->text(page()->opt['c_phone']);
-// Get Mail
-$c_mail = $sanitizer->email(page()->opt['c_mail']);
-
+// More Info
 echo icon('phone',
   [
-    'txt' => $phone_nr . '<br>',
-    'url' =>  "tel:$phone_nr",
+    'txt' => $phoneNumber . '<br>',
+    'url' =>  "tel:$phoneNumber",
     'width' => 30,
     'height' => 30,
     'color' => '#9b4dca',
@@ -149,8 +164,8 @@ echo icon('phone',
 
 echo icon('mail',
   [
-    'txt' => $c_mail,
-    'url' =>  "mailto:$c_mail",
+    'txt' => $contactMail,
+    'url' =>  "mailto:$contactMail",
     'width' => 30,
     'height' => 30,
     'color' => '#9b4dca',
@@ -160,4 +175,4 @@ echo icon('mail',
  }
   endif;
     // Remove Session Message
-    $session->remove('Message');
+    session()->remove('Message');

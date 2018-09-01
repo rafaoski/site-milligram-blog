@@ -82,7 +82,7 @@ window.addEventListener("load", function(){
 echo googleFonts(page()->opt['g_fonts']);
 // GOGLE ANALYTICS CODE
 if(page()->opt['ga_code']) {
-    echo gAnalitycs(page()->opt['ga_code']);
+echo gAnalitycs(page()->opt['ga_code']);
 }
 // Privacy Banner
 if(page()->opt['p_b']) {
