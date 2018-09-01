@@ -13,44 +13,22 @@ if ($input->urlSegment(1)) {
 
 <div id='content-body' pw-prepend>
 
+<?php echo icon('archive', // https://feathericons.com/
+[
+  'txt' => ' ' . page()->ts['s_archives'],
+  'color' => '#9b4dca',
+  'html_el' => 'h3'
+]);?>
+
 <form action="./">
 
-<?php
-echo icon('archive', // https://feathericons.com/
-  [
-    'txt' => page()->ts['s_archives'],
-    'color' => '#9b4dca',
-    'html_el' => 'h3'
-  ]);
-?>
+  <select name='form' onchange='location = this.options[this.selectedIndex].value;'>
 
-<select name='form'  onchange='location = this.options[this.selectedIndex].value;'>
+  <option value='#'><?=page()->ts['s_archives'];?></option>
 
-<?php
-$blog_p = page()->opt['blog_p'];
-$startDate = page()->opt['basic_start_date']; // or whenever you want it to end
-// $startYear = date("Y"); // this year
-$endDate = date("Y"); // this year
-$now = time();
-echo "<option value='#'>" . page()->ts['s_archives'] . "</option>";
-//CODE FROM => https://processwire.com/talk/topic/263-creating-archives-for-newsblogs-sections/
-for($year = $endDate; $year >= $startDate; $year--) {
-   for($month = 12; $month > 0; $month--) {
-       $startTime = strtotime("$year-$month-01"); // 2011-12-01 example
-       if($startTime > $now) continue; // don't bother with future dates
-       if($month == 12) $endTime = strtotime(($year+1) . "-01-01");
-           else $endTime = strtotime("$year-" . ($month+1) . "-01");
-       $entries = $blog_p->children("date>=$startTime, date<$endTime"); // or substitute your own date field
-       $date = date("Y-m",$startTime);
-       $url = $page->url . date("Y",$startTime) . "/" . date("m",$startTime) . '/';
-       $count = count($entries);
-       if($count > 0) {
-           echo "<option value='$url'>$date - ($count)</option>";
-       }
-   }
-} ?>
+    <?=blogArchive(page()->opt['archive_date'],'archives')?>
 
-</select>
+  </select>
 
 </form>
 
@@ -77,7 +55,6 @@ foreach ($page_f as $key) {
   echo "$body <a href='$key->url'>" . page()->ts['read_m'] . "</a></blockquote></p>";
 
 }
-
 // https://processwire.com/api/modules/markup-pager-nav/
 echo basicPagination($page_f, 'container grid');?>
 

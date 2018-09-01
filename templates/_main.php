@@ -46,8 +46,8 @@ wireIncludeFile("inc/_head"); // ( Include header )?>
                 echo page()->sidebar;
             // Include sidebar links
                 wireIncludeFile('inc/_links');
-            // Include archives
-                wireIncludeFile("inc/_archives");
+            // Show Archives if is not Archive Page archives.php
+                echo '<ul>' . blogArchive(page()->opt['sidebar_date'],'sidebar') . '</ul>';
             // Include contact form
                 if(page()->opt['enable_cf']) wireIncludeFile("inc/_c-form");?>
 

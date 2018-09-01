@@ -66,7 +66,7 @@ page()->opt = [
 
 /**
  *
- * Enable / Disable => User Info in a single blog entry ( right sidebar )
+ * Enable / Disable => User Info in a single blog entry
  *
  */
 'user_info' => true,
@@ -129,9 +129,9 @@ page()->opt = [
  */
 'enable_archive' => true, // Enable Archives ( ./inc/_archives.php ) Sidebar
 
-'sidebar_start_date' => 2017, // Archives inside sidebar ( ./inc/_archives.php ) Sidebar
+'archive_date' => 2017, // Archives inside ( archives.php ) Basic Page
 
-'basic_start_date' => 2017, // Archives inside ( archives.php ) Basic Page
+'sidebar_date' => 2017, // Archives inside Sidebar ( _main.php )
 
 /**
  *

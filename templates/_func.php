@@ -920,6 +920,56 @@ return $comm;
 
 /**
  *
+ * @param int $startDate or whenever you want it to start like 2017
+ * @param string $where where is location archive ( 'sidebar' or 'archives' )
+ *
+ */
+function blogArchive($startDate,$where) {
+// Blog Page from _options.php
+$blogPage = page()->opt['blog_p'];
+// Reset Form
+$out = '';
+// $startYear = date("Y"); // this year
+$endDate = date("Y"); // this year
+$now = time();
+if($where == 'sidebar' && page() != page()->opt['arch_p']) {
+    $out .= icon('archive', // https://feathericons.com/
+    [
+        'txt' => ' ' . page()->ts['s_archives'],
+        'color' => '#9b4dca',
+        'html_el' => 'h3',
+        'url' => page()->opt['arch_p']->url
+    ]);
+}
+//CODE FROM => https://processwire.com/talk/topic/263-creating-archives-for-newsblogs-sections/
+    for($year = $endDate; $year >= $startDate; $year--) {
+         for($month = 12; $month > 0; $month--) {
+            $startTime = strtotime("$year-$month-01"); // 2011-12-01 example
+            if($startTime > $now) continue; // don't bother with future dates
+            if($month == 12) $endTime = strtotime(($year+1) . "-01-01");
+            else $endTime = strtotime("$year-" . ($month+1) . "-01");
+            $entries = $blogPage->children("date>=$startTime, date<$endTime"); // or substitute your own date field
+            $date = date("Y-m",$startTime);
+            $url = page()->opt['arch_p']->url . date("Y",$startTime) . "/" . date("m",$startTime) . '/';
+            $count = count($entries);
+            if($count > 0) {
+            
+                if($where == 'archives') $out .= "<option value='$url'>$date - ($count)</option>";
+
+                if($where == 'sidebar' && page() != page()->opt['arch_p']) {
+
+                    $out .= "<li><a href='$url'>$date - ($count)</a></li>";
+                }
+            }
+    
+        }
+    }
+
+    return $out;
+}
+
+/**
+ *
  * TRASH DEMO DATA => USAGE: trashDemoData($trash = true);
  *
  * @param  bool $trash
@@ -943,16 +993,16 @@ function trashDemoData($trash = false) {
             // '1046', // Tags Page
             '1047','1048','1051','1054','1055','1058' // Tags Children
         ];
-    // Add pages to trash  
-        foreach ($arr_p as $key) {
-            $trash_p = pages()->get($key);
-        // IF PAGE EXSIST
-            if($trash_p->name == true) {
-        // PAGE TO TRASH
-                pages()->trash($trash_p);
-            // OR DELETE
-                // pages()->delete($trash_p);
+    // Add pages to trash   
+    foreach ($arr_p as $key) {
+                $trash_p = pages()->get($key);
+            // IF PAGE EXSIST
+                if($trash_p->name == true) {
+            // PAGE TO TRASH
+                    pages()->trash($trash_p);
+                // OR DELETE
+                    // pages()->delete($trash_p);
+                }
             }
         }
     }
-}
