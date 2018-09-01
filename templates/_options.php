@@ -66,7 +66,7 @@ page()->opt = [
 
 /**
  *
- * Enable / Disable => User Info ( ./inc/_user-info.php ) in a single blog entry
+ * Enable / Disable => User Info in a single blog entry ( right sidebar )
  *
  */
 'user_info' => true,
