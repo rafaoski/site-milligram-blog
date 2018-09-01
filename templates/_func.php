@@ -943,15 +943,16 @@ function trashDemoData($trash = false) {
             // '1046', // Tags Page
             '1047','1048','1051','1054','1055','1058' // Tags Children
         ];
-            foreach ($arr_p as $key) {
-                $trash_p = pages()->get($key);
-            // IF PAGE EXSIST
-                if($trash_p->name == true) {
-            // PAGE TO TRASH
-                    pages()->trash($trash_p);
-                // OR DELETE
-                    // pages()->delete($trash_p);
-                }
+    // Add pages to trash  
+        foreach ($arr_p as $key) {
+            $trash_p = pages()->get($key);
+        // IF PAGE EXSIST
+            if($trash_p->name == true) {
+        // PAGE TO TRASH
+                pages()->trash($trash_p);
+            // OR DELETE
+                // pages()->delete($trash_p);
             }
         }
     }
+}
