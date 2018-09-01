@@ -17,7 +17,7 @@
     <p id="social" class='socila-profiles col-7_md-6_sm-12'>
 
         <?php foreach (page()->opt['soc_p'] as $icon => $value) {
-                
+
         echo icon($icon, // Feather Icons
             [
                 'url'=> $value,
@@ -26,7 +26,7 @@
                 'height' => 35,
                 'stroke' => 2,
                 'color' => '#9b4dca'
-            ]); 
+            ]);
         }?>
 
     </p><!-- /#social -->
@@ -55,7 +55,7 @@
 
 <?php // End Config Debug
     endif; ?>
-    
+
 <!-- Main Scripts -->
 <script defer src="<?=urls()->templates?>dist/main.js"></script>
 
@@ -79,18 +79,13 @@ window.addEventListener("load", function(){
 </script>
 
 <?php // Get Some Google Fonts https://github.com/typekit/webfontloader
-    echo googleFonts(page()->opt['g_fonts']);
-
+echo googleFonts(page()->opt['g_fonts']);
 // GOGLE ANALYTICS CODE
 if(page()->opt['ga_code']) {
-
     echo gAnalitycs(page()->opt['ga_code']);
-
 }
-
 // Privacy Banner
 if(page()->opt['p_b']) {
-
 echo cookieBanner(
     [
        'message' => page()->ts['p_message'],
@@ -98,7 +93,6 @@ echo cookieBanner(
        'link' => page()->ts['learn_more'],
        'href' => page()->opt['p_url']
     ]);
-
 } ?>
 
 </body>

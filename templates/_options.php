@@ -8,21 +8,21 @@ if(page()->getLanguages()) {
 
     foreach ($languages as $lang) {
 
-        $page_url = page()->localHttpUrl($lang); 
-    
+        $page_url = page()->localHttpUrl($lang);
+
         if(page()->httpUrl == $page_url) {
         // Seo Locale <meta property='og:locale' content='en_US'/>
             $page_locale = substr(languages()->getLocale('LC_ALL',$lang->name),0,5);
-        // Language Prefix <html lang='en'>    
+        // Language Prefix <html lang='en'>
             $lang_code = substr($page_locale, 0, 2);
         }
-    
+
     }
 
 } else {
 // Seo Locale <meta property='og:locale' content='en_US'/>
     $page_locale = page()->ts['locale'];
-// Language Prefix <html lang='en'      
+// Language Prefix <html lang='en'
     $lang_code = page()->ts['lang_code'];
 }
 
@@ -30,9 +30,9 @@ if(page()->getLanguages()) {
 page()->opt = [
 
 /**
- * 
+ *
  * Language Options ( set <html lang='en'>, <meta property='og:locale' content='en_US'/> )
- * 
+ *
  */
 'locale' => $page_locale, // Inside _func.php => function smartSeo()
 'l_pref' => $lang_code, // Inside _head.php <html lang='l_pref'
@@ -111,14 +111,14 @@ page()->opt = [
 /**
  *
  * Smart SEO
- * Twitter Card 
+ * Twitter Card
  * https://cards-dev.twitter.com/validator
  *
  */
 'smart_seo' => true, // Enable Seo
 's_name' => page()->ts['site_name'], // Site Name
 'cannonical_url' => '', // https://www.domain.com
-// Twitter Card 
+// Twitter Card
 'enable_tw' => true, // Enable Twitter Card
 'large_image' => true,
 

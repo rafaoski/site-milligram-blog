@@ -1,12 +1,12 @@
 <?php namespace ProcessWire;
 
 /**
- * 
+ *
  * https://processwire.com/docs/tutorials-old/quick-start/navigation/
  * Usage => <?=simpleNav($pages->get("/"))?>
- * 
+ *
  * @param Page|null $root
- * 
+ *
  */
 function simpleNav($root = null) {
     // $home = pages()->get("/");
@@ -21,10 +21,10 @@ function simpleNav($root = null) {
 }
 
 /**
- * 
+ *
  * @param Page|null $root
  * @param array|null $opt
- * 
+ *
  */
 function burgerNav($root = null, $opt = null) {
 $children = $root->children();
@@ -73,6 +73,173 @@ $out .= "</div><!-- /.b-container -->";
 
 /**
  *
+ * @param Page $root
+ * @param Page $page
+ *
+ */
+function linkTag($root,$page) {
+
+  // If Multi Language Modules activate
+  if(!$page->getLanguages()) return '';
+
+  $out = '';
+  // handle output of 'hreflang' link tags for multi-language
+  // this is good to do for SEO in helping search engines understand
+  // what languages your site is presented in
+  foreach(languages() as $language) {
+      // if this page is not viewable in the language, skip it
+      if(!$page->viewable($language)) continue;
+      // get the http URL for this page in the given language
+      $url = $page->localHttpUrl($language);
+      // hreflang code for language uses language name from homepage
+      $hreflang = $root->getLanguageValue($language, 'name');
+
+      // if($hreflang == 'home') $hreflang = page()->ts['lang_code'];
+
+      // output the <link> tag: note that this assumes your language names are the same as required by hreflang.
+      $out .= "\t<link rel='alternate' hreflang='$hreflang' href='$url' />\n";
+  }
+  return $out;
+}
+
+/**
+ *
+ * @param Page $item
+ * @param Page $root
+ *
+ */
+function langMenu($page, $root) {
+  // If Enable Multilanguage Modules
+  if(!page()->getLanguages()) return '';
+  $out = '';
+  // language switcher / navigation
+  $out .= "<ul class='lang-menu grid' role='navigation'>";
+  // Start Loop
+  foreach(languages() as $language) {
+
+  // is page viewable in this language?
+      if(!$page->viewable($language)) continue;
+
+      if($language->id == user()->language->id) {
+
+          $out .= "<li class='active'>";
+
+      } else {
+
+          $out .= "<li>";
+
+      }
+
+      $url = $page->localUrl($language);
+      $hreflang = $root->getLanguageValue($language, 'name');
+      $out .= "<a hreflang='$hreflang' href='$url'>$language->title</a></li>";
+
+  }
+
+  $out .= "</ul>";
+
+  return $out;
+}
+
+/**
+ *
+ * @param Page $item
+ *
+ */
+function entryHeader(Page $item) {
+
+$out = '';
+
+  $out .= icon('user', ['txt' => $item->createdUser->title . ' | ' ]);
+
+  $out .= icon('calendar',
+  [
+    'txt' => $item->date . ' | '
+  ]);
+
+  // if page comments
+  if(count($item->comments) && page()->opt['enable_comments'] == true) {
+
+    $id = $item->comments->last() ? $item->comments->last()->id : '#';
+
+    $out .= icon('message-circle',
+    [
+      'txt' => count($item->comments),
+      'url' => "$item->url#Comment$id",
+    ]);
+
+  }
+
+  return $out;
+
+}
+
+/**
+ *
+ * @param Page $item
+ *
+ */
+function entryFooter(Page $item) {
+
+$out = '';
+
+// Show CATEGORIES
+$out .= icon('grid',
+  [
+    'txt' => ' | ',
+    'url' => page()->opt['cat_p']->url, // Get Category Page
+    'color' => '#9b4dca'
+  ]);
+
+// https://processwire.com/api/ref/page-array/each/
+  $out .= $item->categories->each(
+    "<a href='{url}'>{title}</a> | "
+  ) . ' ... ' ;
+
+// Show TAGS
+  $out .= icon('tag',
+  [
+    'txt' => ' | ',
+    'url' => page()->opt['tag_p']->url, // Get Tag Page
+    'color' => '#9b4dca'
+  ]);
+
+// https://processwire.com/api/ref/page-array/each/
+  $out .= $item->tags->each(
+    "<a href='{url}'>{title}</a> | "
+  ) . ' ... ';
+
+  return $out;
+
+}
+
+/**
+ *
+ * @param User $uthor
+ *
+ */
+function userInfo(User $user) {
+
+  if(page()->opt['user_info'] == false ) return '';
+
+  if($user == '') return '';
+
+  $out = '';
+
+  $out .= "<h3>$user->title</h3>";
+
+  $out .= $user->render('images', 'img-thumb');
+
+  $out .= "<blockquote>$user->headline</blockquote>";
+
+  // $out .= "<p>$user->summary</p>";
+
+  return $out;
+
+}
+
+/**
+ *
  * @param Page|PageArray|null $page
  *
  */
@@ -94,7 +261,7 @@ function breadCrumb($page = null) {
         } else {
             $out .= "<span><a href='$item->url'>$item->title</a></span> > ";
         }
-            
+
 		}
 		// optionally output the current page as the last item
         $out .= $page->id != 1  ? "<span>$page->title</span>" : '';
@@ -104,7 +271,7 @@ function breadCrumb($page = null) {
 /**
  *
  * @param Page|PageArray|null $page
- * @param array|null $opt 
+ * @param array|null $opt
  *
  */
 function pageChildren($page = null, $opt = null) {
@@ -142,11 +309,29 @@ if(isset($opt['random']) && $opt['random'] == true) {
 }
 
 /**
- * 
+ *
+ * https://processwire.com/blog/posts/processwire-3.0.107-core-updates/
+ *
+ * @param Page $item
+ *
+ */
+function articleLinks($page) {
+$out = '';
+$links = $page->links();
+// If another page has links to this page
+if($links->count()) {
+   $out .= "<h3>" . page()->ts['also_like'] . "</h3>";
+   $out .= $links->each("<li><a href={url}>{title}</a></li>") . '<br>';
+ }
+ return $out;
+}
+
+/**
+ *
  * Smart SEO
- * 
+ *
  * @param Page $page
- * 
+ *
  */
 function smartSeo($page) {
 
@@ -154,7 +339,7 @@ function smartSeo($page) {
 if(!page()->opt['smart_seo']) return '';
 
 // Reset variables
-$out = ''; 
+$out = '';
 $tw_image = '';
 
 // https://processwire.com/blog/posts/processwire-2.6.18-updates-pagination-and-seo/
@@ -188,7 +373,7 @@ $locale = page()->opt['locale'];
     $out .= "\t<meta id='og-url' property='og:url' content='{$canonicalURL}'/>\n";
     $out .= "\t<meta property='og:site_name' content='{$page->opt['s_name']}'/>\n";
 
-// Article Seo    
+// Article Seo
 if($page->parent == page()->opt['blog_p']) {
 
     $out .= "\t<meta property='article:published_time' content='" . datetime()->date('c',$page->published) . "'/>\n";
@@ -206,21 +391,21 @@ if($page->parent == page()->opt['blog_p']) {
 
 // If Page Images
 if( $page->images && count($page->images) ) {
-        
-// Get large size ( 1200px ) 
+
+// Get large size ( 1200px )
         $large = page()->opt['large'];
     // Get image width
         $img = $page->images->first()->width($large);
-    // Show Image    
+    // Show Image
         $out .= "\t<meta id='og-image' property='og:image' content='{$img->httpUrl()}'/>\n";
-    // Image Size    
+    // Image Size
         $out .= "\t<meta property='og:image:width' content='$img->width'/>\n";
         $out .= "\t<meta property='og:image:height' content='$img->height'/>\n";
     // TWITTER CARD IMAGE
         $tw_image = "\t<meta name='twitter:image' content='{$img->httpUrl()}'/>\n";
 }
 
-// Simple Twitter Card 
+// Simple Twitter Card
 if(page()->opt['enable_tw']) {
 
     $tw_summary = page()->opt['large_image'] ? 'summary_large_image' : 'summary';
@@ -238,18 +423,18 @@ $out .= "\t<link rel='canonical' href='{$canonicalURL}'/>\n";
 }
 
 /**
- * 
+ *
  * Google Webmaster Tools Verification Code
- * 
- * @param string|null $code 
- * 
+ *
+ * @param string|null $code
+ *
  */
 function gwCode($code = null) {
 if($code) return "<meta name='google-site-verification' content='$code' />\n";
 }
 
 /**
- * 
+ *
  * // Basic Example ( also example is inside /render/grid.php )
  *  echo icon('user',[
  *  'height' => 40,
@@ -257,22 +442,22 @@ if($code) return "<meta name='google-site-verification' content='$code' />\n";
  *  'stroke' => 4,
  *  'color' => '#201f27',
  *  'text' => __('Hello'),
- *  'html_el' => 'h1', // html elements like h1 h2 h3 h4 h5 span p ... 
+ *  'html_el' => 'h1', // html elements like h1 h2 h3 h4 h5 span p ...
  *  // 'before' => true,
  *  'url'=>  'https://feathericons.com/',
- *  't_url' => true, // <a href='#' target='_blank'  
+ *  't_url' => true, // <a href='#' target='_blank'
  *  'class' => 'custom-class',
  *  ]);
- * 
+ *
  * @param string|null $icon
  * @param array|null $opt
- * 
+ *
  */
 function icon($icon = null, $opt = null) {
 
 if($icon == null) return '';
-    
-// Reset variables    
+
+// Reset variables
 
     $out = '';
 
@@ -297,10 +482,10 @@ if($icon == null) return '';
 
     // Show Custom Text Before
     if (isset($opt['before']) && $opt['before'] == true) $out .= $txt;
-        
-            $out .= "<i data-feather='$icon' 
-            width=$width 
-            height=$height 
+
+            $out .= "<i data-feather='$icon'
+            width=$width
+            height=$height
             stroke-width=$stroke
             color=$color>
             </i>";
@@ -317,15 +502,15 @@ if($icon == null) return '';
                 $out .= "</a>";
 
         }
-    
+
         return $out;
 }
 
 /**
- * 
+ *
  * Example usage
  * ~~
- * echo catTag(pages('/categories/'), 
+ * echo catTag(pages('/categories/'),
  *   [
  *     'txt' => __('Categories'),
  *      //  'txt_clear' => true, // Show Only Text without <a href''><h3></h3></a>
@@ -336,9 +521,9 @@ if($icon == null) return '';
  *     'random' => false, // Sort Random
  *     'dis_count' => false
  *   ]);
- * 
+ *
  * @param Page|null $item
- * @param array|null $opt 
+ * @param array|null $opt
  *
  */
 function catTag($item = null, $opt = null) {
@@ -364,7 +549,7 @@ if(wire('page')->id == $item->id) return '';
 // Class <ul
     $ul_cl = isset($opt['ul_cl']) ? $opt['ul_cl'] : 'ct-ul';
 // Class <li
-    $li_cl = isset($opt['li_cl']) ? $opt['li_cl'] : 'ct-li';    
+    $li_cl = isset($opt['li_cl']) ? $opt['li_cl'] : 'ct-li';
 // Basic Class element <a
     $class = isset($opt['class']) ? $opt['class'] : 'cat-tag-class';
 
@@ -377,7 +562,7 @@ if(isset($opt['txt_clear'])) {
 
     $out .= "<a href='$item->url'><h3>$txt</h3></a>";
 
-}    
+}
 
     $out .= "<ul class='page-children $item->name $ul_cl'>";
 
@@ -393,8 +578,8 @@ foreach ($item->children("limit=$limit, $random, start=0") as $child) {
             if($count != 0) {
 
                $out .= "<li class='$li_cl'>
-                            <a class='$class' 
-                                href='$child->url'>$child->title $c_txt  
+                            <a class='$class'
+                                href='$child->url'>$child->title $c_txt
                             </a>
                         </li>";
             }
@@ -410,7 +595,7 @@ foreach ($item->children("limit=$limit, $random, start=0") as $child) {
  * @param array $fonts
  *
  */
-function googleFonts(array $fonts) {
+function googleFonts($fonts) {
 
 // Implode to format => 'Roboto','Montserrat','Limelight','Righteous'
 $font_family = "'" . implode("','", $fonts) . "'";
@@ -436,9 +621,9 @@ WebFontConfig = {
 }
 
 /**
- * 
+ *
  * START PAGINATION https://processwire.com/api/modules/markup-pager-nav/
- * 
+ *
  * @param Page $items
  * @param string|null $class
  *
@@ -522,7 +707,7 @@ function renderNavTree($items, $maxDepth = 0, $fieldNames = '', $class = 'nav') 
  *
  */
 function cookieBanner(array $info) {
-    
+
 $message = isset($info['message']) ? $info['message'] : __('Privacy & Cookies Policy.');
 $dismiss = isset($info['dismiss']) ? $info['dismiss'] : __('Got it!');
 $link = isset($info['link']) ? $info['link'] : __('Learn More');
@@ -554,9 +739,9 @@ window.cookieconsent.initialise({
 }
 
 /**
- * 
+ *
  * https://developers.google.com/analytics/devguides/collection/analyticsjs/
- * 
+ *
  * @param string $code Google Analytics Tracking Code
  *
  */
@@ -574,11 +759,11 @@ return "\n
 }
 
 /**
- * 
+ *
  * @param Page|null $item
  * @param array $opt
- * 
- */    
+ *
+ */
 function imgDemo($item, $opt = null) {
 
 $out = '';
@@ -591,9 +776,9 @@ $out .="<img class='center lazy'
         data-src='{$item->images->first->url}'
         alt='{$item->description}'
         width='$width' height='$height'>";
-        
+
 } else {
-        
+
 // Home Page Random images from https://picsum.photos/
 if(isset($opt['random']) && $opt['random'] == true) {
     $width = '3' . rand(1,4) . '0';
@@ -611,21 +796,21 @@ return $out;
 }
 
 /**
- * 
+ *
  * Prev Next Button
  * Basic Example echo prNx($page, 'grid')
  *
  * @param Page|null $item
  * @param string $class
- * 
+ *
  */
 function prNx($item = null, $class = 'prev-next') {
 
-// Prev Next Button    
+// Prev Next Button
     $p_next = $item->next();
     $p_prev = $item->prev();
 
-$out = '';    
+$out = '';
 
 $out .= "<div class='$class'>";
 
@@ -658,7 +843,7 @@ $out .= '</div>';
 }
 
  /**
- * 
+ *
  * Comments + Pagination
  * @param Page $page
  * @param int $limit
@@ -666,7 +851,7 @@ $out .= '</div>';
  */
 function blogComments($page, $limit = 12) {
 
-if (!$page->comments) return ''; 
+if (!$page->comments) return '';
 
 // Translatable Strings
 $cite = page()->ts['cite'];
@@ -734,11 +919,11 @@ return $comm;
 }
 
 /**
- * 
+ *
  * TRASH DEMO DATA => USAGE: trashDemoData($trash = true);
- * 
+ *
  * @param  bool $trash
- * 
+ *
 */
 function trashDemoData($trash = false) {
     // IF TRUE

@@ -1,11 +1,12 @@
-<?php namespace ProcessWire; 
-if ($input->urlSegment(3)) throw new Wire404Exception(); 
+<?php namespace ProcessWire;
+if ($input->urlSegment(3)) session()->redirect(pages('http404')->url);
 
 if ($input->urlSegment(1)) {
 
   if(!is_numeric($input->urlSegment(1)) or !is_numeric($input->urlSegment(2))){
 
-      throw new Wire404Exception();
+      session()->redirect(pages('http404')->url);
+      // throw new Wire404Exception();
   }
 
 }?>
@@ -14,7 +15,7 @@ if ($input->urlSegment(1)) {
 
 <form action="./">
 
-<?php 
+<?php
 echo icon('archive', // https://feathericons.com/
   [
     'txt' => page()->ts['s_archives'],
@@ -28,7 +29,6 @@ echo icon('archive', // https://feathericons.com/
 <?php
 $blog_p = page()->opt['blog_p'];
 $startDate = page()->opt['basic_start_date']; // or whenever you want it to end
-
 // $startYear = date("Y"); // this year
 $endDate = date("Y"); // this year
 $now = time();
@@ -45,9 +45,7 @@ for($year = $endDate; $year >= $startDate; $year--) {
        $url = $page->url . date("Y",$startTime) . "/" . date("m",$startTime) . '/';
        $count = count($entries);
        if($count > 0) {
-           
            echo "<option value='$url'>$date - ($count)</option>";
-
        }
    }
 } ?>
@@ -56,17 +54,16 @@ for($year = $endDate; $year >= $startDate; $year--) {
 
 </form>
 
-<?php
-//GET URL SEGMENT
-     $y = $input->urlSegment(1);
-     $m = $input->urlSegment(2);
+<?php //GET URL SEGMENT
+$y = $input->urlSegment(1);
+$m = $input->urlSegment(2);
 $date_s = "$y/$m/01";
 $date_e = "$y/$m/31";
 $page_f = $pages->find("template=blog-post, date>=$date_s, date<=$date_e, sort=-date, limit=12");
 
-if($y !=''){
+if($y){
 
-  if(count($page_f) == 0) throw new Wire404Exception();
+if(count($page_f) == 0) session()->redirect(pages('http404')->url);
 
   echo "<h3>" . page()->ts['date'] . " -- $y/$m </h3>";
 }

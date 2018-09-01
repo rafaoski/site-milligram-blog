@@ -1,5 +1,5 @@
 <?php namespace ProcessWire;
-// Get Pages if Has Categories 
+// Get Pages if Has Categories
 $posts = page()->opt['blog_p']->children("tags=$page, limit=16");?>
 
 <div id='content-body' class="category grid" pw-prepend>
@@ -12,7 +12,7 @@ $posts = page()->opt['blog_p']->children("tags=$page, limit=16");?>
 
 <h3><?=$post->title?></h3>
 
-<?php // View a replacement image from https://picsum.photos/ 
+<?php // View a replacement image from https://picsum.photos/
 
 if(page()->opt['demo_img']) {
 
@@ -32,11 +32,7 @@ if(page()->opt['demo_img']) {
 
 <div class="entry-footer m-1">
 
-  <?php wireIncludeFile('inc/_entry-footer',
-  [
-      'item' => $post,
-
-  ]);?>
+  <?=entryFooter($post);?>
 
 </div>
 
@@ -47,4 +43,4 @@ if(page()->opt['demo_img']) {
 // Basic Pagination + custom CSS class 'grid'
 echo basicPagination($posts, 'container grid');?>
 
-</div><!-- /#content-body --> 
+</div><!-- /#content-body -->

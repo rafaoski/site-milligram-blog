@@ -1,5 +1,4 @@
 <?php namespace ProcessWire;
-
 // Show Home page Children
 echo pageChildren(pages(1),
     [
@@ -9,16 +8,16 @@ echo pageChildren(pages(1),
 );
 
 // Get Categories
-echo catTag(page()->opt['cat_p'], 
+echo catTag(page()->opt['cat_p'],
     [
       // 'txt' => __('Categories'),
         'limit' => 9,
         'random' => true // Randomize Items
-    ] 
+    ]
 );
 
-// Get Tags     
-echo catTag(page()->opt['tag_p'], 
+// Get Tags
+echo catTag(page()->opt['tag_p'],
     [
       // 'txt' => __('Tags'),
         'limit' => 8,
@@ -27,5 +26,5 @@ echo catTag(page()->opt['tag_p'],
         'class' => 'button button-outline', // Element <a class='button button-outline',
         'random' => true, // Randomize Items
         'dis_count' => true // hide Count Down
-    ] 
+    ]
 );

@@ -1,29 +1,42 @@
-<?php namespace ProcessWire;?>
+<?php namespace ProcessWire;
+// If page has children
+if(!count($items)) return '';
+// If more text
+if(isset($more)) echo "<h3>$more</h3>";
+// If isset container
+if(isset($container_class)) echo "<div class='$container_class'>";
 
-<h3><?=$title;?></h3>
+// Get Items
+foreach ($items as $child): ?>
 
-<div class="grid">
+  <div class='<?=$class?>'>
 
-<?php foreach ($items as $item):?>
+    <a href="<?=$child->url?>">
 
-<a class="col-4_sm-12" href='<?=$item->url?>'>
+      <h4><?=$child->title?></h4>
 
-    <h4><?=$item->title?></h4>
+      <?php // View a replacement image from https://picsum.photos/
 
-    <?php // View a replacement image from https://picsum.photos/ 
+        if(page()->opt['demo_img']) {
+          echo imgDemo($child);
+        } else {
+          echo $child->render('images', 'img-small');
+        }
 
-    if(page()->opt['demo_img']) {
+        if( $page->name == page()->opt['news_p']->name ) {
+          echo "<p><b> -- <small>" . date("F j, Y, g:i a", $child->created) . "</small></b><br>";
+          echo $child->render('body','txt-small') . '</p>';
+        }
+      ?>
 
-      echo imgDemo($item);
+    </a>
 
-    } else {
+  </div><!-- /.news-item -->
 
-      echo $item->render('images', 'img-small');
+<?php endforeach;
 
-    }?>
+// If isset container
+if(isset($container_class)) echo "</div>";
 
-</a>
-
-<?php endforeach; ?>
-
-</div>
+// https://processwire.com/api/modules/markup-pager-nav/
+echo basicPagination($items, 'container grid');

@@ -1,8 +1,5 @@
 <?php namespace ProcessWire;
-
-if(!page()->opt['enable_cf']) return '';
-
-// Translate    
+// Translate
   $c_u = page()->ts['c_u'];
   $l_name = page()->ts['l_name'];
   $l_email = page()->ts['l_email'];
@@ -15,11 +12,11 @@ if(!page()->opt['enable_cf']) return '';
   $m_subj = page()->ts['m_subj'];
 
 if($input->post->submit) :
- 
+
 if($input->firstname) {
 
     $session->Message = '<h3>' . $s_wrong . "</h3>";
-    session()->redirect('./http404');   
+    session()->redirect('./http404');
 
 }
 if($session->CSRF->hasValidToken()) {
@@ -48,16 +45,16 @@ if($m_name && $m_from  && $m_message) {
 
 // $bool = $mail->mailHTML($to, string $subject, $messageHTML, array $headers = []);
 
-  // $mail->mailHTML($your_mail, $m_subj, 
+  // $mail->mailHTML($your_mail, $m_subj,
   // [
   //   'bodyHTML' => $html,
   //   'from' => $m_from
   // ]);
-  
-// If Enable Save Messages 
+
+// If Enable Save Messages
 if(page()->opt['save_message'] == true) {
 
-// Parent Page ( Contact Page )  
+// Parent Page ( Contact Page )
   $c_parent = page()->opt['c_parent'];
 // Contact Items
   $c_item = page()->opt['c_item'];
@@ -134,33 +131,33 @@ $tokenValue = $this->session->CSRF->getTokenValue(); ?>
 
 </form>
 
-<?php 
+<?php
 // Get Phone Number
 $phone_nr = $sanitizer->text(page()->opt['c_phone']);
 // Get Mail
 $c_mail = $sanitizer->email(page()->opt['c_mail']);
 
 echo icon('phone',
-[
-'txt' => $phone_nr . '<br>',  
-'url' =>  "tel:$phone_nr",
-'width' => 30,
-'height' => 30,
-'color' => '#9b4dca',
-'stroke' => 1
-]);
+  [
+    'txt' => $phone_nr . '<br>',
+    'url' =>  "tel:$phone_nr",
+    'width' => 30,
+    'height' => 30,
+    'color' => '#9b4dca',
+    'stroke' => 1
+  ]);
 
 echo icon('mail',
-[
-'txt' => $c_mail,  
-'url' =>  "mailto:$c_mail",
-'width' => 30,
-'height' => 30,
-'color' => '#9b4dca',
-'stroke' => 1
-]);
+  [
+    'txt' => $c_mail,
+    'url' =>  "mailto:$c_mail",
+    'width' => 30,
+    'height' => 30,
+    'color' => '#9b4dca',
+    'stroke' => 1
+  ]);
 
- } 
+ }
   endif;
     // Remove Session Message
     $session->remove('Message');

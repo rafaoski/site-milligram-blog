@@ -1,12 +1,6 @@
-<?php namespace ProcessWire; 
-// _main.php template file, called after a page’s template file
+<?php namespace ProcessWire; // _main.php template file, called after a page’s template file
 // trashDemoData('false'); // Put unnecessary pages into the trash ( change to true ) !!!
-
-// Get Homepage
-$home = page()->opt['home']; 
-
-// ( Include header ) https://processwire.com/blog/posts/processwire-2.5.2/
-wireIncludeFile("inc/_head", ['home' => $home]);?>
+wireIncludeFile("inc/_head"); // ( Include header )?>
 
 <!-- MAIN CONTENT -->
 <main id='main' class='container-medium'>
@@ -16,7 +10,7 @@ wireIncludeFile("inc/_head", ['home' => $home]);?>
         <!-- CONTENT -->
         <div id='content' class='col-9_md-12 c-page'>
 
-        <?php if(page()->template != 'home'):?>
+           <?php if(page()->template != 'home'):?>
 
             <!-- HEADING -->
             <h1 id='content-head'>
@@ -25,7 +19,7 @@ wireIncludeFile("inc/_head", ['home' => $home]);?>
 
             </h1>
 
-        <?php endif; ?>
+           <?php endif; ?>
 
             <!-- CONTENT BODY -->
             <div id='content-body' class='c-body'>
@@ -39,12 +33,7 @@ wireIncludeFile("inc/_head", ['home' => $home]);?>
         <!-- SIDEBAR -->
         <aside id='sidebar' class='col sid'>
 
-            <?php // Include Multi Language Menu
-                wireIncludeFile("inc/_lang-menu",
-                    [ // Get Homepage
-                        'home' => $home,
-                        'menu_class' => 'lang-menu grid' // <ul class='lang-menu grid'
-                    ]);?>
+            <?=langMenu($page,pages('/'))?>
 
             <!-- SEARCH FORM  -->
             <form id='search' class='s-form' action='<?=pages()->get('template=search')->url?>' method='get'>
@@ -53,21 +42,14 @@ wireIncludeFile("inc/_head", ['home' => $home]);?>
 
             </form>
 
-            <?php // Show Sidebar 
-               echo page()->sidebar?>
-
-            <div id="page-children">
-
-            <?php // Include file
-                wireIncludeFile('inc/_page-children');?>
-
-            </div><!-- /#page-children -->
-
-            <?php // Include archives Form
+            <?php // Show Sidebar
+                echo page()->sidebar;
+            // Include sidebar links
+                wireIncludeFile('inc/_links');
+            // Include archives
                 wireIncludeFile("inc/_archives");
-
             // Include contact form
-                wireIncludeFile("inc/_c-form");?>
+                if(page()->opt['enable_cf']) wireIncludeFile("inc/_c-form");?>
 
         </aside><!-- /#sidebar -->
 
@@ -75,5 +57,4 @@ wireIncludeFile("inc/_head", ['home' => $home]);?>
 
 </main>
 
-<?php // ( Include footer ) https://processwire.com/blog/posts/processwire-2.5.2/
-    wireIncludeFile("inc/_foot"); // Include Footer
+<?php wireIncludeFile("inc/_foot"); // ( Include footer )
