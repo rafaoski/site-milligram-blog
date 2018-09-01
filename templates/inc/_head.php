@@ -4,7 +4,7 @@
 <head id='html-head'>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="<?=page()->opt['favicon_url'];?>"/>
+    <link rel="icon" href="<?=page()->opt['favicon_url'];?>"/>
 	<title id='html-title'><?=page('headline|title');?></title>
 	<meta name="description" content="<?=page()->summary;?>">
 <?php // Smart Seo
