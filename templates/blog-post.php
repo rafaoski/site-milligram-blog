@@ -9,7 +9,7 @@
 </div><!-- /.entry-header -->
 
 <?php // View a replacement image from https://picsum.photos/
-if(page()->opt['demo_img']) {
+if(page()->opt['demoImage']) {
 
   echo imgDemo(page());
 
@@ -30,7 +30,7 @@ echo prNx($page, 'grid-center');
 // https://processwire.com/blog/posts/processwire-3.0.107-core-updates/
 echo articleLinks($page);
 // If enable comments ( _options.php )
-if( page()->opt['enable_comments'] == true ) {
+if( page()->opt['enableComments'] == true ) {
 // Basic Comments + pagination
 echo blogComments($page, 16);
 }?>
@@ -43,7 +43,7 @@ echo blogComments($page, 16);
 
 </div><!-- /#page-children -->
 
-<?php if(page()->comments && page()->opt['enable_comments'] == true):?>
+<?php if(page()->comments && page()->opt['enableComments'] == true):?>
 
 <pw-region id='bottom-region'>
 

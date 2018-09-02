@@ -39,7 +39,7 @@ unset($q);?>
 	if(count($matches)) {
 		
 		// yes we did, render them
-		echo sprintf(page()->ts['found_matches'],count($matches));
+		echo sprintf(page()->ts['foundMatches'],count($matches));
 
 		foreach ($matches as $key) {
 			$out = '<ul>';
@@ -48,7 +48,7 @@ unset($q);?>
 		}
 	} else {
 		// we didn't find any
-		echo "<h3>" . page()->ts['no_results'] . "</h3>";
+		echo "<h3>" . page()->ts['noResults'] . "</h3>";
 	}
 	?>
 </div>

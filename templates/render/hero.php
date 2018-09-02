@@ -2,7 +2,7 @@
 
 if($enable == false) return '';
 
-$intro = isset($intro) ? explode(" ", $intro) : explode(" ", page()->ts['add_hero']);?>
+$intro = isset($intro) ? explode(" ", $intro) : explode(" ", page()->ts['addHero']);?>
 
 <section id="<?=$id?>" class="<?=$class?>" pw-after="header">
 
@@ -37,11 +37,11 @@ $intro = isset($intro) ? explode(" ", $intro) : explode(" ", page()->ts['add_her
 
     <br>
    
-      <small><?= $first_txt . " <a href='$b_url'>" . $next_txt . " </a>" . $last_txt . ' ' ;?>
+      <small><?= $heroTxtFirst . " <a href='$heroUrl'>" . $heroTxtNext . " </a>" . $heroTxtLast . ' ' ;?>
       
           <?=icon($icon,
           [
-            'url' => $icon_url,
+            'url' => $iconUrl,
             'width' => 30,
             'height' => 30,
             'color' => 'red'

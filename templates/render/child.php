@@ -17,13 +17,13 @@ foreach ($items as $child): ?>
 
       <?php // View a replacement image from https://picsum.photos/
 
-        if(page()->opt['demo_img']) {
+        if(page()->opt['demoImage']) {
           echo imgDemo($child);
         } else {
           echo $child->render('images', 'img-small');
         }
 
-        if( $page->name == page()->opt['news_p']->name ) {
+        if( $page->name == page()->opt['newsPage']->name ) {
           echo "<p><b> -- <small>" . date("F j, Y, g:i a", $child->created) . "</small></b><br>";
           echo $child->render('body','txt-small') . '</p>';
         }

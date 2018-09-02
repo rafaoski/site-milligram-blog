@@ -9,26 +9,26 @@ $saveMessage = isset($saveMessage) ? $saveMessage : '';
 $contactPage = isset($contactPage) ? $contactPage : '';
 $contactItem = isset($contactItem) ? $contactItem : '';
 // Translate
-$c_u = page()->ts['c_u'];
-$l_name = page()->ts['l_name'];
-$l_email = page()->ts['l_email'];
-$l_message = page()->ts['l_message'];
-$l_success = page()->ts['l_success'];
-$s_wrong = page()->ts['s_wrong'];
+$contactUs = page()->ts['contactUs'];
+$labelName = page()->ts['labelName'];
+$labelEmail = page()->ts['labelEmail'];
+$labelMessage = page()->ts['labelMessage'];
+$labelSuccess = page()->ts['labelSuccess'];
+$somethingWrong = page()->ts['somethingWrong'];
 $submit = page()->ts['submit'];
 $reset = page()->ts['reset'];
-$show_form = page()->ts['show_form'];
+$showForm = page()->ts['showForm'];
 
 // Get Phone Number
-$phoneNumber = $sanitizer->text(page()->opt['c_phone']);
+$phoneNumber = $sanitizer->text(page()->opt['contactPhone']);
 // Get Mail
-$contactMail = $sanitizer->email(page()->opt['c_mail']);
+$contactMail = $sanitizer->email(page()->opt['contactMail']);
 
 if($input->post->submit) :
 
 if($input->firstname) {
 
-    session()->Message = '<h3>' . $s_wrong . "</h3>";
+    session()->Message = '<h3>' . $somethingWrong . "</h3>";
     session()->redirect('./http404');
 
 }
@@ -42,10 +42,10 @@ if($m_name == false) return '';
 
 if($m_name && $m_from  && $m_message) {
     $html = "<html><body>
-                  <h1>$l_success</h1>
-                  <h3>$l_name: $m_name</h3>
-                  <h3>$l_email: $m_from</h3>
-                  <p><b>$l_message:</b> $m_message</p>
+                  <h1>$labelSuccess</h1>
+                  <h3>$labelName: $m_name</h3>
+                  <h3>$labelEmail: $m_from</h3>
+                  <p><b>$labelMessage:</b> $m_message</p>
              </body></html>";
 
     $m = wireMail();
@@ -80,10 +80,10 @@ if( $saveMessage == true) {
 }
 // Session Message
 session()->Message ="<blockquote>
-<h4 class='success'>$l_success</h4>
-<h5>$l_name: $m_name</h5>
-<h5>$l_email:  $m_from</h5>
-<p>$l_message: $m_message</p></blockquote>";
+<h4 class='success'>$labelSuccess</h4>
+<h5>$labelName: $m_name</h5>
+<h5>$labelEmail:  $m_from</h5>
+<p>$labelMessage: $m_message</p></blockquote>";
 //finally redirect user
 session()->redirect('./');
 } else {
@@ -91,7 +91,7 @@ session()->redirect('./');
 }
 // IF CSRF TOKEN NOT FOUND
 } else {
-    $session->Message = '<h3>' . $s_wrong . "</h3>";
+    $session->Message = '<h3>' . $somethingWrong . "</h3>";
     session()->redirect('./http404');
 }
 
@@ -100,21 +100,21 @@ else :
 if ($session->Message) {
 
     echo $session->Message;
-    echo "<a href='./' class='button'>$show_form</a>";
+    echo "<a href='./' class='button'>$showForm</a>";
 
 } else {
 
 $tokenName = $this->session->CSRF->getTokenName();
 $tokenValue = $this->session->CSRF->getTokenValue();
 // Form Icons
-$ic_user = icon('user');
-$ic_mail = icon('mail');
+$icontactUsser = icon('user');
+$icontactMail = icon('mail');
 $ic_message = icon('message-circle');
 
 // More Info
 echo icon('navigation',
   [
-    'txt' => " $c_u",
+    'txt' => " $contactUs",
     'width' => 40,
     'height' => 40,
     'color' => '#9b4dca',
@@ -132,18 +132,18 @@ echo "<form id='contact-form' class='c-form' action='./' method='post'>
 		<!-- honeypot fields end -->
 
     <div class='name'>
-      <label class='label-name'>$ic_user</label>
-      <input name='name' placeholder='$l_name' autocomplete='off' type='text' required>
+      <label class='label-name'>$icontactUsser</label>
+      <input name='name' placeholder='$labelName' autocomplete='off' type='text' required>
     </div>
 
     <div class='enmail'>
-      <label class='label-email'>$ic_mail</label>
-      <input name='email' placeholder='$l_email' type='email' required>
+      <label class='label-email'>$icontactMail</label>
+      <input name='email' placeholder='$labelEmail' type='email' required>
     </div>
 
     <div class='message'>
       <label class='label-message'>$ic_message</label>
-      <textarea class='' name='message' placeholder='$l_message' rows='7'  required></textarea>
+      <textarea class='' name='message' placeholder='$labelMessage' rows='7'  required></textarea>
     </div>
 
     <input name='submit' value='$submit' type='submit'>

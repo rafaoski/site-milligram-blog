@@ -8,13 +8,13 @@ echo wireRenderFile("render/hero",
           'intro' =>  page()->title,
           'content' =>  page()->headline,
         // Bottom text and url
-          'first_txt' => page()->ts['first_txt'], 
-          'next_txt' => page()->ts['next_txt'], 
-          'last_txt' => page()->ts['last_txt'], 
-          'b_url' => 'https://processwire.com/',
+          'heroTxtFirst' => page()->ts['heroTxtFirst'], 
+          'heroTxtNext' => page()->ts['heroTxtNext'], 
+          'heroTxtLast' => page()->ts['heroTxtLast'], 
+          'heroUrl' => 'https://processwire.com/',
         // Some Icons
           'icon' => 'github', // https://feathericons.com/
-          'icon_url' => 'https://github.com/processwire',
+          'iconUrl' => 'https://github.com/processwire',
         // id / class  
           'id' => 'hero',
           'class' => 'hero-content'
@@ -27,7 +27,7 @@ echo wireRenderFile("render/hero",
     echo wireRenderFile("render/grid",
       [ 
         'enable' =>  true,
-        'item' => page()->opt['about_p'], // Render from About page
+        'item' => page()->opt['aboutPage'], // Render from About page
         'id' => 'home-grid',
         'class' => 'container-fluid'
       ]);
@@ -36,7 +36,7 @@ echo wireRenderFile("render/hero",
     echo wireRenderFile("render/latest-posts",
       [ 
         'enable' =>  true,
-        'item' => page()->opt['blog_p'], // Render from Blog page
+        'item' => page()->opt['blogPage'], // Render from Blog page
         'heading' => page()->ts['recent'], // Blog Heading
         'id' => 'latest-posts',
         'class' => 'container-fluid'

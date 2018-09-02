@@ -1,12 +1,12 @@
 <?php namespace ProcessWire;
 // $news = pages()->find("parent.name=news, limit=16"); // Example find with name parent page
 // $news = pages()->find("template=basic-page, limit=16"); // Example find with template name
-$news_p = page()->opt['news_p']->name?>
+$newsPage = page()->opt['newsPage']->name?>
 
-<div id='content-body' class="<?=page()->name == $news_p ? 'news grid' : 'basic-page';?>">
+<div id='content-body' class="<?=page()->name == $newsPage ? 'news grid' : 'basic-page';?>">
 
 <?php // If is news Page
-if(page()->name == $news_p) {
+if(page()->name == $newsPage) {
 
 echo wireRenderFile("render/child",
 [
@@ -16,7 +16,7 @@ echo wireRenderFile("render/child",
 
 } else {
 
-if(page()->opt['demo_img']) {
+if(page()->opt['demoImage']) {
 
   echo imgDemo(page());
 
@@ -33,7 +33,7 @@ echo wireRenderFile("render/child",
   'items' => $page->children("limit=12"),
   'container_class' => 'grid',
   'class' => 'col-4_sm-12',
-  'more' => page()->ts['more_pages']
+  'more' => page()->ts['morePages']
 ]);
 
 }?>

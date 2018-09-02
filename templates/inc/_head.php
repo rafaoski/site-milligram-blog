@@ -1,10 +1,10 @@
 <?php namespace ProcessWire;?>
 <!DOCTYPE html>
-<html lang='<?=page()->opt['l_pref'];?>' prefix="og: http://ogp.me/ns#">
+<html lang='<?=page()->ts['languageCode'];?>' prefix="og: http://ogp.me/ns#">
 <head id='html-head'>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="<?=page()->opt['favicon_url'];?>"/>
+    <link rel="icon" href="<?=page()->opt['faviconUrl'];?>"/>
 	<title id='html-title'><?=page('headline|title');?></title>
 	<meta name="description" content="<?=page()->summary;?>">
 <?php // Smart Seo
@@ -13,7 +13,7 @@ echo smartSeo(page());
 echo linkTag(pages('/'),$page);?>
 
    <!-- BASIC STYLESHEET -->
-   <link rel="stylesheet" href="<?=page()->opt['app_css'];?>"/>
+   <link rel="stylesheet" href="<?=page()->opt['appCss'];?>"/>
 
    <!-- CUSTOM STYLE -->
    <style id='head-style'>
@@ -23,7 +23,7 @@ echo linkTag(pages('/'),$page);?>
         }
 
         /* List style for Tags */
-        .page-children.<?=page()->opt['tag_p']->name;?> {
+        .page-children.<?=page()->opt['tagsPage']->name;?> {
             list-style: none;
         }
 
@@ -34,7 +34,7 @@ echo linkTag(pages('/'),$page);?>
             }
     </style>
 
-<?=gwCode(page()->opt['verification_code']);?>
+<?=gwCode(page()->opt['verificationCode']);?>
 </head>
 
 <body id='html-body' class='<?=page()->template?>'>
@@ -48,10 +48,10 @@ echo linkTag(pages('/'),$page);?>
      <?php  // Some Options
         echo burgerNav(pages('/'),
          [
-            'logo_url' => page()->opt['logo_url'],
-		 				// Show Site Name if logo_url is uncomment
-            'alt' => page()->ts['logo_alt'],
-						'brand' => page()->opt['s_name'],
+            'logoUrl' => page()->opt['logoUrl'],
+		 				// Show Site Name if logoUrl is uncomment
+            'alt' => page()->ts['logoAlt'],
+						'brand' => page()->ts['siteName'],
          ]
      )?>
 

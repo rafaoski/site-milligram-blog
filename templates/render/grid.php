@@ -35,7 +35,7 @@ $children = $item->children("limit=4");?>
 
           <div class="bottom-link">
 
-              <a href="<?=$item->url?>"><?=page()->ts['read_m'];?></a>
+              <a href="<?=$item->url?>"><?=page()->ts['readMore'];?></a>
 
           </div>
 
@@ -73,7 +73,7 @@ $children = $item->children("limit=4");?>
             
                       <div class="bottom-link">
 
-                          <a href="<?=$child->url?>"><?=page()->ts['read_m'];?></a>
+                          <a href="<?=$child->url?>"><?=page()->ts['readMore'];?></a>
 
                       </div>
 

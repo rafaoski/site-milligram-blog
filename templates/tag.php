@@ -1,6 +1,6 @@
 <?php namespace ProcessWire;
 // Get Pages if Has Categories
-$posts = page()->opt['blog_p']->children("tags=$page, limit=16");?>
+$posts = page()->opt['blogPage']->children("tags=$page, limit=16");?>
 
 <div id='content-body' class="category grid" pw-prepend>
 
@@ -14,7 +14,7 @@ $posts = page()->opt['blog_p']->children("tags=$page, limit=16");?>
 
 <?php // View a replacement image from https://picsum.photos/
 
-if(page()->opt['demo_img']) {
+if(page()->opt['demoImage']) {
 
     echo imgDemo($post);
 

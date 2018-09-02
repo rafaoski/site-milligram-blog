@@ -29,7 +29,7 @@ $children = $item->children("limit=4,sort=random");?>
 
             <?php // View a replacement image from https://picsum.photos/ 
 
-                if(page()->opt['demo_img']) {
+                if(page()->opt['demoImage']) {
 
                 echo imgDemo($item);
 

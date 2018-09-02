@@ -15,7 +15,7 @@ if ($input->urlSegment(1)) {
 
 <?php echo icon('archive', // https://feathericons.com/
 [
-  'txt' => ' ' . page()->ts['s_archives'],
+  'txt' => ' ' . page()->ts['selectArchives'],
   'color' => '#9b4dca',
   'html_el' => 'h3'
 ]);?>
@@ -24,9 +24,9 @@ if ($input->urlSegment(1)) {
 
   <select name='form' onchange='location = this.options[this.selectedIndex].value;'>
 
-  <option value='#'><?=page()->ts['s_archives'];?></option>
+  <option value='#'><?=page()->ts['selectArchives'];?></option>
 
-    <?=blogArchive(page()->opt['archive_date'],'archives')?>
+    <?=blogArchive(page()->opt['archiveDate'],'archives')?>
 
   </select>
 
@@ -52,7 +52,7 @@ foreach ($page_f as $key) {
 
   echo "<p><blockquote><h4><a href='$key->url'>$key->title</a> -- $key->date</h4>";
 
-  echo "$body <a href='$key->url'>" . page()->ts['read_m'] . "</a></blockquote></p>";
+  echo "$body <a href='$key->url'>" . page()->ts['readMore'] . "</a></blockquote></p>";
 
 }
 // https://processwire.com/api/modules/markup-pager-nav/

@@ -5,56 +5,56 @@ page()->ts = [
 
 // Language => locale / code prefx
 'locale' => _x('en_US', 'HTML locale code'),
-'lang_code' => _x('en', 'HTML language code'),
+'languageCode' => _x('en', 'HTML language code'),
 
 // Main Page ( main.php )
-'site_name' => __('Your Site Name'),
-'logo_alt' => __('Show My Awesome Logo'),
+'siteName' => __('Your Site Name'),
+'logoAlt' => __('Show My Awesome Logo'),
 
 // Archives Page
-'s_archives' => __('Select The Archives'),
+'selectArchives' => __('Select The Archives'),
 'date' => __('Date'),
 
 // Basic
-'read_m' => __('Read More &raquo;'),
-'more_pages' => __('More Pages'),
+'readMore' => __('Read More &raquo;'),
+'morePages' => __('More Pages'),
 'search' => __('Search'),
 'recent' =>  __('Recent Posts'),
 
 // Search Page ( search.php )
-'found_matches' => __("Found %d page(s)."),
-'no_results' => __('Sorry, no results were found.'),
+'foundMatches' => __("Found %d page(s)."),
+'noResults' => __('Sorry, no results were found.'),
 
 // Blog Post ( blog-post.php )
-'also_like' => __('You might also like:'),
+'alsoLike' => __('You might also like:'),
 
 // Hero ( home.php )
-'first_txt' => __('A friendly and powerful open source CMS'),
-'next_txt' => __('Processwire'),
-'last_txt' => __('With an exceptionally strong API -- '),
-'add_hero' => __('Add Hero Text'),
+'heroTxtFirst' => __('A friendly and powerful open source CMS'),
+'heroTxtNext' => __('Processwire'),
+'heroTxtLast' => __('With an exceptionally strong API -- '),
+'addHero' => __('Add Hero Text'),
 
 // Grid ( grid.php )
 'wow' => __(' PROCESSWIRE WOW!!!'),
 
 // Contact Form
-'c_u' => __('Contact Us'),
-'l_name' => __('Name'),
-'l_email' => __('E-Mail'),
-'l_message' => __('Some Message'),
-'l_success' => __('Success !!! Your message has been sent'),
-'s_wrong' => __('Something Wrong !!! Try it again'),
+'contactUs' => __('Contact Us'),
+'labelName' => __('Name'),
+'labelEmail' => __('E-Mail'),
+'labelMessage' => __('Some Message'),
+'labelSuccess' => __('Success !!! Your message has been sent'),
+'somethingWrong' => __('Something Wrong !!! Try it again'),
 'submit' => __('Submit'),
 'reset' => __('Reset'),
-'show_form' => __('Show Form'),
-'m_subj' => __('Mail Subject'),
+'showForm' => __('Show Form'),
+'mailSubject' => __('Mail Subject'),
 
 // Footer ( footer.php )
-'powered_by' => __('Powered by ProcessWire CMS'),
-'edit_page' => __('Edit Page'),
-'p_message' => __('Privacy & Cookies Policy. This website uses cookies to ensure you get the best experience on our website.'),
-'go_it' => __('Got it!'),
-'learn_more' => __('Learn More'),
+'poweredBy' => __('Powered by ProcessWire CMS'),
+'editPage' => __('Edit Page'),
+'privacyMessage' => __('Privacy & Cookies Policy. This website uses cookies to ensure you get the best experience on our website.'),
+'goIt' => __('Got it!'),
+'learnMore' => __('Learn More'),
 
 // BASIC PAGINATION
 'prev' => __('&laquo; Previous'),
@@ -65,15 +65,15 @@ page()->ts = [
 'email' => __('Email'),
 'text' => __('Comment'),
 'submit' => __('Submit'),
-'comments_l' => __('Comments'),
+'commentsLabel' => __('Comments'),
 'added' => __('Added '),
-'in_day' => __(' in day '),
+'inDay' => __(' in day '),
 'reply' => __('Reply'),
 'join' => __('Join The Discussion'),
 'approved' => __('Your comment must be approved by admin'),
 'thanks' => __('Thanks Your comment has been saved'),
 'errors' => __('There were errors and the comment was not approved'),
-'prev_comments' => __('&laquo; Previous Comments'),
-'next_comments' => __('Next Comments &raquo;'),
+'previousComments' => __('&laquo; Previous Comments'),
+'nextComments' => __('Next Comments &raquo;'),
 
 ];

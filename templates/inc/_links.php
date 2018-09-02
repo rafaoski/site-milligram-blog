@@ -8,7 +8,7 @@ echo pageChildren(pages(1),
 );
 
 // Get Categories
-echo catTag(page()->opt['cat_p'],
+echo catTag(page()->opt['categoryPage'],
     [
       // 'txt' => __('Categories'),
         'limit' => 9,
@@ -17,7 +17,7 @@ echo catTag(page()->opt['cat_p'],
 );
 
 // Get Tags
-echo catTag(page()->opt['tag_p'],
+echo catTag(page()->opt['tagsPage'],
     [
       // 'txt' => __('Tags'),
         'limit' => 8,

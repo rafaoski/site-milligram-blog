@@ -52,11 +52,11 @@ $out .= "<!-- Burger-Icon -->
           <div class='b-bun b-bun--bottom'></div>
         </div>";
 
-if(isset($opt['logo_url'])) {
+if(isset($opt['logoUrl'])) {
     $alt = isset($opt['alt']) ? $opt['alt'] : '';
     $out .="<!-- Burger-Logo -->
     <a class='logo' href='{$root->httpUrl}'>
-        <img src='{$opt['logo_url']}'
+        <img src='{$opt['logoUrl']}'
         alt='{$alt}'
         width='91' height='49'/>
     </a>";
@@ -94,7 +94,7 @@ function linkTag($root,$page) {
       // hreflang code for language uses language name from homepage
       $hreflang = $root->getLanguageValue($language, 'name');
 
-      // if($hreflang == 'home') $hreflang = page()->ts['lang_code'];
+      // if($hreflang == 'home') $hreflang = page()->ts['languageCode'];
 
       // output the <link> tag: note that this assumes your language names are the same as required by hreflang.
       $out .= "\t<link rel='alternate' hreflang='$hreflang' href='$url' />\n";
@@ -158,7 +158,7 @@ $out = '';
   ]);
 
   // if page comments
-  if(count($item->comments) && page()->opt['enable_comments'] == true) {
+  if(count($item->comments) && page()->opt['enableComments'] == true) {
 
     $id = $item->comments->last() ? $item->comments->last()->id : '#';
 
@@ -187,7 +187,7 @@ $out = '';
 $out .= icon('grid',
   [
     'txt' => ' | ',
-    'url' => page()->opt['cat_p']->url, // Get Category Page
+    'url' => page()->opt['categoryPage']->url, // Get Category Page
     'color' => '#9b4dca'
   ]);
 
@@ -200,7 +200,7 @@ $out .= icon('grid',
   $out .= icon('tag',
   [
     'txt' => ' | ',
-    'url' => page()->opt['tag_p']->url, // Get Tag Page
+    'url' => page()->opt['tagsPage']->url, // Get Tag Page
     'color' => '#9b4dca'
   ]);
 
@@ -220,7 +220,7 @@ $out .= icon('grid',
  */
 function userInfo(User $user) {
 
-  if(page()->opt['user_info'] == false ) return '';
+  if(page()->opt['userInfo'] == false ) return '';
 
   if($user == '') return '';
 
@@ -283,7 +283,7 @@ $out = '';
 $random = '';
 
 // Default Text
-    $txt = isset($opt['txt']) ? $opt['txt'] : page()->ts['more_pages'];
+    $txt = isset($opt['txt']) ? $opt['txt'] : page()->ts['morePages'];
 
 // Limit Items
     $limit = isset($opt['limit']) ? $opt['limit'] : 8;
@@ -320,7 +320,7 @@ $out = '';
 $links = $page->links();
 // If another page has links to this page
 if($links->count()) {
-   $out .= "<h3>" . page()->ts['also_like'] . "</h3>";
+   $out .= "<h3>" . page()->ts['alsoLike'] . "</h3>";
    $out .= $links->each("<li><a href={url}>{title}</a></li>") . '<br>';
  }
  return $out;
@@ -336,7 +336,7 @@ if($links->count()) {
 function smartSeo($page) {
 
 // Check if Seo is enabled
-if(!page()->opt['smart_seo']) return '';
+if(!page()->opt['smartSeo']) return '';
 
 // Reset variables
 $out = '';
@@ -350,8 +350,8 @@ if(config()->pagerHeadTags) echo "\t" . config()->pagerHeadTags . "\n";
 // https://processwire.com/blog/posts/processwire-2.6.18-updates-pagination-and-seo/#using-a-pagination-view-all-page
 // specify scheme and host statically rather than from $page->httpUrl
 // $canonicalURL = 'https://www.domain.com' . $page->url;
-if(page()->opt['cannonical_url']) {
-    $canonicalURL = page()->opt['cannonical_url'] . $page->url;
+if(page()->opt['cannonicalUrl']) {
+    $canonicalURL = page()->opt['cannonicalUrl'] . $page->url;
 } else {
     $canonicalURL = $page->httpUrl;
 }
@@ -362,19 +362,19 @@ if(input()->pageNum > 1) {
 }
 
 // Type Content ( article, website )
-$content = $page->parent() == page()->opt['blog_p'] ? 'article' : 'website';
+$content = $page->parent() == page()->opt['blogPage'] ? 'article' : 'website';
 
 // Get locale
-$locale = page()->opt['locale'];
+$locale = page()->ts['locale'];
     $out .= "\t<meta property='og:locale' content='{$locale}'/>\n";
     $out .= "\t<meta id='og-title' property='og:title' content='{$page('headline|title')}'/>\n";
     $out .= "\t<meta id='og-desc' property='og:description' content='{$page->summary}'>\n";
     $out .= "\t<meta id='og-type' property='og:type' content='{$content}'/>\n";
     $out .= "\t<meta id='og-url' property='og:url' content='{$canonicalURL}'/>\n";
-    $out .= "\t<meta property='og:site_name' content='{$page->opt['s_name']}'/>\n";
+    $out .= "\t<meta property='og:site_name' content='{$page->ts['siteName']}'/>\n";
 
 // Article Seo
-if($page->parent == page()->opt['blog_p']) {
+if($page->parent == page()->opt['blogPage']) {
 
     $out .= "\t<meta property='article:published_time' content='" . datetime()->date('c',$page->published) . "'/>\n";
     $out .= "\t<meta property='article:modified_time' content='" . datetime()->date('c',$page->modified) . "'/>\n";
@@ -406,9 +406,9 @@ if( $page->images && count($page->images) ) {
 }
 
 // Simple Twitter Card
-if(page()->opt['enable_tw']) {
+if(page()->opt['enableTwitter']) {
 
-    $tw_summary = page()->opt['large_image'] ? 'summary_large_image' : 'summary';
+    $tw_summary = page()->opt['largeImage'] ? 'summary_largeImage' : 'summary';
 
     $out .= "\t<meta name='twitter:card' content='{$tw_summary}'/>\n";
     $out .= "\t<meta name='twitter:title' content='{$page('headline|title')}'/>\n";
@@ -858,16 +858,16 @@ $cite = page()->ts['cite'];
 $email = page()->ts['email'];
 $text = page()->ts['text'];
 $submit = page()->ts['submit'];
-$comments_l = page()->ts['comments_l'];
+$commentsLabel = page()->ts['commentsLabel'];
 $added = page()->ts['added'];
-$in_day = page()->ts['in_day'];
+$inDay = page()->ts['inDay'];
 $reply = page()->ts['reply'];
 $join = page()->ts['join'];
 $approved = page()->ts['approved'];
 $thanks = page()->ts['thanks'];
 $errors = page()->ts['errors'];
-$prev = page()->ts['prev_comments'];
-$next = page()->ts['next_comments'];
+$prev = page()->ts['previousComments'];
+$next = page()->ts['nextComments'];
 
 $comm = '';
 
@@ -875,8 +875,8 @@ $comm = '';
     $comments = $page->comments->slice($start, $limit);
 
     $comm .= $comments->render(array(
-     'headline' => "<h3>" . $comments_l . "</h3>",
-     'commentHeader' => $added . '{cite}' . $in_day . ' {created} {stars} {votes}',
+     'headline' => "<h3>" . $commentsLabel . "</h3>",
+     'commentHeader' => $added . '{cite}' . $inDay . ' {created} {stars} {votes}',
      'dateFormat' => 'm/d/y - H:i',
      'encoding' => 'UTF-8',
     //  'admin' => false, // shows unapproved comments if true
@@ -926,19 +926,19 @@ return $comm;
  */
 function blogArchive($startDate,$where) {
 // Blog Page from _options.php
-$blogPage = page()->opt['blog_p'];
+$blogPage = page()->opt['blogPage'];
 // Reset Form
 $out = '';
 // $startYear = date("Y"); // this year
 $endDate = date("Y"); // this year
 $now = time();
-if($where == 'sidebar' && page() != page()->opt['arch_p']) {
+if($where == 'sidebar' && page() != page()->opt['archivesPage']) {
     $out .= icon('archive', // https://feathericons.com/
     [
-        'txt' => ' ' . page()->ts['s_archives'],
+        'txt' => ' ' . page()->ts['selectArchives'],
         'color' => '#9b4dca',
         'html_el' => 'h3',
-        'url' => page()->opt['arch_p']->url
+        'url' => page()->opt['archivesPage']->url
     ]);
 }
 //CODE FROM => https://processwire.com/talk/topic/263-creating-archives-for-newsblogs-sections/
@@ -950,13 +950,13 @@ if($where == 'sidebar' && page() != page()->opt['arch_p']) {
             else $endTime = strtotime("$year-" . ($month+1) . "-01");
             $entries = $blogPage->children("date>=$startTime, date<$endTime"); // or substitute your own date field
             $date = date("Y-m",$startTime);
-            $url = page()->opt['arch_p']->url . date("Y",$startTime) . "/" . date("m",$startTime) . '/';
+            $url = page()->opt['archivesPage']->url . date("Y",$startTime) . "/" . date("m",$startTime) . '/';
             $count = count($entries);
             if($count > 0) {
             
                 if($where == 'archives') $out .= "<option value='$url'>$date - ($count)</option>";
 
-                if($where == 'sidebar' && page() != page()->opt['arch_p']) {
+                if($where == 'sidebar' && page() != page()->opt['archivesPage']) {
 
                     $out .= "<li><a href='$url'>$date - ($count)</a></li>";
                 }
