@@ -46,7 +46,7 @@ $config->defaultAdminTheme = 'AdminThemeUikit';
  * https://processwire.com/blog/posts/pw-3.0.87/#new-field-template-context-settings
  */
 // $config->advanced = true; // Advanced Configuration
-// $config->demo; // Show demo site
+// $config->demo = true; // Show demo site
 
 // https://processwire.com/blog/posts/pw-3.0.99/
 // Given the above, this week I added a new $config setting that lets you disable all HTTPS requirements that may be present in a site:
