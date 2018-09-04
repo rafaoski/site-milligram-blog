@@ -341,7 +341,8 @@ if(!page()->opt['smartSeo']) return '';
 // Reset variables
 $out = '';
 $tw_image = '';
-
+// No index
+if(page()->check_1) echo "\t<meta name='robots' content='noindex'>\n";
 // https://processwire.com/blog/posts/processwire-2.6.18-updates-pagination-and-seo/
 if(input()->pageNum > 1) echo "\t<meta name='robots' content='noindex,follow'>\n";
 // https://weekly.pw/issue/222/
@@ -366,12 +367,15 @@ $content = $page->parent() == page()->opt['blogPage'] ? 'article' : 'website';
 
 // Get locale
 $locale = page()->ts['locale'];
+// Site Name
+$siteName = page()->opt['optionsPage']->headline ?: page()->ts['siteName'];
+// Basic Meta
     $out .= "\t<meta property='og:locale' content='{$locale}'/>\n";
     $out .= "\t<meta id='og-title' property='og:title' content='{$page('headline|title')}'/>\n";
     $out .= "\t<meta id='og-desc' property='og:description' content='{$page->summary}'>\n";
     $out .= "\t<meta id='og-type' property='og:type' content='{$content}'/>\n";
     $out .= "\t<meta id='og-url' property='og:url' content='{$canonicalURL}'/>\n";
-    $out .= "\t<meta property='og:site_name' content='{$page->ts['siteName']}'/>\n";
+    $out .= "\t<meta property='og:site_name' content='{$siteName}'/>\n";
 
 // Article Seo
 if($page->parent == page()->opt['blogPage']) {
@@ -703,6 +707,15 @@ function renderNavTree($items, $maxDepth = 0, $fieldNames = '', $class = 'nav') 
 
 /**
  *
+ * // Example
+ * echo cookieBanner(
+ * [
+ *    'message' => page()->ts['privacyMessage'],
+ *    'dismiss' => page()->ts['goIt'],
+ *    'link' => page()->ts['learnMore'],
+ *    'href' => page()->opt['privacyPage']->url
+ * ]);
+ * 
  * @param array $info
  *
  */

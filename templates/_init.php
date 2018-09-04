@@ -19,9 +19,9 @@
 
 include_once('./_func.php');
 
-include_once('./_translate.php');
-
 include_once('./_options.php');
+
+include_once('./_translate.php');
 
 // RSS FEED BLOG PAGE ( if installed module rss enable this => http://your-page/blog/rss)
     // if($page->template->name == 'blog' && $input->urlSegment1 == 'rss') {

@@ -1,7 +1,7 @@
 <?php namespace ProcessWire;
 // Enable or disable
 if(isset($enable) && $enable == false) return '';
-
+// Mail To ( Your E-Mail )
 $mailTo = isset($mailTo) ? $mailTo : '';
 // Mail Subject
 $mailSubject = isset($mailSubject) ? $mailSubject : '';
@@ -14,15 +14,19 @@ $labelName = page()->ts['labelName'];
 $labelEmail = page()->ts['labelEmail'];
 $labelMessage = page()->ts['labelMessage'];
 $labelSuccess = page()->ts['labelSuccess'];
+$labelAccept = page()->ts['labelAccept'];
+$labelPrivacy = page()->ts['labelPrivacy'];
 $somethingWrong = page()->ts['somethingWrong'];
+$fillFields = page()->ts['fillFields'];
 $submit = page()->ts['submit'];
 $reset = page()->ts['reset'];
 $showForm = page()->ts['showForm'];
-
+// Privacy Page
+$privacyPage = page()->opt['privacyPage']->url;
 // Get Phone Number
-$phoneNumber = $sanitizer->text(page()->opt['contactPhone']);
+$phoneNumber = isset($phoneNumber) ? $phoneNumber : '';
 // Get Mail
-$contactMail = $sanitizer->email(page()->opt['contactMail']);
+$contactMail = isset($contactMail) ? $contactMail : '';
 
 if($input->post->submit) :
 
@@ -40,7 +44,7 @@ $m_message = $sanitizer->text($input->post->message);
 
 if($m_name == false) return '';
 
-if($m_name && $m_from  && $m_message) {
+if($m_name && $m_from  && $m_message && input()->post->accept_message) {
     $html = "<html><body>
                   <h1>$labelSuccess</h1>
                   <h3>$labelName: $m_name</h3>
@@ -87,7 +91,9 @@ session()->Message ="<blockquote>
 //finally redirect user
 session()->redirect('./');
 } else {
-    echo '<h1>' . page()->ts['f_fill'] . '</h1>';
+// Fill fields correctly  
+    $session->Message = "<h3>$fillFields</h3>";
+    session()->redirect('./');
 }
 // IF CSRF TOKEN NOT FOUND
 } else {
@@ -111,6 +117,8 @@ $icontactUsser = icon('user');
 $icontactMail = icon('mail');
 $ic_message = icon('message-circle');
 
+if(page() != page()->opt['contactPage']) {
+
 // More Info
 echo icon('navigation',
   [
@@ -123,6 +131,8 @@ echo icon('navigation',
     'url' => $contactPage->url,
   ]);
 
+ }
+
 echo "<form id='contact-form' class='c-form' action='./' method='post'>
 
 <input type='hidden' id='_post_token' name='$tokenName' value='$tokenValue'>
@@ -131,48 +141,55 @@ echo "<form id='contact-form' class='c-form' action='./' method='post'>
     <input name='firstname' type='text' id='firstname' class='hide-robot'>
 		<!-- honeypot fields end -->
 
-    <div class='name'>
       <label class='label-name'>$icontactUsser</label>
       <input name='name' placeholder='$labelName' autocomplete='off' type='text' required>
-    </div>
-
-    <div class='enmail'>
+    
       <label class='label-email'>$icontactMail</label>
       <input name='email' placeholder='$labelEmail' type='email' required>
-    </div>
-
-    <div class='message'>
+    
       <label class='label-message'>$ic_message</label>
       <textarea class='' name='message' placeholder='$labelMessage' rows='7'  required></textarea>
-    </div>
+
+      <label class='label-check'>
+      <input class='accept-message' name='accept_message' type='checkbox' placeholder='$labelMessage' required>
+      <small>$labelAccept <a href='$privacyPage'>$labelPrivacy</a>.</small></label>
 
     <input name='submit' value='$submit' type='submit'>
     <button type='reset'>$reset</button>
 
 </form>";
 
+// Show more information on the contact page
+if($phoneNumber) {
+
 // More Info
 echo icon('phone',
   [
-    'txt' => $phoneNumber . '<br>',
+    'txt' => ' ' . $phoneNumber . '<br>',
     'url' =>  "tel:$phoneNumber",
     'width' => 30,
     'height' => 30,
     'color' => '#9b4dca',
-    'stroke' => 1
+    'stroke' => 2
   ]);
+
+}
+
+if($contactMail) {
 
 echo icon('mail',
   [
-    'txt' => $contactMail,
+    'txt' => ' ' . $contactMail,
     'url' =>  "mailto:$contactMail",
     'width' => 30,
     'height' => 30,
     'color' => '#9b4dca',
-    'stroke' => 1
+    'stroke' => 2
   ]);
 
  }
+
+}
   endif;
     // Remove Session Message
     session()->remove('Message');

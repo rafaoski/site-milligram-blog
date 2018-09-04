@@ -4,7 +4,7 @@
 <head id='html-head'>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="<?=page()->opt['faviconUrl'];?>"/>
+    <link rel="icon" href="<?=$options->img_2 ? $options->img_2->url : page()->opt['faviconUrl'];?>"/>
 	<title id='html-title'><?=page('headline|title');?></title>
 	<meta name="description" content="<?=page()->summary;?>">
 <?php // Smart Seo
@@ -45,13 +45,12 @@ echo linkTag(pages('/'),$page);?>
 	<!-- NAV MENU -->
 	<nav id='main-menu' class='grid container-medium'>
 
-     <?php  // Some Options
+     <?php  // Nav Menu
         echo burgerNav(pages('/'),
          [
-            'logoUrl' => page()->opt['logoUrl'],
-		 				// Show Site Name if logoUrl is uncomment
+            'logoUrl' => $options->img_1 ? $options->img_1->url : page()->opt['logoUrl'],
             'alt' => page()->ts['logoAlt'],
-						'brand' => page()->ts['siteName'],
+			'brand' => $options->headline ? $options->headline : page()->ts['siteName'],
          ]
      )?>
 

@@ -8,7 +8,7 @@ page()->ts = [
 'languageCode' => _x('en', 'HTML language code'),
 
 // Main Page ( main.php )
-'siteName' => __('Your Site Name'),
+'siteName' => page()->opt['optionsPage']->headline ?: __('Your Site Name'),
 'logoAlt' => __('Show My Awesome Logo'),
 
 // Archives Page
@@ -44,10 +44,13 @@ page()->ts = [
 'labelMessage' => __('Some Message'),
 'labelSuccess' => __('Success !!! Your message has been sent'),
 'somethingWrong' => __('Something Wrong !!! Try it again'),
+'fillFields' => __('Fill the fields correctly !!!'),
 'submit' => __('Submit'),
 'reset' => __('Reset'),
 'showForm' => __('Show Form'),
 'mailSubject' => __('Mail Subject'),
+'labelAccept' => __('By submitting a query, you accept'),
+'labelPrivacy' => __('privacy policy'),
 
 // Footer ( footer.php )
 'poweredBy' => __('Powered by ProcessWire CMS'),

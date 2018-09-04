@@ -3,24 +3,29 @@
 <!-- FOOTER -->
 <footer id='footer' class='grid container-full p-3'>
 
+<?php // Copyrigt Text
+if($options->txt_1):?>
+
     <!-- COPYRIGHT  -->
     <p id='copyright' class='copy col-5_md-6_sm-12'>
 
         <small class='small'>&copy; <?=date('Y')?> &bull;</small>
 
-        <a href='https://processwire.com'><?=page()->ts['poweredBy'];?></a>
+        <a href='<?=$options->url_1?>' target='_blank'><?=$options->txt_1?></a>
 
     </p><!-- /#copyright -->
 
-<?php if(page()->opt['socialProfile']):?>
+<?php endif;
+// Social Profiles
+if($options->rep_url):?>
 
     <p id="social" class='socila-profiles col-7_md-6_sm-12'>
 
-        <?php foreach (page()->opt['socialProfile'] as $icon => $value) {
+        <?php foreach ($options->rep_url as $icon) {
 
-        echo icon($icon, // Feather Icons
+        echo icon($icon->txt_1, // Feather Icons
             [
-                'url'=> $value,
+                'url'=> $icon->url_1,
                 't_blank' => true,
                 'width' => 40,
                 'height' => 35,
@@ -32,6 +37,12 @@
     </p><!-- /#social -->
 
 <?php endif; ?>
+
+<p><b><?=page()->ts['privacyMessage'];?></b>
+
+<a class='button button-outline' href='<?=page()->opt['privacyPage']->url?>'><?=page()->ts['learnMore']?></a>
+
+</p>
 
 </footer>
 
@@ -83,17 +94,7 @@ echo googleFonts(page()->opt['googleFonts']);
 // GOGLE ANALYTICS CODE
 if(page()->opt['gaCode']) {
 echo gAnalitycs(page()->opt['gaCode']);
-}
-// Privacy Banner
-if(page()->opt['enablePrivacy']) {
-echo cookieBanner(
-    [
-       'message' => page()->ts['privacyMessage'],
-       'dismiss' => page()->ts['goIt'],
-       'link' => page()->ts['learnMore'],
-       'href' => page()->opt['privacyUrl']
-    ]);
-} ?>
+}?>
 
 </body>
 </html>
