@@ -1,8 +1,8 @@
 <?php namespace ProcessWire; // _main.php template file, called after a page’s template file
 // trashDemoData('false'); // Put unnecessary pages into the trash ( change to true ) !!!
-$pageOptions = page()->opt['optionsPage']; // Get options page
+$optionsPage = page()->opt['optionsPage']; // Get options page
 $contactPage = page()->opt['contactPage']; // Get contact page
-wireIncludeFile("inc/_head",['options' => $pageOptions]); // ( Include header )?>
+wireIncludeFile("inc/_head",['options' => $optionsPage]); // ( Include header )?>
 
 <!-- MAIN CONTENT -->
 <main id='main' class='container-medium'>
@@ -69,4 +69,4 @@ wireIncludeFile("inc/_head",['options' => $pageOptions]); // ( Include header )?
 
 </main>
 
-<?php wireIncludeFile("inc/_foot",['options' => $pageOptions]); // ( Include footer )
+<?php wireIncludeFile("inc/_foot",['options' => $optionsPage]); // ( Include footer )
