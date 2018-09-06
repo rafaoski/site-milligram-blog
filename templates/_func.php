@@ -458,6 +458,30 @@ if($code) return "<meta name='google-site-verification' content='$code' />\n";
 }
 
 /**
+ * https://www.addtoany.com/
+ * ADD TO ANY DEFAULT USAGE: echo toAny(); or echo toAny(['t','e'])
+ * @param array $opt
+ * 
+ */
+function toAny($opt=['t','f','g-p','l','r','e','g-m']) {
+    $out = '';
+      $out .= "<!-- AddToAny BEGIN -->
+      <div class='a2a_kit a2a_kit_size_32 a2a_default_style p-1'>
+      <a class='a2a_dd' href='https://www.addtoany.com/share'></a>";
+      if(in_array('f', $opt)) $out .= "<a class='a2a_button_facebook'></a>";
+      if(in_array('t', $opt)) $out .= "<a class='a2a_button_twitter'></a>";
+      if(in_array('g-p', $opt)) $out .= "<a class='a2a_button_google_plus'></a>";
+      if(in_array('l', $opt)) $out .= "<a class='a2a_button_linkedin'></a>";
+      if(in_array('r', $opt)) $out .= "<a class='a2a_button_reddit'></a>";
+      if(in_array('e', $opt)) $out .= "<a class='a2a_button_email'></a>";
+      if(in_array('g-m', $opt)) $out .= "<a class='a2a_button_google_gmail'></a>";
+      $out .= "</div>
+      <script async src='https://static.addtoany.com/menu/page.js'></script>
+      <!-- AddToAny END -->";
+      return $out;
+  }
+
+/**
  *
  * // Basic Example ( also example is inside /render/grid.php )
  *  echo icon('user',[

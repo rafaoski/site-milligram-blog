@@ -4,7 +4,10 @@
 
 <div class='entry-header'>
 
-<?=entryHeader($page);?>
+<?php // Entry Header
+echo entryHeader($page);
+// Add To Any https://www.addtoany.com/
+echo toAny(['t','f','g-p','g-m']);?>
 
 </div><!-- /.entry-header -->
 
