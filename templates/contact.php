@@ -6,7 +6,7 @@ $contactPage = page()->opt['contactPage']; // Get contact page?>
 
 <?php // Include contact form
         wireIncludeFile("inc/_c-form",
-        [   'enable' => true, // Enable or Disable => true or false 
+        [
             'saveMessage' => true, // true or false
             'contactPage' => $contactPage, // Get Contact Page to save items pages('/contact/')
             'contactItem' => 'contact-item', // Template to create item ( It must have a body field )

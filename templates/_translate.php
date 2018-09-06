@@ -21,6 +21,14 @@ page()->ts = [
 'search' => __('Search'),
 'recent' =>  __('Recent Posts'),
 
+// Images
+'strSize' => __("The height %dpx and width %dpx of the Image"),
+'thumbSize' => __("thumb size"),
+'smallSize' => __("small size"),
+'mediumSize' => __("medium size"),
+'largeSize' => __("large size"),
+'fullSize' => __("full size"),
+
 // Search Page ( search.php )
 'foundMatches' => __("Found %d page(s)."),
 'noResults' => __('Sorry, no results were found.'),

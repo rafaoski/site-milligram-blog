@@ -1,7 +1,5 @@
 <?php namespace ProcessWire;
 
-if($enable == false) return '';
-
 $children = $item->children("limit=4");?>
 
 <section id='<?=$id?>' class="<?=$class?>">

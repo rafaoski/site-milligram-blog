@@ -16,16 +16,10 @@ echo wireRenderFile("render/child",
 
 } else {
 
-if(page()->opt['demoImage']) {
+// Show Image
+echo getImage(page(),'medium');
 
-  echo imgDemo(page());
-
-} else {
-
-  echo page()->render('images', 'img-medium');
-
-}
-
+// Body field
 echo page()->body;
 
 echo wireRenderFile("render/child",

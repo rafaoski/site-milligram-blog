@@ -1,7 +1,5 @@
 <?php namespace ProcessWire;
 
-if($enable == false) return '';
-
 $intro = isset($intro) ? explode(" ", $intro) : explode(" ", page()->ts['addHero']);?>
 
 <section id="<?=$id?>" class="<?=$class?>" pw-after="header">

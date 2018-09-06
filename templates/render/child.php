@@ -15,13 +15,8 @@ foreach ($items as $child): ?>
 
       <h4><?=$child->title?></h4>
 
-      <?php // View a replacement image from https://picsum.photos/
-
-        if(page()->opt['demoImage']) {
-          echo imgDemo($child);
-        } else {
-          echo $child->render('images', 'img-small');
-        }
+      <?php // Get Image
+        echo getImage($child,'small');
 
         if( $page->name == page()->opt['newsPage']->name ) {
           echo "<p><b> -- <small>" . date("F j, Y, g:i a", $child->created) . "</small></b><br>";

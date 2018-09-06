@@ -215,28 +215,48 @@ $out .= icon('grid',
 
 /**
  *
+ * @param Page $page
+ * // All Sizes 'thumb','small','medium','large', 'full'(default) 
+ * @param string $size
+ *
+ */
+function getImage($page, $size = 'full') {
+    // View a replacement image from https://picsum.photos/
+    if(page()->opt['demoImage']) {
+    
+      return imgDemo($page);
+    
+    } else {
+    
+      return $page->render('images', "img-$size");
+      
+    }
+}
+
+/**
+ *
  * @param User $uthor
  *
  */
 function userInfo(User $user) {
 
-  if(page()->opt['userInfo'] == false ) return '';
-
-  if($user == '') return '';
-
-  $out = '';
-
-  $out .= "<h3>$user->title</h3>";
-
-  $out .= $user->render('images', 'img-thumb');
-
-  $out .= "<blockquote>$user->headline</blockquote>";
-
-  // $out .= "<p>$user->summary</p>";
-
-  return $out;
-
-}
+    if(!page()->opt['userInfo']) return '';
+  
+    if($user == '') return '';
+  
+    $out = '';
+  
+    $out .= "<h3>$user->title</h3>";
+  
+    $out .= getImage($user,'thumb');
+  
+    $out .= "<blockquote>$user->headline</blockquote>";
+  
+    // $out .= "<p>$user->summary</p>";
+  
+    return $out;
+  
+  }
 
 /**
  *

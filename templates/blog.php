@@ -22,16 +22,7 @@ $posts = page()->children('limit=12');?>
 
 <a href="<?=$post->url?>">
 
-<?php // View a replacement image from https://picsum.photos/
-if(page()->opt['demoImage']) {
-
-  echo imgDemo($post);
-
-} else {
-
-  echo $post->render('images', 'img-small');
-  
-}?>
+<?=getImage($post,'small');?>
 
 </a>
 

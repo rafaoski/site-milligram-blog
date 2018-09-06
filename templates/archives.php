@@ -13,6 +13,8 @@ if ($input->urlSegment(1)) {
 
 <div id='content-body' pw-prepend>
 
+<?=getImage($page,'medium');?>
+
 <?php echo icon('archive', // https://feathericons.com/
 [
   'txt' => ' ' . page()->ts['selectArchives'],

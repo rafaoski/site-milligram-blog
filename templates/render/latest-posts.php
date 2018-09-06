@@ -1,7 +1,5 @@
 <?php namespace ProcessWire;
 
-if($enable == false) return '';
-
 $children = $item->children("limit=4,sort=random");?>
 
 <section id='<?=$id?>' class="<?=$class?>">
@@ -27,17 +25,7 @@ $children = $item->children("limit=4,sort=random");?>
 
             <a href="<?=$item->url?>">
 
-            <?php // View a replacement image from https://picsum.photos/ 
-
-                if(page()->opt['demoImage']) {
-
-                echo imgDemo($item);
-
-                } else {
-
-                echo $item->render('images', 'img-small');
-
-            }?>
+            <?=getImage($item,'small');?>
 
             <h4><?=$item->title?></h4>
      

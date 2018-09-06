@@ -3,14 +3,38 @@
 // render a thumbnail of the first image
 if(count($value)) {
 
-// Get large size ( 1200px ) 
-  $large = page()->opt['large'];
-// Get first image 
-  $image = $value->first()->width($large);
+// Reset  
+$out = '';
 
+// Get large size ( 1200px ) 
+$large = page()->opt['large'];
+
+// Get first image 
+$image = $value->first()->width($large);
+
+// Get size
+$height = $image->height;
+$width = $image->width;
+  
 // Show image
-  echo "<img data-src='$image->url' 
-            class='center lazy' 
-            alt='$image->description'
-            height='$image->height' width='$image->width'>";
+$out .= "<img data-src='$image->url' 
+          class='center lazy' 
+          alt='$image->description'
+          height='$height' width='$width'>";
+
+// Show Image Size            
+if(config()->debug && user()->isSuperuser()) {
+
+// Translatable string  
+$strSize = page()->ts['strSize']; 
+$largeSize = page()->ts['largeSize']; 
+    
+// Image Size  
+$out .= "<blockquote><h4>";
+$out .= icon('image',['stroke' => 2, 'width' => 50, 'height' => 40, 'color' => '#22727' ]);
+$out .= sprintf($strSize,$height,$width)  . " <b>( $largeSize )</b></h4></blockquote>";
+
+}           
+
+return $out;
 }

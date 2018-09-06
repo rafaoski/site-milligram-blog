@@ -12,17 +12,7 @@ $posts = page()->opt['blogPage']->children("tags=$page, limit=16");?>
 
 <h3><?=$post->title?></h3>
 
-<?php // View a replacement image from https://picsum.photos/
-
-if(page()->opt['demoImage']) {
-
-    echo imgDemo($post);
-
-} else {
-
-    echo $post->render('images', 'img-small');
-
-}?>
+<?=getImage($post,'small');?>
 
 </a>
 

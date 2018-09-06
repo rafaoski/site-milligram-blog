@@ -8,14 +8,7 @@
 
 </div><!-- /.entry-header -->
 
-<?php // View a replacement image from https://picsum.photos/
-if(page()->opt['demoImage']) {
-
-  echo imgDemo(page());
-
-} else {
-  
-  echo page()->render('images', 'img-medium');}?>
+<?=getImage($page,'medium');?>
 
 <div class="entry-footer m-1">
 
@@ -37,7 +30,7 @@ echo blogComments($page, 16);
 
 </div><!-- /#content-body -->
 
-<div id="sidebar" class='p-3' pw-prepend>
+<div id="sidebar" pw-prepend>
 
   <?=userInfo(page()->createdUser);?>
 

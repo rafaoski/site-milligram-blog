@@ -1,6 +1,4 @@
 <?php namespace ProcessWire;
-// Enable or disable
-if(isset($enable) && $enable == false) return '';
 // Mail To ( Your E-Mail )
 $mailTo = isset($mailTo) ? $mailTo : '';
 // Mail Subject

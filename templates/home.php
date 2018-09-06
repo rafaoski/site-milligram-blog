@@ -2,7 +2,6 @@
 // Render Hero
 echo wireRenderFile("render/hero",
       [ 
-          'enable' =>  true,
           'height' => 70, // Height Hero Content ( 70vh full screen - not for mobile screens )
         // Intro
           'intro' =>  page()->title,
@@ -26,7 +25,6 @@ echo wireRenderFile("render/hero",
   // Render Grid
     echo wireRenderFile("render/grid",
       [ 
-        'enable' =>  true,
         'item' => page()->opt['aboutPage'], // Render from About page
         'id' => 'home-grid',
         'class' => 'container-fluid'
@@ -34,8 +32,7 @@ echo wireRenderFile("render/hero",
 
  // Render Latest Posts 
     echo wireRenderFile("render/latest-posts",
-      [ 
-        'enable' =>  true,
+      [
         'item' => page()->opt['blogPage'], // Render from Blog page
         'heading' => page()->ts['recent'], // Blog Heading
         'id' => 'latest-posts',
