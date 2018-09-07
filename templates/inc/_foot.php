@@ -54,9 +54,9 @@ if($options->rep_url):?>
 
     </a>
 
-<?php endif; ?>
-
-<?php if(config()->debug && user()->isSuperuser()): // display region debugging info ?>
+<?php endif;
+// Display region debugging info 
+if(config()->debug && user()->isSuperuser()):?>
 
 <section id='debug' class='sec-debug container-fluid'>
 
@@ -64,8 +64,7 @@ if($options->rep_url):?>
 
 </section>
 
-<?php // End Config Debug
-    endif; ?>
+<?php endif; ?>
 
 <!-- Main Scripts -->
 <script defer src="<?=urls()->templates?>dist/main.js"></script>
