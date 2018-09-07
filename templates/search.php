@@ -39,7 +39,7 @@ unset($q);?>
 	if(count($matches)) {
 		
 		// yes we did, render them
-		echo sprintf(page()->ts['foundMatches'],count($matches));
+		echo '<h3>' . sprintf(page()->ts['foundMatches'],count($matches)) . '</h3>';
 
 		echo '<ul>';
 
