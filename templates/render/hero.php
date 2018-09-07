@@ -31,21 +31,25 @@ $intro = isset($intro) ? explode(" ", $intro) : explode(" ", page()->ts['addHero
 
   <p class='p-1'>
 
-      <?=$content?>
+    <?=$content?>
 
     <br>
-   
-      <small><?= $heroTxtFirst . " <a href='$heroUrl'>" . $heroTxtNext . " </a>" . $heroTxtLast . ' ' ;?>
-      
-          <?=icon($icon,
+
+    <small><?php 
+    // First Text
+      echo $heroTxtFirst;
+    // Icon with Text     
+      echo icon($icon,
           [
             'url' => $iconUrl,
+            'txt' => ' ' . $heroTxtNext,
+            'before' => true,
             'width' => 30,
             'height' => 30,
             'color' => 'red'
-          ])?>
- 
-      </small>
+          ]);
+    // Last Text
+      echo $heroTxtLast;?></small>
       
   </p>
 

@@ -39,7 +39,7 @@ page()->ts = [
 // Hero ( home.php )
 'heroTxtFirst' => __('A friendly and powerful open source CMS'),
 'heroTxtNext' => __('Processwire'),
-'heroTxtLast' => __('With an exceptionally strong API -- '),
+'heroTxtLast' => __('With an exceptionally strong API'),
 'addHero' => __('Add Hero Text'),
 
 // Grid ( grid.php )

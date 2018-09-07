@@ -10,10 +10,9 @@ echo wireRenderFile("render/hero",
           'heroTxtFirst' => page()->ts['heroTxtFirst'], 
           'heroTxtNext' => page()->ts['heroTxtNext'], 
           'heroTxtLast' => page()->ts['heroTxtLast'], 
-          'heroUrl' => 'https://processwire.com/',
         // Some Icons
           'icon' => 'github', // https://feathericons.com/
-          'iconUrl' => 'https://github.com/processwire',
+          'iconUrl' => 'https://github.com/processwire/processwire/',
         // id / class  
           'id' => 'hero',
           'class' => 'hero-content'
