@@ -13,7 +13,6 @@ $contactPage = page()->opt['contactPage']; // Get contact page?>
             'contactMail' => $contactPage->email ?: 'user@gmail.com', // Send To Mail ( Bottom Form )
             'phoneNumber' => $contactPage->txt_1 ?: '55-22-36', // Phone Number
             'mailSubject' => page()->ts['mailSubject'], // Mail Subject
-            
         ]);
 
 // If sidebar
