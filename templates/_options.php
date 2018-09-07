@@ -27,17 +27,28 @@ page()->opt = [
 
 /**
  *
- * Enable / Disable => Comments
- *
- */
-'enableComments' => pages('/options/')->check_1,
-
-/**
- *
  * Enable / Disable => User Info in a single blog entry
  *
  */
 'userInfo' => true,
+
+/**
+ *
+ * Options Page => Do not change the options path !!! (/options/)
+ * If you change the language, just change the only title ( Options ) ...
+ * To change the title you have to go to the options template and select
+ * the title field in which you have to change the presentation to visible from the input tab.
+ * Now the title will appear on the options page ...
+ *
+ */
+'optionsPage' => pages('/options/'), // Options Page
+
+/**
+ *
+ * Enable / Disable => Comments
+ *
+ */
+'enableComments' => pages('/options/')->check_1,
 
 /**
  *
@@ -62,8 +73,6 @@ page()->opt = [
 'contactPage' => pages('/contact/'), // Contact Page
 
 'privacyPage' => pages('/privacy-policy/'), // Privacy Page
-
-'optionsPage' => pages('/options/'), // Options Page
 
 /**
  *
