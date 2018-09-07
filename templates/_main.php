@@ -46,7 +46,7 @@ wireIncludeFile("inc/_head",['options' => $optionsPage]); // ( Include header )?
 
             <?php // Show Sidebar
                 echo page()->sidebar;
-            // Include contact form
+                // Include contact form
                 wireIncludeFile("inc/_c-form",
                 [   'saveMessage' => true, // true or false
                     'contactPage' => $contactPage, // Get Contact Page to save items pages('/contact/')

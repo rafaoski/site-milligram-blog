@@ -1,11 +1,9 @@
-<?php namespace ProcessWire; ?>
+<?php namespace ProcessWire; 
+$categories = page()->children("limit=22");?>
 
 <div id='content-body' pw-prepend>
 
-<?php // Show Categories
-$categories = page()->children("limit=22");
-
-foreach ($categories as $category) {
+<?php foreach ($categories as $category) {
 
 // https://processwire.com/blog/posts/processwire-3.0.107-core-updates/
 // get all visible pages referencing this page

@@ -1,11 +1,9 @@
-<?php namespace ProcessWire; ?>
+<?php namespace ProcessWire; 
+$tags = page()->children("limit=42");?>
 
 <div id='content-body' pw-prepend>
 
-<?php // Show Tags
-$tags = page()->children("limit=42");
-
-foreach ($tags as $tag) {
+<?php foreach ($tags as $tag) {
 
 // https://processwire.com/blog/posts/processwire-3.0.107-core-updates/
 // get all visible pages referencing this page

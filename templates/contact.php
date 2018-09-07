@@ -35,12 +35,10 @@ echo page()->body;?>
 <!-- SIDEBAR -->
 <aside id='sidebar'>
 
-    <?php 
-    // Include sidebar links
-        wireIncludeFile('inc/_links');
-    // Show Archives if is not Archive Page archives.php
-        echo '<ul>' . blogArchive(page()->opt['sidebarDate'],'sidebar') . '</ul>';
-    ?>
+<?php // Include sidebar links
+    wireIncludeFile('inc/_links');
+// Show Archives if is not Archive Page archives.php
+    echo '<ul>' . blogArchive(page()->opt['sidebarDate'],'sidebar') . '</ul>';?>
 
 </aside>
 
