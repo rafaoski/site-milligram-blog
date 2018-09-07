@@ -42,9 +42,9 @@ unset($q);?>
 		echo sprintf(page()->ts['foundMatches'],count($matches));
 
 		foreach ($matches as $key) {
-			$out = '<ul>';
-			echo "<li><a href='$key->url'>$key->title</a></li>";
-			$out .= '</ul>';
+
+			echo "<ul><li><a href='$key->url'>$key->title</a></li></ul>";
+			
 		}
 	} else {
 		// we didn't find any
