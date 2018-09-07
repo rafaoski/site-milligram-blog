@@ -41,11 +41,16 @@ unset($q);?>
 		// yes we did, render them
 		echo sprintf(page()->ts['foundMatches'],count($matches));
 
+		echo '<ul>';
+
 		foreach ($matches as $key) {
 
-			echo "<ul><li><a href='$key->url'>$key->title</a></li></ul>";
-			
+			echo "<li><a href='$key->url'>$key->title</a></li>";
+
 		}
+
+		echo '</ul>';
+		
 	} else {
 		// we didn't find any
 		echo "<h3>" . page()->ts['noResults'] . "</h3>";
