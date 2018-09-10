@@ -17,6 +17,11 @@ echo wireRenderFile("render/child",
 // Show Image
 echo getImage(page(),'medium');
 
+// Show Date ( single news )
+if( page()->parent == page()->opt['newsPage'] ) {
+  echo "<p><b> -- <small>" . date("F j, Y, g:i a", $page->created) . "</small></b><br>";
+}
+
 // Body field
 echo page()->body;
 
