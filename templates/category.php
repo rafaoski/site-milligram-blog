@@ -1,10 +1,13 @@
 <?php namespace ProcessWire;
 // Get Pages if Has Categories
-$posts = page()->opt['blogPage']->children("categories=$page, limit=16");?>
+$posts = page()->opt['blogPage']->children("categories=$page, limit=16");
+// No Found
+if(!count($posts)) echo "<h1 id='content-head'>" . page()->ts['noFound'] . "</h1>";?>
 
 <div id='content-body' class="category grid" pw-prepend>
 
-<?php foreach ($posts as $post): ?>
+<?php // Start Loop
+foreach ($posts as $post): ?>
 
 <article class='col-6_sm-12'>
 

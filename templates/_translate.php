@@ -20,6 +20,7 @@ page()->ts = [
 'morePages' => __('More Pages'),
 'search' => __('Search'),
 'recent' =>  __('Recent Posts'),
+'noFound' => __('No items found !!!'),
 
 // Images
 'strSize' => __("The height %dpx and width %dpx of the Image"),
