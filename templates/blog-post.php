@@ -35,6 +35,8 @@ echo blogComments($page, 16);
 
 <aside id="sidebar" pw-append>
 
+<?=userInfo(page()->createdUser);?>
+
 <?php wireIncludeFile("inc/_block-blog");?>
 
 </aside>
