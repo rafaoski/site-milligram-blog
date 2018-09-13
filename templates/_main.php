@@ -52,8 +52,6 @@ wireIncludeFile("inc/_head",['options' => $optionsPage]); // ( Include header )?
                     'contactPage' => $contactPage, // Get Contact Page to save items pages('/contact/')
                     'contactItem' => 'contact-item', // Template to create item ( It must have a body field )
                     'mailTo' => $contactPage->email ?: 'user@gmail.com', // Send To Mail
-                    // 'contactMail' => $contactPage->email ?: 'user@gmail.com', // Send To Mail ( Bottom Form )
-                    // 'phoneNumber' => $contactPage->txt_1 ?: '55-22-36', // Phone Number
                     'mailSubject' => page()->ts['mailSubject'], // Mail Subject
                 ]);
                 // Include sidebar links

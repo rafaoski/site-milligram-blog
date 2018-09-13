@@ -1,5 +1,9 @@
 <?php namespace ProcessWire;
-$contactPage = page()->opt['contactPage']; // Get contact page?>
+// Get Phone Number
+$phoneNumber = page()->txt_1;
+// Get Mail
+$contactMail = page()->email;
+?>
 
 <!-- CONTENT BODY -->
 <div id='content-body'>
@@ -7,25 +11,11 @@ $contactPage = page()->opt['contactPage']; // Get contact page?>
 <?php // Include contact form
         wireIncludeFile("inc/_c-form",
         [   'saveMessage' => true, // true or false
-            'contactPage' => $contactPage, // Get Contact Page to save items pages('/contact/')
+            'contactPage' => page(), // Get Contact Page to save items pages('/contact/')
             'contactItem' => 'contact-item', // Template to create item ( It must have a body field )
-            'mailTo' => $contactPage->email ?: 'user@gmail.com', // Send To Mail
-            'contactMail' => $contactPage->email ?: 'user@gmail.com', // Send To Mail ( Bottom Form )
-            'phoneNumber' => $contactPage->txt_1 ?: '55-22-36', // Phone Number
+            'mailTo' => $contactMail ?: 'user@gmail.com', // Send To Mail
             'mailSubject' => page()->ts['mailSubject'], // Mail Subject
         ]);
-
-// If sidebar
-if(page()->sidebar):?>
-
-    <div class="col map">
-
-    <br>
-        <?php echo page()->sidebar?> 
-
-    </div><!-- /.col map -->
-
-<?php endif; // End if sidebar
 
 // Show basic Body field
 echo page()->body;?> 
@@ -35,15 +25,62 @@ echo page()->body;?>
 <!-- SIDEBAR -->
 <aside id='sidebar'>
 
-<?php // Include sidebar links
-    wireIncludeFile('inc/_links');
-// Show Archives if is not Archive Page archives.php
-    echo '<ul>' . blogArchive(page()->opt['sidebarDate'],'sidebar') . '</ul>';?>
+<?php
+// Show more information ( phone, mail )
+if($phoneNumber) {
 
-</aside>
+// Phone
+    echo icon('phone',
+      [
+        'txt' => ' ' . $phoneNumber . '<br>',
+        'url' =>  "tel:$phoneNumber",
+        'width' => 30,
+        'height' => 30,
+        'color' => '#9b4dca',
+        'stroke' => 2
+      ]);
+    
+}
+// Mail   
+if($contactMail) {
+    
+    echo icon('mail',
+      [
+        'txt' => ' ' . $contactMail,
+        'url' =>  "mailto:$contactMail",
+        'width' => 30,
+        'height' => 30,
+        'color' => '#9b4dca',
+        'stroke' => 2
+      ]);
+    
+}
+?>
+
+<div class="map">
+
+    <?php echo page()->sidebar?> 
+
+</div><!-- /.col map -->
+
+<div class="nore-pages p-1">
+
+<?php // Show Home page Children
+echo pageChildren(pages(1),
+    [
+        'limit'=> 12,
+      //  'random' => true
+    ]
+);
+?>
+
+</div><!-- /.nore-pages -->
+
+</aside><!-- /#sidebar -->
 
 <style id='head-style' pw-append>
 .map iframe {
+    margin-top: 20px;
    width: 100%;
    max-height: 400px;
  }

@@ -21,10 +21,6 @@ $reset = page()->ts['reset'];
 $showForm = page()->ts['showForm'];
 // Privacy Page
 $privacyPage = page()->opt['privacyPage']->url;
-// Get Phone Number
-$phoneNumber = isset($phoneNumber) ? $phoneNumber : '';
-// Get Mail
-$contactMail = isset($contactMail) ? $contactMail : '';
 
 if($input->post->submit) :
 
@@ -156,36 +152,6 @@ echo "<form id='contact-form' class='c-form' action='./' method='post'>
     <button type='reset'>$reset</button>
 
 </form>";
-
-// Show more information on the contact page
-if($phoneNumber) {
-
-// More Info
-echo icon('phone',
-  [
-    'txt' => ' ' . $phoneNumber . '<br>',
-    'url' =>  "tel:$phoneNumber",
-    'width' => 30,
-    'height' => 30,
-    'color' => '#9b4dca',
-    'stroke' => 2
-  ]);
-
-}
-
-if($contactMail) {
-
-echo icon('mail',
-  [
-    'txt' => ' ' . $contactMail,
-    'url' =>  "mailto:$contactMail",
-    'width' => 30,
-    'height' => 30,
-    'color' => '#9b4dca',
-    'stroke' => 2
-  ]);
-
- }
 
 }
   endif;
