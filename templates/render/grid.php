@@ -2,7 +2,7 @@
 
 $children = $item->children("limit=4");?>
 
-<section id='<?=$id?>' class="<?=$class?>">
+<section id='home-grid' class="container-fluid">
 
   <h2><?=$item->headline?></h2>
 

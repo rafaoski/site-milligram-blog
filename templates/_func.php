@@ -981,7 +981,7 @@ return $comm;
  * @param string $where where is location archive ( 'sidebar' or 'archives' )
  *
  */
-function blogArchive($startDate,$where) {
+function blogArchive($startDate) {
 // Blog Page from _options.php
 $blogPage = page()->opt['blogPage'];
 // Reset Form
@@ -989,7 +989,9 @@ $out = '';
 // $startYear = date("Y"); // this year
 $endDate = date("Y"); // this year
 $now = time();
-if($where == 'sidebar' && page() != page()->opt['archivesPage']) {
+
+if(page() != page()->opt['archivesPage']) {
+
     $out .= icon('archive', // https://feathericons.com/
     [
         'txt' => ' ' . page()->ts['selectArchives'],
@@ -997,10 +999,11 @@ if($where == 'sidebar' && page() != page()->opt['archivesPage']) {
         'html_el' => 'h3',
         'url' => page()->opt['archivesPage']->url
     ]);
+
 }
 //CODE FROM => https://processwire.com/talk/topic/263-creating-archives-for-newsblogs-sections/
     for($year = $endDate; $year >= $startDate; $year--) {
-         for($month = 12; $month > 0; $month--) {
+        for($month = 12; $month > 0; $month--) {
             $startTime = strtotime("$year-$month-01"); // 2011-12-01 example
             if($startTime > $now) continue; // don't bother with future dates
             if($month == 12) $endTime = strtotime(($year+1) . "-01-01");
@@ -1011,12 +1014,16 @@ if($where == 'sidebar' && page() != page()->opt['archivesPage']) {
             $count = count($entries);
             if($count > 0) {
             
-                if($where == 'archives') $out .= "<option value='$url'>$date - ($count)</option>";
+                if(page() == page()->opt['archivesPage']) {
 
-                if($where == 'sidebar' && page() != page()->opt['archivesPage']) {
+                    $out .= "<option value='$url'>$date - ($count)</option>";
+
+                } else {
 
                     $out .= "<li><a href='$url'>$date - ($count)</a></li>";
+
                 }
+
             }
     
         }

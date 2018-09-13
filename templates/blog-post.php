@@ -33,11 +33,11 @@ echo blogComments($page, 16);
 
 </div><!-- /#content-body -->
 
-<div id="sidebar" pw-prepend>
+<aside id="sidebar" pw-append>
 
-  <?=userInfo(page()->createdUser);?>
+<?php wireIncludeFile("inc/_block-blog");?>
 
-</div><!-- /#page-children -->
+</aside>
 
 <?php if(page()->comments && page()->opt['enableComments'] == true):?>
 

@@ -22,8 +22,8 @@ echo page()->body;?>
 
 </div><!-- /#content-body -->
 
-<!-- SIDEBAR -->
-<aside id='sidebar'>
+
+<aside id="sidebar" pw-append>
 
 <?php
 // Show more information ( phone, mail )
@@ -57,30 +57,11 @@ if($contactMail) {
 }
 ?>
 
-<div class="map">
-
-    <?php echo page()->sidebar?> 
-
-</div><!-- /.col map -->
-
-<div class="nore-pages p-1">
-
-<?php // Show Home page Children
-echo pageChildren(pages(1),
-    [
-        'limit'=> 12,
-      //  'random' => true
-    ]
-);
-?>
-
-</div><!-- /.nore-pages -->
-
-</aside><!-- /#sidebar -->
+</aside>
 
 <style id='head-style' pw-append>
-.map iframe {
-    margin-top: 20px;
+iframe {
+   margin-bottom: 20px;
    width: 100%;
    max-height: 400px;
  }

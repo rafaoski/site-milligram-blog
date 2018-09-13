@@ -1,12 +1,4 @@
 <?php namespace ProcessWire;
-// Show Home page Children
-echo pageChildren(pages(1),
-    [
-        'limit'=> 12,
-      //  'random' => true
-    ]
-);
-
 // Get Categories
 echo catTag(page()->opt['categoryPage'],
     [
@@ -27,4 +19,14 @@ echo catTag(page()->opt['tagsPage'],
         'random' => true, // Randomize Items
         'dis_count' => true // hide Count Down
     ]
-);
+);?>
+
+<?php if(page() != page()->opt['archivesPage']):?>
+
+<div id="content-archive">
+
+    <ul><?=blogArchive(page()->opt['sidebarDate']);?></ul>
+
+</div><!-- /#content-archive -->
+
+<?php endif;?>

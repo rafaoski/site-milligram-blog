@@ -2,7 +2,7 @@
 
 $intro = isset($intro) ? explode(" ", $intro) : explode(" ", page()->ts['addHero']);?>
 
-<section id="<?=$id?>" class="<?=$class?>" pw-after="header">
+<section id="hero" class="hero-content" pw-after="header">
 
 <div class="hero_container">
 

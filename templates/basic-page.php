@@ -35,3 +35,16 @@ echo wireRenderFile("render/child",
 }?>
 
 </div><!-- /#content-body -->
+
+<aside id="sidebar" pw-append>
+
+<?php // Show Home page Children
+    echo pageChildren(pages(1),
+    [
+        'limit'=> 12,
+    //  'random' => true
+    ]
+);
+?>
+
+</aside>

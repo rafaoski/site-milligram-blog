@@ -1,7 +1,6 @@
 <?php namespace ProcessWire; // _main.php template file, called after a page’s template file
 // trashDemoData('false'); // Put unnecessary pages into the trash ( change to true ) !!!
 $optionsPage = page()->opt['optionsPage']; // Get options page
-$contactPage = page()->opt['contactPage']; // Get contact page
 wireIncludeFile("inc/_head",['options' => $optionsPage]); // ( Include header )?>
 
 <!-- MAIN CONTENT -->
@@ -44,21 +43,15 @@ wireIncludeFile("inc/_head",['options' => $optionsPage]); // ( Include header )?
 
             </form>
 
-            <?php // Show Sidebar
-                echo page()->sidebar;
-                // Include contact form
-                wireIncludeFile("inc/_c-form",
-                [   'saveMessage' => true, // true or false
-                    'contactPage' => $contactPage, // Get Contact Page to save items pages('/contact/')
-                    'contactItem' => 'contact-item', // Template to create item ( It must have a body field )
-                    'mailTo' => $contactPage->email ?: 'user@gmail.com', // Send To Mail
-                    'mailSubject' => page()->ts['mailSubject'], // Mail Subject
-                ]);
-                // Include sidebar links
-                wireIncludeFile('inc/_links');
-                // Show Archives if is not Archive Page archives.php
-                echo '<ul>' . blogArchive(page()->opt['sidebarDate'],'sidebar') . '</ul>';
-            ?>
+        <?php if(page()->sidebar): ?>
+
+            <div id="content-sidebar">
+
+               <?=page()->sidebar;?>
+
+            </div><!-- /#content-sidebar -->
+
+        <?php endif; ?>
 
         </aside><!-- /#sidebar -->
 

@@ -56,4 +56,17 @@ unset($q);?>
 		echo "<h3>" . page()->ts['noResults'] . "</h3>";
 	}
 	?>
-</div>
+</div><!-- /#content-body -->
+
+<aside id="sidebar" pw-append>
+
+<?php // Show Home page Children
+    echo pageChildren(pages(1),
+    [
+        'limit'=> 12,
+    //  'random' => true
+    ]
+);
+?>
+
+</aside>

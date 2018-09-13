@@ -29,7 +29,7 @@ echo icon('archive',
 
   <option value='#'><?=page()->ts['selectArchives'];?></option>
 
-    <?=blogArchive(page()->opt['archiveDate'],'archives')?>
+    <?=blogArchive(page()->opt['archiveDate'])?>
 
   </select>
 
@@ -61,3 +61,9 @@ foreach ($page_f as $key) {
 echo basicPagination($page_f, 'container grid');?>
 
 </div><!-- /#content-body -->
+
+<aside id="sidebar" pw-append>
+
+<?php wireIncludeFile("inc/_block-blog");?>
+
+</aside>

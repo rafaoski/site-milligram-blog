@@ -27,3 +27,9 @@ $count = count($tag->references());
  echo basicPagination($tags, 'container grid');?>
 
 </div><!-- /#content-body -->
+
+<aside id="sidebar" pw-append>
+
+<?php wireIncludeFile("inc/_block-blog");?>
+
+</aside>
