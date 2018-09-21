@@ -1,14 +1,16 @@
 <?php namespace ProcessWire;
+
 // Get Page children
 $posts = page()->children('limit=12');
 // No Found
-if(!count($posts)) echo "<h1 id='content-head'>" . page()->ts['noFound'] . "</h1>";?>
+if (!count($posts)) {
+    echo "<h1 id='content-head'>" . page()->ts['noFound'] . "</h1>";
+}?>
 
 <div id='content-body' class="news grid">
 
 <?php // Start Loop
-foreach ($posts as $post): ?>
-
+foreach ($posts as $post) : ?>
 <article class='blog-item col-6_sm-12'>
 
 <a href="<?=$post->url?>">
@@ -19,17 +21,17 @@ foreach ($posts as $post): ?>
 
 <div class='entry-header'>
 
-  <?=entryHeader($post);?>
+    <?=entryHeader($post);?>
 
 </div>
 
 <a href="<?=$post->url?>">
 
-<?=getImage($post,'small');?>
+    <?=getImage($post, 'small');?>
 
 </a>
 
-<p><?=$post->render('body','txt-small')?></p>
+<p><?=$post->render('body', 'txt-small')?></p>
 
 </article>
 
@@ -41,6 +43,6 @@ echo basicPagination($posts, 'container grid');?>
 
 <aside id="sidebar" pw-append>
 
-  <?php wireIncludeFile("inc/_block-blog");?>
+    <?php wireIncludeFile("inc/_block-blog");?>
 
 </aside>

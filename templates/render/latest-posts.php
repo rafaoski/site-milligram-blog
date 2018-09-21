@@ -4,28 +4,29 @@ $children = $item->children("limit=4,sort=random");?>
 
 <section id='latest-posts' class="container-fluid">
 
-     <?php // Simple Icon
-            echo icon('eye', // https://feathericons.com/
-            [
-              'width' => 70,
-              'height' => 70,
-              'color' => '#608190',
-              'stroke' => 2,
-              'html_el' => 'h3',
-              'txt' => $heading,
-              'url' => $item->url
-            ]);?>
+        <?php // Simple Icon
+            echo icon(
+                'eye', // https://feathericons.com/
+                [
+                'width' => 70,
+                'height' => 70,
+                'color' => '#608190',
+                'stroke' => 2,
+                'html_el' => 'h3',
+                'txt' => $heading,
+                'url' => $item->url
+                ]
+            );?>
 
   <div class="grid">
 
     <?php // Start Loop
-        foreach ($children as $item):?>
-
+    foreach ($children as $item) :?>
             <div class="col-6_sm-12">
 
             <a href="<?=$item->url?>">
 
-            <?=getImage($item,'small');?>
+            <?=getImage($item, 'small');?>
 
             <h4><?=$item->title?></h4>
      
@@ -33,7 +34,7 @@ $children = $item->children("limit=4,sort=random");?>
             
             </div><!-- /.child -->
 
-        <?php endforeach;?>
+    <?php endforeach;?>
 
     </div><!-- /.grid -->
 

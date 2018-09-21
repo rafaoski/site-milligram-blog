@@ -1,6 +1,8 @@
 <?php namespace ProcessWire;
+
 // Get Categories
-echo catTag(page()->opt['categoryPage'],
+echo catTag(
+    page()->opt['categoryPage'],
     [
       // 'txt' => __('Categories'),
         'limit' => 9,
@@ -9,7 +11,8 @@ echo catTag(page()->opt['categoryPage'],
 );
 
 // Get Tags
-echo catTag(page()->opt['tagsPage'],
+echo catTag(
+    page()->opt['tagsPage'],
     [
       // 'txt' => __('Tags'),
         'limit' => 8,
@@ -21,8 +24,7 @@ echo catTag(page()->opt['tagsPage'],
     ]
 );?>
 
-<?php if(page() != page()->opt['archivesPage']):?>
-
+<?php if (page() != page()->opt['archivesPage']) :?>
 <div id="content-archive">
 
     <ul><?=blogArchive(page()->opt['sidebarDate']);?></ul>

@@ -1,4 +1,6 @@
-<?php namespace ProcessWire; ?>
+<?php namespace ProcessWire;
+
+?>
 
 <div id='content-body'>
 
@@ -11,7 +13,7 @@ echo toAny(['t','f','g-p','g-m']);?>
 
 </div><!-- /.entry-header -->
 
-<?=getImage($page,'medium');?>
+<?=getImage($page, 'medium');?>
 
 <div class="entry-footer m-1">
 
@@ -26,10 +28,11 @@ echo prNx($page, 'grid-center');
 // https://processwire.com/blog/posts/processwire-3.0.107-core-updates/
 echo articleLinks($page);
 // If enable comments ( _options.php )
-if( page()->opt['enableComments'] == true ) {
-// Basic Comments + pagination
-echo blogComments($page, 16);
-}?>
+if (page()->opt['enableComments'] == true) {
+    // Basic Comments + pagination
+    echo blogComments($page, 16);
+}
+?>
 
 </div><!-- /#content-body -->
 
@@ -41,8 +44,7 @@ echo blogComments($page, 16);
 
 </aside>
 
-<?php if(page()->comments && page()->opt['enableComments'] == true):?>
-
+<?php if (page()->comments && page()->opt['enableComments'] == true) : ?>
 <pw-region id='bottom-region'>
 
 <link rel='stylesheet' href='<?= urls()->FieldtypeComments;?>comments.css'>
@@ -50,5 +52,4 @@ echo blogComments($page, 16);
 <script defer src='<?= urls()->FieldtypeComments;?>comments.min.js'></script>
 
 </pw-region>
-
 <?php endif;

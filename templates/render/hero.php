@@ -6,24 +6,34 @@ $intro = isset($intro) ? explode(" ", $intro) : explode(" ", page()->ts['addHero
 
 <div class="hero_container">
 
-  <h1 class="hero_inner">
+<h1 class="hero_inner">
 
-  <span class="hero_first">
-        <?php if(isset($intro[0])) echo $intro[0];?>
-  </span>
+<span class="hero_first">
+<?php if (isset($intro[0])) {
+    echo $intro[0];
+}?>
+</span>
 
-  <span class="hero_small">
-        <?php if(isset($intro[1])) echo $intro[1];?>
-        <?php if(isset($intro[2])) echo $intro[2];?>
-  </span>
+<span class="hero_small">
+<?php if (isset($intro[1])) {
+    echo $intro[1];
+}
+if (isset($intro[2])) {
+    echo $intro[2];
+}?>
+</span>
 
-  <span class="hero_of">
-    <?php if(isset($intro[3])) echo $intro[3];?>
-   </span>
+<span class="hero_of">
+<?php if (isset($intro[3])) {
+    echo $intro[3];
+}?>
+</span>
 
-  <span class="hero_small">
-      <?php if(isset($intro[4])) echo $intro[4];?>
-  </span>
+<span class="hero_small">
+<?php if (isset($intro[4])) {
+    echo $intro[4];
+}?>
+</span>
 
 </h1>
 
@@ -35,11 +45,12 @@ $intro = isset($intro) ? explode(" ", $intro) : explode(" ", page()->ts['addHero
 
     <br>
 
-    <small><?php 
+    <small><?php
     // First Text
       echo $heroTxtFirst;
-    // Icon with Text     
-      echo icon($icon,
+    // Icon with Text
+      echo icon(
+          $icon,
           [
             'url' => $iconUrl,
             'txt' => ' ' . $heroTxtNext,
@@ -47,7 +58,8 @@ $intro = isset($intro) ? explode(" ", $intro) : explode(" ", page()->ts['addHero
             'width' => 30,
             'height' => 30,
             'color' => 'red'
-          ]);
+          ]
+      );
     // Last Text
       echo $heroTxtLast;?></small>
       

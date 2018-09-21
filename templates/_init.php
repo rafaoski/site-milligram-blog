@@ -1,4 +1,5 @@
 <?php namespace ProcessWire;
+
 /**
  * This _init.php file is called automatically by ProcessWire before every page render
  * More Info To Learn Basics

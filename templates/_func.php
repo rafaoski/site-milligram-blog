@@ -8,15 +8,16 @@
  * @param Page|null $root
  *
  */
-function simpleNav($root = null) {
+function simpleNav($root = null)
+{
     // $home = pages()->get("/");
     $children = $root->children();
     $children->prepend($root);
     $out = '';
-        foreach($children as $child) {
-           $class = $child->id == wire('page')->id ? 'active' : 'no-active';
-           $out .= "<li class='{$class}'><a class='nav-item' href='{$child->url}'>{$child->title}</a></li>";
-        }
+    foreach ($children as $child) {
+        $class = $child->id == wire('page')->id ? 'active' : 'no-active';
+        $out .= "<li class='{$class}'><a class='nav-item' href='{$child->url}'>{$child->title}</a></li>";
+    }
     return $out;
 }
 
@@ -26,47 +27,46 @@ function simpleNav($root = null) {
  * @param array|null $opt
  *
  */
-function burgerNav($root = null, $opt = null) {
-$children = $root->children();
-// $children->prepend($root);
-$out = '';
+function burgerNav($root = null, $opt = null)
+{
+    $children = $root->children();
+    // $children->prepend($root);
+    $out = '';
     $out .="
     <!-- Navigation -->
     <ul class='b-nav'>";
 
-    foreach($children as $child) {
+    foreach ($children as $child) {
         $class = $child->id == wire('page')->id ? 'b-link--active' : 'no-active';
         $out .= "<li>
-                  <a class='b-link {$class}' href='{$child->url}'>
-                     {$child->title}
-                   </a>
-                 </li>";
-        }
+                <a class='b-link {$class}' href='{$child->url}'>
+                    {$child->title}
+                </a>
+                </li>";
+    }
         $out .= "</ul>";
 
-$out .= "<!-- Burger-Icon -->
-    <div class='b-container'>
-        <div class='b-menu'>
-          <div class='b-bun b-bun--top'></div>
-          <div class='b-bun b-bun--mid'></div>
-          <div class='b-bun b-bun--bottom'></div>
+    $out .= "<!-- Burger-Icon -->
+        <div class='b-container'>
+            <div class='b-menu'>
+            <div class='b-bun b-bun--top'></div>
+            <div class='b-bun b-bun--mid'></div>
+            <div class='b-bun b-bun--bottom'></div>
         </div>";
 
-if(isset($opt['logoUrl'])) {
-    $alt = isset($opt['alt']) ? $opt['alt'] : '';
-    $out .="<!-- Burger-Logo -->
-    <a class='logo' href='{$root->httpUrl}'>
-        <img src='{$opt['logoUrl']}'
-        alt='{$alt}'
-        width='91' height='49'/>
-    </a>";
+    if (isset($opt['logoUrl'])) {
+        $alt = isset($opt['alt']) ? $opt['alt'] : '';
+        $out .="<!-- Burger-Logo -->
+        <a class='logo' href='{$root->httpUrl}'>
+            <img src='{$opt['logoUrl']}'
+            alt='{$alt}'
+            width='91' height='49'/>
+        </a>";
+    } elseif (isset($opt['brand'])) {
+        $out .= "<a href='{$root->httpUrl}' class='b-brand'>" . $opt['brand'] . "</a>";
+    }
 
-} else if(isset($opt['brand'])) {
-
-    $out .= "<a href='{$root->httpUrl}' class='b-brand'>" . $opt['brand'] . "</a>";
-}
-
-$out .= "</div><!-- /.b-container -->";
+    $out .= "</div><!-- /.b-container -->";
 
     return $out;
 }
@@ -77,29 +77,31 @@ $out .= "</div><!-- /.b-container -->";
  * @param Page $page
  *
  */
-function linkTag($root,$page) {
+function linkTag($root, $page)
+{
 
-  // If Multi Language Modules activate
-  if(!$page->getLanguages()) return '';
-
-  $out = '';
-  // handle output of 'hreflang' link tags for multi-language
-  // this is good to do for SEO in helping search engines understand
-  // what languages your site is presented in
-  foreach(languages() as $language) {
-      // if this page is not viewable in the language, skip it
-      if(!$page->viewable($language)) continue;
-      // get the http URL for this page in the given language
-      $url = $page->localHttpUrl($language);
-      // hreflang code for language uses language name from homepage
-      $hreflang = $root->getLanguageValue($language, 'name');
-
-      // if($hreflang == 'home') $hreflang = page()->ts['languageCode'];
-
-      // output the <link> tag: note that this assumes your language names are the same as required by hreflang.
-      $out .= "\t<link rel='alternate' hreflang='$hreflang' href='$url' />\n";
-  }
-  return $out;
+    // If Multi Language Modules activate
+    if (!$page->getLanguages()) {
+        return '';
+    }
+    $out = '';
+    // handle output of 'hreflang' link tags for multi-language
+    // this is good to do for SEO in helping search engines understand
+    // what languages your site is presented in
+    foreach (languages() as $language) {
+        // if this page is not viewable in the language, skip it
+        if (!$page->viewable($language)) {
+            continue;
+        }
+        // get the http URL for this page in the given language
+        $url = $page->localHttpUrl($language);
+        // hreflang code for language uses language name from homepage
+        $hreflang = $root->getLanguageValue($language, 'name');
+        // if($hreflang == 'home') $hreflang = page()->ts['languageCode'];
+        // output the <link> tag: note that this assumes your language names are the same as required by hreflang.
+        $out .= "\t<link rel='alternate' hreflang='$hreflang' href='$url' />\n";
+    }
+    return $out;
 }
 
 /**
@@ -108,37 +110,32 @@ function linkTag($root,$page) {
  * @param Page $root
  *
  */
-function langMenu($page, $root) {
-  // If Enable Multilanguage Modules
-  if(!page()->getLanguages()) return '';
-  $out = '';
-  // language switcher / navigation
-  $out .= "<ul class='lang-menu grid' role='navigation'>";
-  // Start Loop
-  foreach(languages() as $language) {
-
-  // is page viewable in this language?
-      if(!$page->viewable($language)) continue;
-
-      if($language->id == user()->language->id) {
-
-          $out .= "<li class='active'>";
-
-      } else {
-
-          $out .= "<li>";
-
-      }
-
-      $url = $page->localUrl($language);
-      $hreflang = $root->getLanguageValue($language, 'name');
-      $out .= "<a hreflang='$hreflang' href='$url'>$language->title</a></li>";
-
-  }
-
-  $out .= "</ul>";
-
-  return $out;
+function langMenu($page, $root)
+{
+    // If Enable Multilanguage Modules
+    if (!page()->getLanguages()) {
+        return '';
+    }
+    $out = '';
+    // language switcher / navigation
+    $out .= "<ul class='lang-menu grid' role='navigation'>";
+    // Start Loop
+    foreach (languages() as $language) {
+    // is page viewable in this language?
+        if (!$page->viewable($language)) {
+            continue;
+        }
+        if ($language->id == user()->language->id) {
+            $out .= "<li class='active'>";
+        } else {
+            $out .= "<li>";
+        }
+        $url = $page->localUrl($language);
+        $hreflang = $root->getLanguageValue($language, 'name');
+        $out .= "<a hreflang='$hreflang' href='$url'>$language->title</a></li>";
+    }
+    $out .= "</ul>";
+    return $out;
 }
 
 /**
@@ -146,32 +143,34 @@ function langMenu($page, $root) {
  * @param Page $item
  *
  */
-function entryHeader(Page $item) {
+function entryHeader(Page $item)
+{
 
-$out = '';
+    $out = '';
 
-  $out .= icon('user', ['txt' => $item->createdUser->title . ' | ' ]);
+    $out .= icon('user', ['txt' => $item->createdUser->title . ' | ' ]);
 
-  $out .= icon('calendar',
-  [
-    'txt' => $item->date . ' | '
-  ]);
+    $out .= icon(
+        'calendar',
+        [
+        'txt' => $item->date . ' | '
+        ]
+    );
 
   // if page comments
-  if(count($item->comments) && page()->opt['enableComments'] == true) {
+    if (count($item->comments) && page()->opt['enableComments'] == true) {
+        $id = $item->comments->last() ? $item->comments->last()->id : '#';
 
-    $id = $item->comments->last() ? $item->comments->last()->id : '#';
+        $out .= icon(
+            'message-circle',
+            [
+            'txt' => count($item->comments),
+            'url' => "$item->url#Comment$id",
+            ]
+        );
+    }
 
-    $out .= icon('message-circle',
-    [
-      'txt' => count($item->comments),
-      'url' => "$item->url#Comment$id",
-    ]);
-
-  }
-
-  return $out;
-
+    return $out;
 }
 
 /**
@@ -179,57 +178,58 @@ $out = '';
  * @param Page $item
  *
  */
-function entryFooter(Page $item) {
+function entryFooter(Page $item)
+{
 
-$out = '';
+    $out = '';
 
 // Show CATEGORIES
-$out .= icon('grid',
-  [
-    'txt' => ' | ',
-    'url' => page()->opt['categoryPage']->url, // Get Category Page
-    'color' => '#9b4dca'
-  ]);
+    $out .= icon(
+        'grid',
+        [
+        'txt' => ' | ',
+        'url' => page()->opt['categoryPage']->url, // Get Category Page
+        'color' => '#9b4dca'
+        ]
+    );
 
 // https://processwire.com/api/ref/page-array/each/
-  $out .= $item->categories->each(
-    "<a href='{url}'>{title}</a> | "
-  ) . ' ... ' ;
+    $out .= $item->categories->each(
+        "<a href='{url}'>{title}</a> | "
+    ) . ' ... ' ;
 
 // Show TAGS
-  $out .= icon('tag',
-  [
-    'txt' => ' | ',
-    'url' => page()->opt['tagsPage']->url, // Get Tag Page
-    'color' => '#9b4dca'
-  ]);
+    $out .= icon(
+        'tag',
+        [
+        'txt' => ' | ',
+        'url' => page()->opt['tagsPage']->url, // Get Tag Page
+        'color' => '#9b4dca'
+        ]
+    );
 
 // https://processwire.com/api/ref/page-array/each/
-  $out .= $item->tags->each(
-    "<a href='{url}'>{title}</a> | "
-  ) . ' ... ';
+    $out .= $item->tags->each(
+        "<a href='{url}'>{title}</a> | "
+    ) . ' ... ';
 
-  return $out;
-
+    return $out;
 }
 
 /**
  *
  * @param Page $page
- * // All Sizes 'thumb','small','medium','large', 'full'(default) 
+ * // All Sizes 'thumb','small','medium','large', 'full'(default)
  * @param string $size
  *
  */
-function getImage($page, $size = 'full') {
+function getImage($page, $size = 'full')
+{
     // View a replacement image from https://picsum.photos/
-    if(page()->opt['demoImage']) {
-    
-      return imgDemo($page);
-    
+    if (page()->opt['demoImage']) {
+        return imgDemo($page);
     } else {
-    
-      return $page->render('images', "img-$size");
-      
+        return $page->render('images', "img-$size");
     }
 }
 
@@ -238,39 +238,46 @@ function getImage($page, $size = 'full') {
  * @param User $uthor
  *
  */
-function userInfo(User $user) {
+function userInfo(User $user)
+{
 
-    if(!page()->opt['userInfo']) return '';
+    if (!page()->opt['userInfo']) {
+        return '';
+    }
   
-    if($user == '') return '';
+    if ($user == '') {
+        return '';
+    }
   
     $out = '';
   
     $out .= "<h3>$user->title</h3>";
   
-    $out .= getImage($user,'thumb');
+    $out .= getImage($user, 'thumb');
   
     $out .= "<blockquote>$user->headline</blockquote>";
   
     // $out .= "<p>$user->summary</p>";
   
     return $out;
-  
-  }
+}
 
 /**
  *
  * @param Page|PageArray|null $page
  *
  */
-function breadCrumb($page = null) {
+function breadCrumb($page = null)
+{
 
-    if($page == null) return '';
+    if ($page == null) {
+        return '';
+    }
 
       $out = '';
-    		// breadcrumbs are the current page's parents
-		foreach($page->parents() as $item) {
-        if($item->name == 'home') {
+            // breadcrumbs are the current page's parents
+    foreach ($page->parents() as $item) {
+        if ($item->name == 'home') {
             $out .= "<span class='home'><a href='$item->url'>
             <i data-feather='home'
             width=25 height=25
@@ -281,9 +288,8 @@ function breadCrumb($page = null) {
         } else {
             $out .= "<span><a href='$item->url'>$item->title</a></span> > ";
         }
-
-		}
-		// optionally output the current page as the last item
+    }
+        // optionally output the current page as the last item
         $out .= $page->id != 1  ? "<span>$page->title</span>" : '';
         return $out;
 }
@@ -294,13 +300,16 @@ function breadCrumb($page = null) {
  * @param array|null $opt
  *
  */
-function pageChildren($page = null, $opt = null) {
+function pageChildren($page = null, $opt = null)
+{
 
-if(!count($page->children)) return '';
+    if (!count($page->children)) {
+        return '';
+    }
 
 // Reset variables
-$out = '';
-$random = '';
+    $out = '';
+    $random = '';
 
 // Default Text
     $txt = isset($opt['txt']) ? $opt['txt'] : page()->ts['morePages'];
@@ -309,19 +318,17 @@ $random = '';
     $limit = isset($opt['limit']) ? $opt['limit'] : 8;
 
 // Random Items
-if(isset($opt['random']) && $opt['random'] == true) {
-    $random = "sort=random,";
-  }
+    if (isset($opt['random']) && $opt['random'] == true) {
+        $random = "sort=random,";
+    }
 
     $out .= "<h3>$txt</h3>";
 
     $out .= "<ul class='page-children'>";
 
-        foreach ($page->children("limit=$limit,$random start=0") as $child) {
-
-            $out .= "<li><a href='$child->url'>$child->title</a></li>";
-
-        }
+    foreach ($page->children("limit=$limit,$random start=0") as $child) {
+        $out .= "<li><a href='$child->url'>$child->title</a></li>";
+    }
 
     $out .= '</ul>';
 
@@ -335,15 +342,16 @@ if(isset($opt['random']) && $opt['random'] == true) {
  * @param Page $item
  *
  */
-function articleLinks($page) {
-$out = '';
-$links = $page->links();
+function articleLinks($page)
+{
+    $out = '';
+    $links = $page->links();
 // If another page has links to this page
-if($links->count()) {
-   $out .= "<h3>" . page()->ts['alsoLike'] . "</h3>";
-   $out .= $links->each("<li><a href={url}>{title}</a></li>") . '<br>';
- }
- return $out;
+    if ($links->count()) {
+        $out .= "<h3>" . page()->ts['alsoLike'] . "</h3>";
+        $out .= $links->each("<li><a href={url}>{title}</a></li>") . '<br>';
+    }
+    return $out;
 }
 
 /**
@@ -353,42 +361,51 @@ if($links->count()) {
  * @param Page $page
  *
  */
-function smartSeo($page) {
+function smartSeo($page)
+{
 
 // Check if Seo is enabled
-if(!page()->opt['smartSeo']) return '';
+    if (!page()->opt['smartSeo']) {
+        return '';
+    }
 
 // Reset variables
-$out = '';
-$tw_image = '';
+    $out = '';
+    $tw_image = '';
 // No index
-if(page()->check_1) echo "\t<meta name='robots' content='noindex'>\n";
+    if (page()->check_1) {
+        echo "\t<meta name='robots' content='noindex'>\n";
+    }
 // https://processwire.com/blog/posts/processwire-2.6.18-updates-pagination-and-seo/
-if(input()->pageNum > 1) echo "\t<meta name='robots' content='noindex,follow'>\n";
+    if (input()->pageNum > 1) {
+        echo "\t<meta name='robots' content='noindex,follow'>\n";
+    }
 // https://weekly.pw/issue/222/
-if(config()->pagerHeadTags) echo "\t" . config()->pagerHeadTags . "\n";
+    if (config()->pagerHeadTags) {
+        echo "\t" . config()->pagerHeadTags . "\n";
+    }
 
 // https://processwire.com/blog/posts/processwire-2.6.18-updates-pagination-and-seo/#using-a-pagination-view-all-page
 // specify scheme and host statically rather than from $page->httpUrl
 // $canonicalURL = 'https://www.domain.com' . $page->url;
-if(page()->opt['cannonicalUrl']) {
-    $canonicalURL = page()->opt['cannonicalUrl'] . $page->url;
-} else {
-    $canonicalURL = $page->httpUrl;
-}
+    if (page()->opt['cannonicalUrl']) {
+        $canonicalURL = page()->opt['cannonicalUrl'] . $page->url;
+    } else {
+        $canonicalURL = $page->httpUrl;
+    }
 
 // if on a pagination, include that as part of your canonical URL
-if(input()->pageNum > 1) {
-    $canonicalURL .= config()->pageNumUrlPrefix . input()->pageNum;
-}
+    if (input()->pageNum > 1) {
+        $canonicalURL .= config()->pageNumUrlPrefix . input()->pageNum;
+    }
 
 // Type Content ( article, website )
-$content = $page->parent() == page()->opt['blogPage'] ? 'article' : 'website';
+    $content = $page->parent() == page()->opt['blogPage'] ? 'article' : 'website';
 
 // Get locale
-$locale = page()->ts['locale'];
+    $locale = page()->ts['locale'];
 // Site Name
-$siteName = page()->opt['optionsPage']->headline ?: page()->ts['siteName'];
+    $siteName = page()->opt['optionsPage']->headline ?: page()->ts['siteName'];
 // Basic Meta
     $out .= "\t<meta property='og:locale' content='{$locale}'/>\n";
     $out .= "\t<meta id='og-title' property='og:title' content='{$page('headline|title')}'/>\n";
@@ -398,50 +415,47 @@ $siteName = page()->opt['optionsPage']->headline ?: page()->ts['siteName'];
     $out .= "\t<meta property='og:site_name' content='{$siteName}'/>\n";
 
 // Article Seo
-if($page->parent == page()->opt['blogPage']) {
+    if ($page->parent == page()->opt['blogPage']) {
+        $out .= "\t<meta property='article:published_time' content='" . datetime()->date('c', $page->published) . "'/>\n";
+        $out .= "\t<meta property='article:modified_time' content='" . datetime()->date('c', $page->modified) . "'/>\n";
+        $out .= "\t<meta property='og:updated_time' content='" . datetime()->date('c', $page->modified) . "'/>\n";
 
-    $out .= "\t<meta property='article:published_time' content='" . datetime()->date('c',$page->published) . "'/>\n";
-    $out .= "\t<meta property='article:modified_time' content='" . datetime()->date('c',$page->modified) . "'/>\n";
-    $out .= "\t<meta property='og:updated_time' content='" . datetime()->date('c',$page->modified) . "'/>\n";
+        $out .= $page->categories->each(
+            "\t<meta property='article:section' content='{title}'>\n"
+        );
 
-    $out .= $page->categories->each(
-        "\t<meta property='article:section' content='{title}'>\n"
-    );
-
-    $out .= $page->tags->each(
-        "\t<meta property='article:tag' content='{title}'>\n"
-    );
-}
+        $out .= $page->tags->each(
+            "\t<meta property='article:tag' content='{title}'>\n"
+        );
+    }
 
 // If Page Images
-if( $page->images && count($page->images) ) {
-
-// Get large size ( 1200px )
+    if ($page->images && count($page->images)) {
+    // Get large size ( 1200px )
         $large = page()->opt['large'];
-    // Get image width
+        // Get image width
         $img = $page->images->first()->width($large);
-    // Show Image
+        // Show Image
         $out .= "\t<meta id='og-image' property='og:image' content='{$img->httpUrl()}'/>\n";
-    // Image Size
+        // Image Size
         $out .= "\t<meta property='og:image:width' content='$img->width'/>\n";
         $out .= "\t<meta property='og:image:height' content='$img->height'/>\n";
-    // TWITTER CARD IMAGE
+        // TWITTER CARD IMAGE
         $tw_image = "\t<meta name='twitter:image' content='{$img->httpUrl()}'/>\n";
-}
+    }
 
 // Simple Twitter Card
-if(page()->opt['enableTwitter']) {
+    if (page()->opt['enableTwitter']) {
+        $tw_summary = page()->opt['largeImage'] ? 'summary_largeImage' : 'summary';
 
-    $tw_summary = page()->opt['largeImage'] ? 'summary_largeImage' : 'summary';
-
-    $out .= "\t<meta name='twitter:card' content='{$tw_summary}'/>\n";
-    $out .= "\t<meta name='twitter:title' content='{$page('headline|title')}'/>\n";
-    $out .= "\t<meta name='twitter:description' content='{$page->summary}'/>\n";
-    $out .= "$tw_image";
-}
+        $out .= "\t<meta name='twitter:card' content='{$tw_summary}'/>\n";
+        $out .= "\t<meta name='twitter:title' content='{$page('headline|title')}'/>\n";
+        $out .= "\t<meta name='twitter:description' content='{$page->summary}'/>\n";
+        $out .= "$tw_image";
+    }
 
 // Cannonical Link
-$out .= "\t<link rel='canonical' href='{$canonicalURL}'/>\n";
+    $out .= "\t<link rel='canonical' href='{$canonicalURL}'/>\n";
 
     return $out;
 }
@@ -453,33 +467,51 @@ $out .= "\t<link rel='canonical' href='{$canonicalURL}'/>\n";
  * @param string|null $code
  *
  */
-function gwCode($code = null) {
-if($code) return "<meta name='google-site-verification' content='$code' />\n";
+function gwCode($code = null)
+{
+    if ($code) {
+        return "<meta name='google-site-verification' content='$code' />\n";
+    }
 }
 
 /**
  * https://www.addtoany.com/
  * ADD TO ANY DEFAULT USAGE: echo toAny(); or echo toAny(['t','e'])
  * @param array $opt
- * 
+ *
  */
-function toAny($opt=['t','f','g-p','l','r','e','g-m']) {
+function toAny($opt = ['t','f','g-p','l','r','e','g-m'])
+{
     $out = '';
       $out .= "<!-- AddToAny BEGIN -->
       <div class='a2a_kit a2a_kit_size_32 a2a_default_style p-1'>
       <a class='a2a_dd' href='https://www.addtoany.com/share'></a>";
-      if(in_array('f', $opt)) $out .= "<a class='a2a_button_facebook'></a>";
-      if(in_array('t', $opt)) $out .= "<a class='a2a_button_twitter'></a>";
-      if(in_array('g-p', $opt)) $out .= "<a class='a2a_button_google_plus'></a>";
-      if(in_array('l', $opt)) $out .= "<a class='a2a_button_linkedin'></a>";
-      if(in_array('r', $opt)) $out .= "<a class='a2a_button_reddit'></a>";
-      if(in_array('e', $opt)) $out .= "<a class='a2a_button_email'></a>";
-      if(in_array('g-m', $opt)) $out .= "<a class='a2a_button_google_gmail'></a>";
+    if (in_array('f', $opt)) {
+        $out .= "<a class='a2a_button_facebook'></a>";
+    }
+    if (in_array('t', $opt)) {
+        $out .= "<a class='a2a_button_twitter'></a>";
+    }
+    if (in_array('g-p', $opt)) {
+        $out .= "<a class='a2a_button_google_plus'></a>";
+    }
+    if (in_array('l', $opt)) {
+        $out .= "<a class='a2a_button_linkedin'></a>";
+    }
+    if (in_array('r', $opt)) {
+        $out .= "<a class='a2a_button_reddit'></a>";
+    }
+    if (in_array('e', $opt)) {
+        $out .= "<a class='a2a_button_email'></a>";
+    }
+    if (in_array('g-m', $opt)) {
+        $out .= "<a class='a2a_button_google_gmail'></a>";
+    }
       $out .= "</div>
       <script async src='https://static.addtoany.com/menu/page.js'></script>
       <!-- AddToAny END -->";
       return $out;
-  }
+}
 
 /**
  *
@@ -501,9 +533,12 @@ function toAny($opt=['t','f','g-p','l','r','e','g-m']) {
  * @param array|null $opt
  *
  */
-function icon($icon = null, $opt = null) {
+function icon($icon = null, $opt = null)
+{
 
-if($icon == null) return '';
+    if ($icon == null) {
+        return '';
+    }
 
 // Reset variables
 
@@ -521,15 +556,17 @@ if($icon == null) return '';
         $a_class = isset($opt['a_class']) ? $opt['a_class'] : 'a-class';
 
     // custom Url
-        if(isset($opt['url'])) {
-            $out .= "<a class='$a_class' href='$url' $t_blank>";
-        }
+    if (isset($opt['url'])) {
+        $out .= "<a class='$a_class' href='$url' $t_blank>";
+    }
 
     // html elements like h1 h2 h3 h4 h5 span p ...
         $out .= isset($opt['html_el']) ? "<{$opt['html_el']} class='$class'>" : '';
 
     // Show Custom Text Before
-    if (isset($opt['before']) && $opt['before'] == true) $out .= $txt;
+    if (isset($opt['before']) && $opt['before'] == true) {
+        $out .= $txt;
+    }
 
             $out .= "<i data-feather='$icon'
             width=$width
@@ -539,17 +576,17 @@ if($icon == null) return '';
             </i>";
 
     // Show Custom Text
-    if (!isset($opt['before'])) $out .= $txt;
+    if (!isset($opt['before'])) {
+        $out .= $txt;
+    }
 
     // End custom html elements
         $out .= isset($opt['html_el']) ? "</{$opt['html_el']}>" : '';
 
     // /End custom url
-        if(isset($opt['url'])) {
-
-                $out .= "</a>";
-
-        }
+    if (isset($opt['url'])) {
+            $out .= "</a>";
+    }
 
         return $out;
 }
@@ -574,13 +611,18 @@ if($icon == null) return '';
  * @param array|null $opt
  *
  */
-function catTag($item = null, $opt = null) {
+function catTag($item = null, $opt = null)
+{
 
 // Do not show if the items do not exist
-if(!count($item->children)) return '';
+    if (!count($item->children)) {
+        return '';
+    }
 
 // Do not show if the page is the same as item
-if(wire('page')->id == $item->id) return '';
+    if (wire('page')->id == $item->id) {
+        return '';
+    }
 
 // Reset Variables
     $out = '';
@@ -588,8 +630,8 @@ if(wire('page')->id == $item->id) return '';
 // Heading Text
     $txt = isset($opt['txt']) ? $opt['txt'] : $item->title;
 // Random Items
-   if(isset($opt['random']) && $opt['random'] == true) {
-      $random = "sort=random";
+    if (isset($opt['random']) && $opt['random'] == true) {
+        $random = "sort=random";
     }
 
 // Limit Items
@@ -602,36 +644,32 @@ if(wire('page')->id == $item->id) return '';
     $class = isset($opt['class']) ? $opt['class'] : 'cat-tag-class';
 
 // Show Content
-if(isset($opt['txt_clear'])) {
-
-    $out.= $opt['txt'];
-
-} else {
-
-    $out .= "<a href='$item->url'><h3>$txt</h3></a>";
-
-}
+    if (isset($opt['txt_clear'])) {
+        $out.= $opt['txt'];
+    } else {
+        $out .= "<a href='$item->url'><h3>$txt</h3></a>";
+    }
 
     $out .= "<ul class='page-children $item->name $ul_cl'>";
 
-foreach ($item->children("limit=$limit, $random, start=0") as $child) {
+    foreach ($item->children("limit=$limit, $random, start=0") as $child) {
+        $count =  count($child->references());
 
-    $count =  count( $child->references() );
+        $c_txt = '( ' . count($child->references()) . ' )';
 
-    $c_txt = '( ' . count( $child->references() ) . ' )';
-
-    if( isset($opt['dis_count']) && $opt['dis_count'] == true ) $c_txt = '';
+        if (isset($opt['dis_count']) && $opt['dis_count'] == true) {
+            $c_txt = '';
+        }
 
         // If category has reference to pages
-            if($count != 0) {
-
-               $out .= "<li class='$li_cl'>
+        if ($count != 0) {
+            $out .= "<li class='$li_cl'>
                             <a class='$class'
                                 href='$child->url'>$child->title $c_txt
                             </a>
                         </li>";
-            }
         }
+    }
 
     $out .= '</ul>';
 
@@ -643,12 +681,13 @@ foreach ($item->children("limit=$limit, $random, start=0") as $child) {
  * @param array $fonts
  *
  */
-function googleFonts($fonts) {
+function googleFonts($fonts)
+{
 
 // Implode to format => 'Roboto','Montserrat','Limelight','Righteous'
-$font_family = "'" . implode("','", $fonts) . "'";
+    $font_family = "'" . implode("','", $fonts) . "'";
 
-return"<script>
+    return"<script>
 /* ADD GOOGLE FONTS WITH WEBFONTLOADER ( BETTER PAGESPEED )
     https://github.com/typekit/webfontloader
     https://fonts.google.com/?subset=latin-ext&selection.family=Comfortaa|Limelight|Montserrat
@@ -676,7 +715,8 @@ WebFontConfig = {
  * @param string|null $class
  *
  */
-function basicPagination($items, $class = null) {
+function basicPagination($items, $class = null)
+{
 
     return $items->renderPager(array(
         'nextItemLabel' => page()->ts['next'],
@@ -687,7 +727,6 @@ function basicPagination($items, $class = null) {
         'numPageLinks' => 10,
         'currentItemClass' => 'active'
     ));
-
 }
 
 /**
@@ -705,48 +744,58 @@ function basicPagination($items, $class = null) {
  * @return string
  *
  */
-function renderNavTree($items, $maxDepth = 0, $fieldNames = '', $class = 'nav') {
+function renderNavTree($items, $maxDepth = 0, $fieldNames = '', $class = 'nav')
+{
 
-	// if we were given a single Page rather than a group of them, we'll pretend they
-	// gave us a group of them (a group/array of 1)
-	if($items instanceof Page) $items = array($items);
+    // if we were given a single Page rather than a group of them, we'll pretend they
+    // gave us a group of them (a group/array of 1)
+    if ($items instanceof Page) {
+        $items = array($items);
+    }
 
-	// $out is where we store the markup we are creating in this function
-	$out = '';
+    // $out is where we store the markup we are creating in this function
+    $out = '';
 
-	// cycle through all the items
-	foreach($items as $item) {
+    // cycle through all the items
+    foreach ($items as $item) {
+        // markup for the list item...
+        // if current item is the same as the page being viewed, add a "current" class to it
+        $out .= $item->id == wire('page')->id ? "<li class='current'>" : "<li>";
 
-		// markup for the list item...
-		// if current item is the same as the page being viewed, add a "current" class to it
-		$out .= $item->id == wire('page')->id ? "<li class='current'>" : "<li>";
+        // markup for the link
+        $out .= "<a href='$item->url'>$item->title</a>";
 
-		// markup for the link
-		$out .= "<a href='$item->url'>$item->title</a>";
+        // if there are extra field names specified, render markup for each one in a <div>
+        // having a class name the same as the field name
+        if ($fieldNames) {
+            foreach (explode(' ', $fieldNames) as $fieldName) {
+                $value = $item->get($fieldName);
+                if ($value) {
+                    $out .= " <div class='$fieldName'>$value</div>";
+                }
+            }
+        }
 
-		// if there are extra field names specified, render markup for each one in a <div>
-		// having a class name the same as the field name
-		if($fieldNames) foreach(explode(' ', $fieldNames) as $fieldName) {
-			$value = $item->get($fieldName);
-			if($value) $out .= " <div class='$fieldName'>$value</div>";
-		}
+        // if the item has children and we're allowed to output tree navigation (maxDepth)
+        // then call this same function again for the item's children
+        if ($item->hasChildren() && $maxDepth) {
+            if ($class == 'nav') {
+                $class = 'nav nav-tree';
+            }
+            $out .= renderNavTree($item->children, $maxDepth-1, $fieldNames, $class);
+        }
 
-		// if the item has children and we're allowed to output tree navigation (maxDepth)
-		// then call this same function again for the item's children
-		if($item->hasChildren() && $maxDepth) {
-			if($class == 'nav') $class = 'nav nav-tree';
-			$out .= renderNavTree($item->children, $maxDepth-1, $fieldNames, $class);
-		}
+        // close the list item
+        $out .= "</li>";
+    }
 
-		// close the list item
-		$out .= "</li>";
-	}
+    // if output was generated above, wrap it in a <ul>
+    if ($out) {
+        $out = "<ul class='$class'>$out</ul>\n";
+    }
 
-	// if output was generated above, wrap it in a <ul>
-	if($out) $out = "<ul class='$class'>$out</ul>\n";
-
-	// return the markup we generated above
-	return $out;
+    // return the markup we generated above
+    return $out;
 }
 
 /**
@@ -759,18 +808,19 @@ function renderNavTree($items, $maxDepth = 0, $fieldNames = '', $class = 'nav') 
  *    'link' => page()->ts['learnMore'],
  *    'href' => page()->opt['privacyPage']->url
  * ]);
- * 
+ *
  * @param array $info
  *
  */
-function cookieBanner(array $info) {
+function cookieBanner(array $info)
+{
 
-$message = isset($info['message']) ? $info['message'] : __('Privacy & Cookies Policy.');
-$dismiss = isset($info['dismiss']) ? $info['dismiss'] : __('Got it!');
-$link = isset($info['link']) ? $info['link'] : __('Learn More');
-$href = isset($info['href']) ? $info['href'] : __('Privacy & Cookies Policy.');
+    $message = isset($info['message']) ? $info['message'] : __('Privacy & Cookies Policy.');
+    $dismiss = isset($info['dismiss']) ? $info['dismiss'] : __('Got it!');
+    $link = isset($info['link']) ? $info['link'] : __('Learn More');
+    $href = isset($info['href']) ? $info['href'] : __('Privacy & Cookies Policy.');
 
-return "<link rel='stylesheet' type='text/css' href='//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css' />
+    return "<link rel='stylesheet' type='text/css' href='//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css' />
 <script defer src='//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js'></script>
 <script>
 window.addEventListener('load', function(){
@@ -804,7 +854,7 @@ window.cookieconsent.initialise({
  */
 function gAnalitycs($code)
 {
-return "\n
+    return "\n
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src='https://www.googletagmanager.com/gtag/js?id=UA-{$code}'></script>
 <script>
@@ -821,35 +871,32 @@ return "\n
  * @param array $opt
  *
  */
-function imgDemo($item, $opt = null) {
+function imgDemo($item, $opt = null)
+{
 
-$out = '';
-$width = isset($opt['width']) ? $opt['width'] : '640';
-$height = isset($opt['height']) ? $opt['height'] : '420';
+    $out = '';
+    $width = isset($opt['width']) ? $opt['width'] : '640';
+    $height = isset($opt['height']) ? $opt['height'] : '420';
 
-if(count($item->images)) {
-
-$out .="<img class='center lazy'
+    if (count($item->images)) {
+        $out .="<img class='center lazy'
         data-src='{$item->images->first->url}'
         alt='{$item->description}'
         width='$width' height='$height'>";
+    } else {
+    // Home Page Random images from https://picsum.photos/
+        if (isset($opt['random']) && $opt['random'] == true) {
+            $width = '3' . rand(1, 4) . '0';
+            $height = '2' . rand(5, 9) . '0';
+        }
 
-} else {
-
-// Home Page Random images from https://picsum.photos/
-if(isset($opt['random']) && $opt['random'] == true) {
-    $width = '3' . rand(1,4) . '0';
-    $height = '2' . rand(5,9) . '0';
-}
-
-$out .="<img class='center lazy'
+        $out .="<img class='center lazy'
         data-src='https://picsum.photos/$width/$height'
         alt='$item->title'
         width='$width' height='$height'>";
-}
+    }
 
-return $out;
-
+    return $out;
 }
 
 /**
@@ -861,21 +908,21 @@ return $out;
  * @param string $class
  *
  */
-function prNx($item = null, $class = 'prev-next') {
+function prNx($item = null, $class = 'prev-next')
+{
 
 // Prev Next Button
     $p_next = $item->next();
     $p_prev = $item->prev();
 
-$out = '';
+    $out = '';
 
-$out .= "<div class='$class'>";
+    $out .= "<div class='$class'>";
 
 // link to the prev blog post, if there is one
-    if($p_prev->id) {
-
+    if ($p_prev->id) {
 // Get function icon()
-    $out .= icon('arrow-left',[
+        $out .= icon('arrow-left', [
         'txt' => $p_prev->title,
         'url' => $p_prev->url,
         'a_class' => 'm-1 button button-outline',
@@ -883,10 +930,9 @@ $out .= "<div class='$class'>";
     }
 
 // link to the next blog post, if there is one
-    if($p_next->id) {
-
+    if ($p_next->id) {
 // Get function icon()
-    $out .= icon('arrow-right',[
+        $out .= icon('arrow-right', [
         'txt' => $p_next->title,
         'url' => $p_next->url,
         'before' => true,
@@ -894,7 +940,7 @@ $out .= "<div class='$class'>";
         ]);
     }
 
-$out .= '</div>';
+    $out .= '</div>';
 
     return $out;
 }
@@ -906,27 +952,30 @@ $out .= '</div>';
  * @param int $limit
  *
  */
-function blogComments($page, $limit = 12) {
+function blogComments($page, $limit = 12)
+{
 
-if (!$page->comments) return '';
+    if (!$page->comments) {
+        return '';
+    }
 
 // Translatable Strings
-$cite = page()->ts['cite'];
-$email = page()->ts['email'];
-$text = page()->ts['text'];
-$submit = page()->ts['submit'];
-$commentsLabel = page()->ts['commentsLabel'];
-$added = page()->ts['added'];
-$inDay = page()->ts['inDay'];
-$reply = page()->ts['reply'];
-$join = page()->ts['join'];
-$approved = page()->ts['approved'];
-$thanks = page()->ts['thanks'];
-$errors = page()->ts['errors'];
-$prev = page()->ts['previousComments'];
-$next = page()->ts['nextComments'];
+    $cite = page()->ts['cite'];
+    $email = page()->ts['email'];
+    $text = page()->ts['text'];
+    $submit = page()->ts['submit'];
+    $commentsLabel = page()->ts['commentsLabel'];
+    $added = page()->ts['added'];
+    $inDay = page()->ts['inDay'];
+    $reply = page()->ts['reply'];
+    $join = page()->ts['join'];
+    $approved = page()->ts['approved'];
+    $thanks = page()->ts['thanks'];
+    $errors = page()->ts['errors'];
+    $prev = page()->ts['previousComments'];
+    $next = page()->ts['nextComments'];
 
-$comm = '';
+    $comm = '';
 
     $start = (input()->pageNum - 1) * $limit;
     $comments = $page->comments->slice($start, $limit);
@@ -938,9 +987,9 @@ $comm = '';
      'encoding' => 'UTF-8',
     //  'admin' => false, // shows unapproved comments if true
      'replyLabel' => $reply,
-   ));
+    ));
 
-   $comm .= $page->comments->renderForm(array(
+    $comm .= $page->comments->renderForm(array(
      'headline' => '<h2>' . $join . '</h2>',
      'pendingMessage' => $approved,
      'successMessage' => $thanks,
@@ -963,16 +1012,15 @@ $comm = '';
 
      $comm .= "<p class='link-pagination'>";
 
-        if(input()->pageNum > 1) {
+    if (input()->pageNum > 1) {
         $comm .= "<a class='btn m-1' href='./page" . (input()->pageNum - 1) . "'>" .  $prev . "</a>";
-        }
-        if($start + $limit < count(page()->comments)) {
+    }
+    if ($start + $limit < count(page()->comments)) {
         $comm .= "<a class='btn m-1'  href='./page" . (input()->pageNum + 1) . "'>" . $next . "</a>";
-        }
+    }
         $comm .= "</p>";
 
-return $comm;
-
+    return $comm;
 }
 
 /**
@@ -981,51 +1029,50 @@ return $comm;
  * @param string $where where is location archive ( 'sidebar' or 'archives' )
  *
  */
-function blogArchive($startDate) {
+function blogArchive($startDate)
+{
 // Blog Page from _options.php
-$blogPage = page()->opt['blogPage'];
+    $blogPage = page()->opt['blogPage'];
 // Reset Form
-$out = '';
+    $out = '';
 // $startYear = date("Y"); // this year
-$endDate = date("Y"); // this year
-$now = time();
+    $endDate = date("Y"); // this year
+    $now = time();
 
-if(page() != page()->opt['archivesPage']) {
-
-    $out .= icon('archive', // https://feathericons.com/
-    [
-        'txt' => ' ' . page()->ts['selectArchives'],
-        'color' => '#9b4dca',
-        'html_el' => 'h3',
-        'url' => page()->opt['archivesPage']->url
-    ]);
-
-}
+    if (page() != page()->opt['archivesPage']) {
+        $out .= icon(
+            'archive', // https://feathericons.com/
+            [
+            'txt' => ' ' . page()->ts['selectArchives'],
+            'color' => '#9b4dca',
+            'html_el' => 'h3',
+            'url' => page()->opt['archivesPage']->url
+            ]
+        );
+    }
 //CODE FROM => https://processwire.com/talk/topic/263-creating-archives-for-newsblogs-sections/
-    for($year = $endDate; $year >= $startDate; $year--) {
-        for($month = 12; $month > 0; $month--) {
+    for ($year = $endDate; $year >= $startDate; $year--) {
+        for ($month = 12; $month > 0; $month--) {
             $startTime = strtotime("$year-$month-01"); // 2011-12-01 example
-            if($startTime > $now) continue; // don't bother with future dates
-            if($month == 12) $endTime = strtotime(($year+1) . "-01-01");
-            else $endTime = strtotime("$year-" . ($month+1) . "-01");
-            $entries = $blogPage->children("date>=$startTime, date<$endTime"); // or substitute your own date field
-            $date = date("Y-m",$startTime);
-            $url = page()->opt['archivesPage']->url . date("Y",$startTime) . "/" . date("m",$startTime) . '/';
-            $count = count($entries);
-            if($count > 0) {
-            
-                if(page() == page()->opt['archivesPage']) {
-
-                    $out .= "<option value='$url'>$date - ($count)</option>";
-
-                } else {
-
-                    $out .= "<li><a href='$url'>$date - ($count)</a></li>";
-
-                }
-
+            if ($startTime > $now) {
+                continue; // don't bother with future dates
             }
-    
+            if ($month == 12) {
+                $endTime = strtotime(($year+1) . "-01-01");
+            } else {
+                $endTime = strtotime("$year-" . ($month+1) . "-01");
+            }
+            $entries = $blogPage->children("date>=$startTime, date<$endTime"); // or substitute your own date field
+            $date = date("Y-m", $startTime);
+            $url = page()->opt['archivesPage']->url . date("Y", $startTime) . "/" . date("m", $startTime) . '/';
+            $count = count($entries);
+            if ($count > 0) {
+                if (page() == page()->opt['archivesPage']) {
+                    $out .= "<option value='$url'>$date - ($count)</option>";
+                } else {
+                    $out .= "<li><a href='$url'>$date - ($count)</a></li>";
+                }
+            }
         }
     }
 
@@ -1039,9 +1086,10 @@ if(page() != page()->opt['archivesPage']) {
  * @param  bool $trash
  *
 */
-function trashDemoData($trash = false) {
+function trashDemoData($trash = false)
+{
     // IF TRUE
-    if($trash == true) {
+    if ($trash == true) {
         // GET ID ALL PAGES TO TRASH
         $arr_p = [
             // '1029', // About Page
@@ -1057,16 +1105,16 @@ function trashDemoData($trash = false) {
             // '1046', // Tags Page
             '1047','1048','1051','1054','1055','1058' // Tags Children
         ];
-    // Add pages to trash   
-    foreach ($arr_p as $key) {
+    // Add pages to trash
+        foreach ($arr_p as $key) {
                 $trash_p = pages()->get($key);
             // IF PAGE EXSIST
-                if($trash_p->name == true) {
+            if ($trash_p->name == true) {
             // PAGE TO TRASH
-                    pages()->trash($trash_p);
+                pages()->trash($trash_p);
                 // OR DELETE
-                    // pages()->delete($trash_p);
-                }
+                // pages()->delete($trash_p);
             }
         }
     }
+}
