@@ -12,20 +12,16 @@ wireIncludeFile("inc/_head", ['options' => $optionsPage]); // ( Include header )
         <!-- CONTENT -->
         <div id='content' class='col-9_md-12 c-page'>
 
-        <?php if (page()->template != 'home') :?>
+            <?php if (page()->template != 'home') :?>
             <!-- HEADING -->
             <h1 id='content-head'>
-
                 <?=page()->get('headline|title')?>
-
             </h1>
-        <?php endif; ?>
+            <?php endif; ?>
 
             <!-- CONTENT BODY -->
             <div id='content-body' class='c-body'>
-
                 <?=page()->body?>
-
             </div>
 
         </div><!-- /#content -->
@@ -33,22 +29,22 @@ wireIncludeFile("inc/_head", ['options' => $optionsPage]); // ( Include header )
         <!-- SIDEBAR -->
         <aside id='sidebar' class='col sid'>
 
-            <?=langMenu($page, pages('/'))?>
+            <?php if (page()->getLanguages()) : ?>
+            <div id="lang-menu">
+                <?=langMenu($page, pages('/'))?>
+            </div>
+            <?php endif; ?>
 
             <!-- SEARCH FORM  -->
             <form id='search' class='s-form' action='<?=pages()->get('template=search')->url?>' method='get'>
-
                 <input type='search' name='q' class='s-input' placeholder='<?=page()->ts['search'];?>&hellip;' required>
-
             </form>
 
-        <?php if (page()->sidebar) : ?>
+            <?php if (page()->sidebar) : ?>
             <div id="content-sidebar">
-
-               <?=page()->sidebar;?>
-
+                <?=page()->sidebar;?>
             </div><!-- /#content-sidebar -->
-        <?php endif; ?>
+            <?php endif; ?>
 
         </aside><!-- /#sidebar -->
 
