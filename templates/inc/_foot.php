@@ -22,6 +22,9 @@ if ($options->txt_1) :?>
 <p id="social" class='socila-profiles col-7_md-6_sm-12'>
     <?php // Start Loop
     foreach ($options->rep_url as $icon) {
+    // Get Blog RSS URL
+        if($icon->txt_1 == 'rss') $icon->url_1 = page()->opt['blogPage']->url . 'rss/';
+
             echo icon(
                 $icon->txt_1,
                 [

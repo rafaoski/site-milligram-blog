@@ -25,12 +25,12 @@ include_once('./_options.php');
 include_once('./_translate.php');
 
 // RSS FEED BLOG PAGE ( if installed module rss enable this => http://your-page/blog/rss)
-    // if($page->template->name == 'blog' && $input->urlSegment1 == 'rss') {
-    //     $rss = $modules->get("MarkupRSS");
-    //     $rss->title = page()->ts['recent'];
-    //     $rss->render($page->children("limit=12"));
-    // die();
-    // }
+    if($page->template->name == 'blog' && $input->urlSegment1 == 'rss') {
+        $rss = $modules->get("MarkupRSS");
+        $rss->title = page()->ts['recent'];
+        $rss->render($page->children("limit=12"));
+     die();
+    }
 
 // ADD USER => https://processwire.com/api/variables/user/
     // $u = $users->add('user-demo');

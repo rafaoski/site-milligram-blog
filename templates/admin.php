@@ -12,4 +12,6 @@
  *
  */
 
+if( page()->name == 'options' ) input()->get->id = pages()->get('/options/')->id;
+
 require($config->paths->adminTemplates . 'controller.php');
